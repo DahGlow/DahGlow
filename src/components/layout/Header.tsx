@@ -18,4 +18,4 @@ export default function Header(){
  <div className="header-right">{!(home&&scroll>180)&&<Link className="icon-button" to="/search" aria-label={t('Search')}><Search/></Link>}<Link className="icon-button" to="/wishlist" aria-label={t('Wishlist')}><Heart/></Link><Link className="icon-button cart-icon" to="/cart" aria-label={t('Cart')}><img src={ASSETS.cart} alt=""/>{cart.length>0&&<span className="count">{cart.reduce((n,x)=>n+x.quantity,0)}</span>}</Link></div></div>
  <nav className="category-nav" aria-label="Shopping categories">{['All','Women','Men','Kids','Home','Beauty'].map(c=><Link key={c} className={active===c?'active':''} to={c==='All'?'/':`/?category=${c}`}>{t(c)}</Link>)}</nav></header>
  <SideMenu open={menu} onClose={()=>setMenu(false)}/><InfoModal open={messages} onClose={()=>setMessages(false)} title={t('Messages')}><p>{t('No messages yet')}</p><p>{t('Sign in to save your favorites and follow stores.')}</p></InfoModal></>;
-}
+
