@@ -4,6 +4,7 @@ import { Toaster } from 'sonner';
 import AccountShopBoundary from '@/components/features/AccountShopBoundary';
 import { AuthProvider } from '@/hooks/useAuth';
 import Header from '@/components/layout/Header';
+import DesktopFooter from '@/components/layout/DesktopFooter';
 import BottomTabs from '@/components/layout/BottomTabs';
 import ScrollReset from '@/components/layout/ScrollReset';
 import CustomerBridge from '@/components/features/CustomerBridge';
@@ -20,6 +21,7 @@ const EditProfile=lazy(()=>import('@/pages/EditProfile')),EditUsername=lazy(()=>
 const OrderTrack=lazy(()=>import('@/pages/OrderTrack')),ReceiveSuccess=lazy(()=>import('@/pages/ReceiveSuccess'));
 const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferences=lazy(()=>import('@/pages/ContactPreferences')),MyStores=lazy(()=>import('@/pages/MyStores'));
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
+const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
 export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><Routes>
   <Route path="/" element={<Shop/>}/><Route path="/trends" element={<Trends/>}/><Route path="/cart" element={<Cart/>}/><Route path="/me" element={<Me/>}/>
@@ -31,6 +33,7 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/auth/callback" element={<AuthCallback/>}/><Route path="/oauth/callback" element={<AuthCallback/>}/><Route path="/shopify/callback" element={<ShopifyCallback/>}/>
   <Route path="/products/:handle" element={<ProductDetail/>}/><Route path="/product/:id" element={<ProductDetail/>}/>
   <Route path="/wishlist" element={<Wishlist/>}/><Route path="/deals" element={<SuperDeals/>}/><Route path="/search" element={<Search/>}/>
+  <Route path="/scan-product/*" element={<VisualSearch/>}/><Route path="/messages" element={<MessageCenter/>}/>
   <Route path="/black-Friday-2026-November-dah-glow" element={<BlackFriday/>}/><Route path="/stores/:slug" element={<VendorStore/>}/>
   <Route path="/us/user/orders/list" element={<Orders/>}/><Route path="/us/user/orders/find" element={<FindOrder/>}/>
   <Route path="/us/user/orders/recycle-bin" element={<OrderRecycleBin/>}/><Route path="/us/user/orders/detail/:id" element={<OrderDetail/>}/>
@@ -38,5 +41,5 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/us/user/orders/track/:id" element={<OrderTrack/>}/><Route path="/us/user/orders/receive-success/:id" element={<ReceiveSuccess/>}/>
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
- </Routes></Suspense><BottomTabs/><Toaster position="top-center" richColors/>
+ </Routes></Suspense><DesktopFooter/><BottomTabs/><Toaster position="top-center" richColors/>
  </AccountShopBoundary></AuthProvider></ErrorBoundary></BrowserRouter>;}
