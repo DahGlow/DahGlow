@@ -8,6 +8,7 @@ import { useShop } from '@/hooks/useShop';
 import { authSchema,type AuthFields } from '@/lib/validations';
 import PageHeader from '@/components/layout/PageHeader';
 import { toast } from 'sonner';
+
 export default function Login(){const {t}=useShop();const {user,loading,signIn,sendOtp,verify,social}=useAuth();const navigate=useNavigate();const [mode,setMode]=useState<'signin'|'signup'>('signin');const [sent,setSent]=useState(false);const [busy,setBusy]=useState(false);const {register,handleSubmit,formState:{errors}}=useForm<AuthFields>({resolver:zodResolver(authSchema)});
 useEffect(()=>{if(!loading&&user&&mode==='signin')navigate('/me',{replace:true});},[user,loading,mode,navigate]);
 const submit=async(values:AuthFields)=>{setBusy(true);if(mode==='signin'){await signIn(values.email,values.password);}else if(!sent){const ok=await sendOtp(values.email);if(ok)setSent(true);}else if(!/^\d{4}$/.test(values.otp||'')){toast.error('Enter the 4-digit code from your email.');}else{const ok=await verify(values.email,values.otp!,values.password);if(ok)navigate('/me',{replace:true});}setBusy(false);};
