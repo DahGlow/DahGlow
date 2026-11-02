@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useShop } from '@/hooks/useShop';
 import PageHeader from '@/components/layout/PageHeader';
 import AccountAccessSheet from '@/components/features/AccountAccessSheet';
+
 const schema=z.object({email:z.string().trim().email('Enter a valid email address.'),password:z.string().optional()});
 interface Fields { email:string; password?:string; }
 export default function Login(){const {user,loading,signIn,sendOtp,social}=useAuth();const {t}=useShop();const navigate=useNavigate();const [params]=useSearchParams();const adding=params.get('add')==='1';const [passwordMode,setPasswordMode]=useState(false);const [access,setAccess]=useState(false);const [busy,setBusy]=useState(false);const {register,handleSubmit,setError,formState:{errors}}=useForm<Fields>({resolver:zodResolver(schema)});

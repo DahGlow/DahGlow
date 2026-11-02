@@ -1,2 +1,3 @@
 interface Props {url?:string;name:string;className?:string;}
+
 export default function StoreAvatar({url,name,className=''}:Props){return <span className={`real-store-avatar ${className}`} role={url?undefined:'img'} aria-label={url?undefined:`${name} store`}>{url?<img src={url} alt={`${name} store logo`}/>:<strong aria-hidden="true">{name.split(/\s+/).filter(Boolean).map(word=>word[0]).slice(0,2).join('').toUpperCase()}</strong>}</span>;}

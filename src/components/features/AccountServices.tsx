@@ -2,7 +2,6 @@ import { CreditCard,Package,Truck,MessageSquare,RotateCcw,Headset,Store,ShieldCh
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useShop } from '@/hooks/useShop';
-
 interface Item {label:string;icon:LucideIcon;path?:string;}
 const ORDERS:Item[]=[{label:'Unpaid',icon:CreditCard},{label:'Processing',icon:Package},{label:'Shipped',icon:Truck},{label:'Review',icon:MessageSquare},{label:'Returns',icon:RotateCcw}];
 const SERVICES:Item[]=[{label:'Customer Service',icon:Headset},{label:'Following',icon:Store,path:'/account/stores?tab=following'},{label:'Gift Card',icon:Gift,path:'/wallet/payment?tab=giftcard'},{label:'More Services',icon:Megaphone},{label:'Policy',icon:ShieldCheck}];

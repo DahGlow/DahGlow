@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Search } from 'lucide-react';
+
 interface Fields {query:string;}
 interface Props {initial:string;onSearch:(query:string)=>void;}
 const schema=z.object({query:z.string().trim().max(200)});

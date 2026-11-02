@@ -10,6 +10,7 @@ verify_jwt = false
 verify_jwt = false
 [functions.shopify-customer-account]
 verify_jwt = false
+
 [functions.shopify-setup]
 verify_jwt = false
 

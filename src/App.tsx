@@ -8,6 +8,7 @@ import BottomTabs from '@/components/layout/BottomTabs';
 import ScrollReset from '@/components/layout/ScrollReset';
 import CustomerBridge from '@/components/features/CustomerBridge';
 import ErrorBoundary from '@/components/features/ErrorBoundary';
+
 const Shop=lazy(()=>import('@/pages/Shop')),Trends=lazy(()=>import('@/pages/Trends')),Cart=lazy(()=>import('@/pages/Cart')),Me=lazy(()=>import('@/pages/Me'));
 const Settings=lazy(()=>import('@/pages/Settings')),Preferences=lazy(()=>import('@/pages/Preferences')),Login=lazy(()=>import('@/pages/Login')),AuthCallback=lazy(()=>import('@/pages/AuthCallback'));
 const ProductDetail=lazy(()=>import('@/pages/ProductDetail')),Wishlist=lazy(()=>import('@/pages/Wishlist')),SuperDeals=lazy(()=>import('@/pages/SuperDeals')),Search=lazy(()=>import('@/pages/Search'));

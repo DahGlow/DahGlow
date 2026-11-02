@@ -1,6 +1,7 @@
 # Dah Glow customer spaces
 
 ## Implemented
+
 - Compact settings rows (48 px targets) and contact-preference navigation.
 - Email-first login, 4-digit code verification and password setup; password sign-in remains available. Existing Google/Apple PKCE OAuth is reused. No Facebook login or fabricated offers.
 - Account switch page with add/remove actions. Real Supabase sessions are encrypted with a non-extractable AES-GCM device key in IndexedDB. Passwords are never stored. Switching uses the single existing Supabase client; expired/revoked sessions require authentication. Signing out locally removes only that account's saved access.

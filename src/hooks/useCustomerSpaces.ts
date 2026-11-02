@@ -5,6 +5,7 @@ import { supabase } from '@/lib/api';
 import { invoke } from '@/lib/shopify';
 import { useAuth } from '@/hooks/useAuth';
 import type { PageInfo } from '@/types/shop';
+
 interface PurchasePage {storeIds:string[];pageInfo:PageInfo;}
 export function useStoreVisits(){const {user}=useAuth();return useQuery({queryKey:['store-visits',user?.id],queryFn:async()=>{const {data,error}=await supabase.from('dg_store_visits').select('store_id,visited_at').eq('user_id',user!.id).order('visited_at',{ascending:false});if(error)throw error;return data;},enabled:!!user,staleTime:0,refetchInterval:30000});}
 export function useRecordStoreVisit(storeId?:string){const {user}=useAuth();const client=useQueryClient();useEffect(()=>{if(!user||!storeId)return;void supabase.from('dg_store_visits').upsert({user_id:user.id,store_id:storeId,visited_at:new Date().toISOString()}).then(({error})=>{if(error)toast.error('Your store visit could not be saved.');else void client.invalidateQueries({queryKey:['store-visits',user.id]});});},[user?.id,storeId,client]);}

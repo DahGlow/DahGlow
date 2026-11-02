@@ -1,5 +1,4 @@
 import type { Session } from '@supabase/supabase-js';
-
 export interface SavedAccount { id:string; email:string; username:string; avatar?:string; updatedAt:number; }
 interface VaultRecord { profile:SavedAccount; iv:Uint8Array; encrypted:ArrayBuffer; }
 let database:Promise<IDBDatabase>|undefined;

@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import { shopify } from '@/lib/shopify';
 import { useAuth } from '@/hooks/useAuth';
 import type { ShopifyCart } from '@/types/shop';
+
 interface MutationResult{cart:ShopifyCart|null;userErrors:{message:string}[];}
 let queue:Promise<unknown>=Promise.resolve();
 export function useCart(){const {user}=useAuth();const storageKey=user?`dg-shopify-cart:${user.id}`:'dg-shopify-cart';const owner=useRef(storageKey);owner.current=storageKey;const client=useQueryClient();const [savedId,setSavedId]=useState(()=>({scope:storageKey,id:localStorage.getItem(storageKey)||''}));const id=savedId.scope===storageKey?savedId.id:localStorage.getItem(storageKey)||'';const key=['shopify','cart',storageKey,id];const query=useQuery({queryKey:key,queryFn:async()=>{const data=await shopify<{cart:ShopifyCart|null}>({op:'cart',action:'get',id});if(!data.cart){localStorage.removeItem(storageKey);if(owner.current===storageKey)setSavedId({scope:storageKey,id:''});}return data.cart;},enabled:!!id,staleTime:15000,refetchInterval:60000,retry:1});

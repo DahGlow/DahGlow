@@ -1,4 +1,5 @@
 -- Customer-owned browsing and contact consent. Verified purchases are backend-only writes.
+
 create table if not exists public.dg_store_visits (user_id uuid not null references public.user_profiles(id) on delete cascade,store_id text not null references public.dg_stores(id),visited_at timestamptz not null default now(),primary key(user_id,store_id));
 alter table public.dg_store_visits enable row level security;
 create policy authenticated_select_own_store_visits on public.dg_store_visits for select to authenticated using(user_id=auth.uid());

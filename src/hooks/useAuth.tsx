@@ -5,7 +5,6 @@ import { mapUser,exchangeCodeOnce } from '@/lib/auth';
 import { saveAccount,accountTokens,removeAccount } from '@/lib/accountVault';
 import { useQueryClient } from '@tanstack/react-query';
 import type { AuthUser } from '@/types/shop';
-
 interface AuthContextType { switchAccount:(id:string)=>Promise<boolean>; forgetAccount:(id:string)=>Promise<void>; user:AuthUser|null; loading:boolean; signIn:(email:string,password:string)=>Promise<boolean>; sendOtp:(email:string)=>Promise<boolean>; verify:(email:string,otp:string,password:string)=>Promise<boolean>; logout:()=>Promise<void>; social:(provider:'google'|'apple')=>Promise<void>; callback:(code:string)=>Promise<string|null>; verifyCode:(email:string,otp:string)=>Promise<boolean>; setPassword:(password:string)=>Promise<boolean>; sendExistingOtp:(email:string)=>Promise<boolean>; updateProfile:(username:string)=>Promise<boolean>; }
 const AuthContext=createContext<AuthContextType>(null!);
 export function AuthProvider({children}:{children:ReactNode}) {

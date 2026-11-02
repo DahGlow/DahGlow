@@ -3,6 +3,7 @@ import { adminGraph } from './shopifyAdmin.ts';
 import { adminDb,check } from './config.ts';
 import { vendors } from './storefront.ts';
 import { CUSTOMER_ORDER,fromCustomer,saveOrder,type CustomerOrder } from './orders.ts';
+
 interface Lines {nodes:{vendor:string|null}[];pageInfo:{hasNextPage:boolean;endCursor:string|null};}
 export async function purchasedStores(userId:string,cursor:unknown){const token=await customerToken(userId);const data=await customerGraph<{customer:{id:string;orders:{nodes:CustomerOrder[];pageInfo:{hasNextPage:boolean;endCursor:string|null}}}}>(token,`query($cursor:String){customer{id orders(first:10,after:$cursor,reverse:true){nodes{${CUSTOMER_ORDER}}pageInfo{hasNextPage endCursor}}}}`,{cursor:typeof cursor==='string'?cursor:null});const directory=await vendors();const found=new Set<string>();
 for(const raw of data.customer.orders.nodes){if(raw.cancelledAt||!['PAID','PARTIALLY_REFUNDED'].includes(raw.financialStatus))continue;const verified=await adminGraph<{order:{customer:{id:string}|null;cancelledAt:string|null;displayFinancialStatus:string;lineItems:Lines}|null}>('query($id:ID!){order(id:$id){customer{id}cancelledAt displayFinancialStatus lineItems(first:100){nodes{vendor}pageInfo{hasNextPage endCursor}}}}',{id:raw.id});const order=verified.order;if(!order||order.customer?.id!==data.customer.id||order.cancelledAt||!['PAID','PARTIALLY_REFUNDED'].includes(order.displayFinancialStatus))continue;
