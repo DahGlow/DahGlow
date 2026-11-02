@@ -9,10 +9,11 @@ export interface Product { id:string; handle:string; name:string; category:strin
 export interface RawProduct { id:string;handle:string;title:string;description:string;descriptionHtml:string;vendor:string;productType:string;tags:string[];availableForSale:boolean;options:ProductOption[];priceRange:{minVariantPrice:Money};compareAtPriceRange:{minVariantPrice:Money};images:{nodes:ProductImage[]};variants:{nodes:Variant[]};metafields:(Metafield|null)[]; }
 export interface CartLine { id:string;quantity:number;cost:{totalAmount:Money};merchandise:{id:string;title:string;availableForSale:boolean;selectedOptions:SelectedOption[];price:Money;image:ProductImage|null;product:{handle:string;title:string;vendor:string}}; }
 export interface ShopifyCart { id:string;checkoutUrl:string;totalQuantity:number;cost:{subtotalAmount:Money;totalAmount:Money};lines:{nodes:CartLine[];pageInfo:{hasNextPage:boolean;endCursor:string|null}}; }
-export interface Vendor { id:string;name:string;avatar:string; }
+export interface Vendor { id:string;name:string;avatar:string;displayName?:string;description?:string; }
 export interface PageInfo { hasNextPage:boolean;endCursor:string|null; }
 export interface OrderItem { title:string;quantity:number;variantTitle:string;image:ProductImage|null;price:Money|null;options:SelectedOption[]; }
 export interface Tracking { number:string|null;company:string|null;url:string|null; }
-export interface Order { id:string;name:string;createdAt:string;financialStatus:string;fulfillmentStatus:string;cancelledAt:string|null;total:Money;items:OrderItem[];tracking:Tracking[];shippingAddress:{formatted?:string[]}|null;statusPageUrl:string|null; }
+export interface FulfillmentTrace {displayStatus:string;deliveredAt:string|null;estimatedDeliveryAt:string|null;events:{nodes:{status:string;message:string;happenedAt:string;city:string|null}[]};}
+export interface Order { receiptConfirmedAt?:string|null;shippingMethod?:string|null;sellers?:string[];fulfillments?:FulfillmentTrace[];logisticsNotice?:string;id:string;name:string;createdAt:string;financialStatus:string;fulfillmentStatus:string;cancelledAt:string|null;total:Money;items:OrderItem[];tracking:Tracking[];shippingAddress:{formatted?:string[]}|null;statusPageUrl:string|null; }
 export type Language = 'en' | 'fr' | 'es' | 'zh';
-export interface AuthUser { id:string;email:string;username:string; }
+export interface AuthUser { id:string;email:string;username:string;avatar?:string; }

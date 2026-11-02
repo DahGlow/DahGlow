@@ -1,9 +1,10 @@
 import { FunctionsHttpError } from '@supabase/supabase-js';
+import { cachedProductRequest } from '@/lib/productCache';
 import { supabase } from '@/lib/api';
 import type { Product,RawProduct,Money } from '@/types/shop';
 
 export async function invoke<T>(name:string,body:Record<string,unknown>):Promise<T>{const {data,error}=await supabase.functions.invoke(name,{body});if(error){if(error instanceof FunctionsHttpError){const content=await error.context.text();let message=content;try{message=JSON.parse(content).error||content;}catch{/* Expected non-JSON upstream response */}throw new Error(message);}throw new Error(error.message);}if(data?.error)throw new Error(String(data.error));return data as T;}
-export const shopify=<T>(body:Record<string,unknown>)=>invoke<T>('shopify-storefront',body);
+export const shopify=<T>(body:Record<string,unknown>)=>cachedProductRequest(body,()=>invoke<T>('shopify-storefront',body));
 export function mapProduct(p:RawProduct):Product{return {id:p.id,handle:p.handle,name:p.title,category:p.productType,image:p.images.nodes[0]?.url||'',price:Number(p.priceRange.minVariantPrice.amount),original:Number(p.compareAtPriceRange.minVariantPrice.amount)||0,tag:p.tags[0]||p.productType,currency:p.priceRange.minVariantPrice.currencyCode,vendor:p.vendor,description:p.description,descriptionHtml:p.descriptionHtml,images:[...p.images.nodes,...p.variants.nodes.map(v=>v.image).filter((image):image is NonNullable<typeof image>=>!!image&&!p.images.nodes.some(i=>i.url===image.url))].filter((image,index,images)=>images.findIndex(i=>i.url===image.url)===index),variants:p.variants.nodes,options:p.options,tags:p.tags,metafields:p.metafields.filter((m):m is NonNullable<typeof m>=>!!m),available:p.availableForSale};}
 export function formatMoney(value:Money|number,currency='USD'){return new Intl.NumberFormat(undefined,{style:'currency',currency:typeof value==='number'?currency:value.currencyCode}).format(typeof value==='number'?value:Number(value.amount));}
 export const productUrl=(p:Pick<Product,'handle'>)=>`/products/${encodeURIComponent(p.handle)}`;

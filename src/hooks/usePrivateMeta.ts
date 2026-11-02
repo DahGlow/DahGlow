@@ -1,0 +1,2 @@
+import { useEffect } from 'react';
+export function usePrivateMeta(){useEffect(()=>{const old=document.title;document.title='Dah Glow';const previous=document.querySelector<HTMLMetaElement>('meta[name="robots"]');const meta=previous||document.createElement('meta');const content=meta.content;meta.name='robots';meta.content='noindex, nofollow, noarchive, nosnippet';if(!previous)document.head.appendChild(meta);return()=>{document.title=old;if(previous&&previous.id!=='dah-glow-private-indexing')meta.content=content;else meta.remove();};},[]);}

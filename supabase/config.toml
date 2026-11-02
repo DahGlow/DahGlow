@@ -11,3 +11,10 @@ verify_jwt = false
 verify_jwt = false
 [functions.shopify-setup]
 verify_jwt = false
+
+[functions.dah-glow-admin]
+verify_jwt = false
+[functions.dah-glow-support]
+verify_jwt = false
+[functions.dah-glow-recovery]
+verify_jwt = false
