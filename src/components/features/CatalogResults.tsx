@@ -1,6 +1,5 @@
 import { AlertCircle,PackageOpen } from 'lucide-react';
 import ProductGrid from '@/components/features/ProductGrid';
 import type { Product } from '@/types/shop';
-
 interface Props {products:Product[];loading?:boolean;error?:Error|null;hasMore?:boolean;fetching?:boolean;onMore?:()=>void;deal?:boolean;}
 export default function CatalogResults({products,loading,error,hasMore,fetching,onMore,deal}:Props){if(loading)return <div className="product-grid" aria-label="Loading products" aria-busy="true">{Array.from({length:6},(_,i)=><div className="product-skeleton" key={i}><div/><span/><span/></div>)}</div>;if(error)return <div className="catalog-empty" role="alert"><AlertCircle size={32}/><h2>Products could not load</h2><p>{error.message}</p></div>;if(!products.length)return <><div className="catalog-empty"><PackageOpen size={36}/><h2>No products in this selection yet</h2><p>{hasMore?'Check the next catalog page for more matches.':'Published products from Dah Glow will appear here.'}</p></div>{hasMore&&<button className="load-more" disabled={fetching} onClick={onMore}>{fetching?'Loading…':'Check more products'}</button>}</>;return <><ProductGrid products={products} deal={deal}/>{hasMore&&<button className="load-more" disabled={fetching} onClick={onMore}>{fetching?'Loading…':'Load more products'}</button>}</>;}

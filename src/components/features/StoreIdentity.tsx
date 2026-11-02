@@ -1,3 +1,2 @@
 import { useStoreSettings } from '@/hooks/useStoreSettings';
-
 export default function StoreIdentity(){const q=useStoreSettings();const s=q.data;if(!s?.description&&!s?.contactEmail&&!s?.socialLinks&&!s?.profileImage)return null;return <section className="store-identity-panel">{s.profileImage&&<img src={s.profileImage} alt={s.name||'Dah Glow'}/>}<div><h2>{s.name||'Dah Glow'}</h2>{s.description&&<p>{s.description}</p>}{s.contactEmail&&<a href={`mailto:${s.contactEmail}`}>{s.contactEmail}</a>}<div>{Object.entries(s.socialLinks||{}).filter(([,url])=>/^https?:\/\//.test(url)).map(([name,url])=><a key={name} href={url} target="_blank" rel="noopener noreferrer">{name}</a>)}</div></div></section>;}
