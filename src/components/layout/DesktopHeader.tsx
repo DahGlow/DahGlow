@@ -6,7 +6,6 @@ import { useStoreSettings } from '@/hooks/useStoreSettings';
 import HeaderSearchForm from '@/components/forms/HeaderSearchForm';
 import RegionPreferencesForm from '@/components/forms/RegionPreferencesForm';
 import InfoModal from '@/components/features/InfoModal';
-
 const CATEGORIES=['Women','Kids','Curve','Men','Shoes','Underwear','Home','Jewelry','Beauty','Baby'];
 const CATEGORY_LABELS:Record<string,string>={Women:'Women Clothing',Men:'Men Clothing',Underwear:'Underwear & Sleepwear',Home:'Home & Living',Jewelry:'Jewelry & Accessories',Beauty:'Beauty & Health',Baby:'Baby & Maternity'};
 interface Props {onMenu:()=>void;}
