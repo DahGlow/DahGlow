@@ -5,7 +5,6 @@ import banner from '@/assets/glow-banner.jpg';
 import { useCatalog } from '@/hooks/useCatalog';
 import { formatMoney } from '@/lib/shopify';
 import './HeroBanner.css';
-
 const featuredBanners = [
   {
     label: 'Featured collection',

@@ -7,5 +7,4 @@ import '@/index.css';
 import '@/admin.css';
 import '@/customer-updates.css';
 import '@/customer-spaces.css';
-
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>);
