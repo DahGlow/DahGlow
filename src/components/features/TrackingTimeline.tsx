@@ -1,0 +1,4 @@
+import type { FulfillmentTrace } from '@/types/shop';
+
+interface Props{fulfillments:FulfillmentTrace[];}
+export default function TrackingTimeline({fulfillments}:Props){const events=fulfillments.flatMap(f=>f.events.nodes).sort((a,b)=>Date.parse(b.happenedAt)-Date.parse(a.happenedAt));return <div className="tracking-timeline">{events.length?events.map((event,i)=><article key={`${event.happenedAt}-${i}`}><time>{new Date(event.happenedAt).toLocaleDateString()}<small>{new Date(event.happenedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</small></time><span/><div><strong>{event.status.replace(/_/g,' ')}</strong><p>{[event.city,event.message].filter(Boolean).join(' · ')}</p></div></article>):<p>Shopify has not supplied detailed shipment events. Open the carrier’s tracking page for the latest scans.</p>}</div>;}
