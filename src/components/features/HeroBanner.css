@@ -1,13 +1,5 @@
-.hero-image-slide {
-  display: block;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.hero-image-slide img {
-  display: block;
-  width: 100%;
-  height: auto;
+.hero-inner-featured {
+  justify-content: flex-end;
 }
 
 .hero-carousel-controls {
