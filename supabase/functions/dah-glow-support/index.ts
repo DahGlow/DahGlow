@@ -5,6 +5,7 @@ import { rate } from '../_shared/adminAccess.ts';
 import { publicSettings,visibleProducts } from '../_shared/publicStore.ts';
 import { storefront,quote,cached } from '../_shared/storefront.ts';
 import { customerGraph,customerToken } from '../_shared/customer.ts';
+
 const schema=z.object({messages:z.array(z.object({role:z.enum(['user','assistant']),content:z.string().min(1).max(2000)})).min(1).max(12),productHandle:z.string().max(255).optional(),orderId:z.string().max(200).optional()});
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});if(req.method!=='POST')return json({error:'POST required'},405);try{
  const auth=req.headers.get('authorization')?.replace(/^Bearer /,'');const user=auth&&auth!==secret('SUPABASE_ANON_KEY')?await requireUser(req):null;const raw=req.headers.get('x-forwarded-for')?.split(',')[0]||'unknown';const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(user?.id||raw));const key=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');await rate(`support:${key}`,20,3600);

@@ -1,4 +1,5 @@
 import type { Money } from '@/types/shop';
+
 export interface AdminSession {role:string;permissions:string[];email:string;}
 export interface AdminProduct {id:string;title:string;handle:string;descriptionHtml:string;vendor:string;productType:string;tags:string[];status:'ACTIVE'|'DRAFT'|'ARCHIVED';createdAt:string;updatedAt:string;totalInventory:number;featuredImage:{url:string}|null;seo:{title:string|null;description:string|null};category:{id:string;name:string}|null;options:{name:string;optionValues:{name:string}[]}[];variants:{nodes:AdminVariant[];pageInfo?:{hasNextPage:boolean}};media:{nodes:{id:string;mediaContentType:string;alt:string|null;image?:{url:string};sources?:{url:string}[]}[]};metafields:{nodes:{namespace:string;key:string;type:string;value:string}[]};}
 export interface AdminVariant {id:string;title:string;price:string;compareAtPrice:string|null;sku:string;barcode:string;inventoryQuantity:number;inventoryPolicy:'DENY'|'CONTINUE';selectedOptions:{name:string;value:string}[];image:{url:string}|null;inventoryItem:{id:string;tracked:boolean};}

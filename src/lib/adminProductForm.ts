@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { AdminProduct,ProductFile } from '@/types/admin';
+
 const money=z.string().regex(/^\d+(\.\d{1,2})?$/,'Enter a valid price');
 export const productFormSchema=z.object({title:z.string().min(1).max(255),descriptionHtml:z.string().max(80000),handle:z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/,'Use lowercase letters, numbers and hyphens'),vendor:z.string(),productType:z.string(),category:z.string(),status:z.enum(['ACTIVE','DRAFT','ARCHIVED']),tags:z.string(),seoTitle:z.string().max(70),seoDescription:z.string().max(320),publicationId:z.string(),locationId:z.string(),options:z.array(z.object({name:z.string().min(1),values:z.string().min(1)})).min(1).max(3),variants:z.array(z.object({id:z.string().optional(),optionValues:z.array(z.object({optionName:z.string(),name:z.string()})),price:money,compareAtPrice:money.or(z.literal('')),sku:z.string(),barcode:z.string(),inventoryPolicy:z.enum(['DENY','CONTINUE']),tracked:z.boolean(),quantity:z.string().refine(v=>v===''||/^\d+$/.test(v),'Use a whole number'),fileIndex:z.number()})).min(1).max(100),metafields:z.string().refine(value=>{try{return Array.isArray(JSON.parse(value));}catch{return false;}},'Enter a valid JSON array of metafields')});
 export type ProductFormValues=z.infer<typeof productFormSchema>;

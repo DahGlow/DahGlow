@@ -6,5 +6,4 @@ const queryClient=new QueryClient({defaultOptions:{queries:{retry:1,refetchOnWin
 import '@/index.css';
 import '@/admin.css';
 import '@/customer-updates.css';
-
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>);

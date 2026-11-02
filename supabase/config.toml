@@ -5,6 +5,7 @@ verify_jwt = false
 verify_jwt = false
 [functions.shopify-admin-auth]
 verify_jwt = false
+
 [functions.shopify-token-monitor]
 verify_jwt = false
 [functions.shopify-customer-account]

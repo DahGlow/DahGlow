@@ -1,3 +1,4 @@
 import { adminDb,check } from './config.ts';
+
 export async function publicSettings(){const result=await adminDb().from('dg_store_settings').select('payload').eq('id',true).maybeSingle();check(result);const p=result.data?.payload||{};const allowed=['name','description','logo','profileImage','contactEmail','contactPhone','socialLinks','announcement'];return Object.fromEntries(allowed.filter(k=>typeof p[k]==='string'||k==='socialLinks').map(k=>[k,p[k]]));}
 export async function visibleProducts<T extends {id:string;vendor:string}>(products:T[]):Promise<T[]>{const db=adminDb();const vendors=await db.from('dg_vendor_settings').select('vendor').eq('visible',false);check(vendors);const hidden=await db.from('dg_product_visibility').select('product_id').eq('visible',false);check(hidden);const v=new Set(vendors.data.map(r=>r.vendor)),p=new Set(hidden.data.map(r=>r.product_id));return products.filter(product=>!v.has(product.vendor)&&!p.has(product.id));}

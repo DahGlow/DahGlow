@@ -1,7 +1,6 @@
 import { useInfiniteQuery,useQuery } from '@tanstack/react-query';
 import { mapProduct,shopify } from '@/lib/shopify';
 import type { RawProduct,PageInfo,Vendor } from '@/types/shop';
-
 export interface CatalogFilter {query?:string;category?:string;vendor?:string;tag?:string;sort?:string;reverse?:boolean;first?:number;}
 interface CatalogPage {products:{nodes:RawProduct[];pageInfo:PageInfo};}
 export function useCatalog(filter:CatalogFilter={}){const query=useInfiniteQuery({queryKey:['shopify','catalog',filter],queryFn:({pageParam})=>shopify<CatalogPage>({op:'catalog',...filter,cursor:pageParam}),initialPageParam:null as string|null,getNextPageParam:page=>page.products.pageInfo.hasNextPage?page.products.pageInfo.endCursor:undefined,staleTime:21600000,gcTime:21600000,refetchInterval:false,refetchOnWindowFocus:false,retry:1});return {...query,products:query.data?.pages.flatMap(p=>p.products.nodes.map(mapProduct))||[]};}

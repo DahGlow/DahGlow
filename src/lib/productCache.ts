@@ -1,4 +1,5 @@
 const TTL=21600000;
+
 interface Entry<T>{expires:number;value:T;}
 const pending=new Map<string,Promise<unknown>>();
 const PRODUCT_OPS=new Set(['catalog','product','vendors','recommendations','suggestions']);

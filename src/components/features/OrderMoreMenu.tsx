@@ -2,6 +2,5 @@ import { Link } from 'react-router-dom';
 import { Mail,House,ShoppingCart,Trash2,Wallet,Gift,Headset,RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 import { Dialog,DialogContent,DialogTitle,DialogDescription } from '@/components/features/GlowDialog';
-
 interface Props{open:boolean;onClose:()=>void;}
 export default function OrderMoreMenu({open,onClose}:Props){return <Dialog open={open} onOpenChange={onClose}><DialogContent className="order-more-modal"><DialogTitle className="sr-only">Order shortcuts</DialogTitle><DialogDescription className="sr-only">Choose a destination.</DialogDescription><div className="order-shortcuts"><button onClick={()=>toast.info('Messages will be available soon.')}><Mail/>Messages</button><Link to="/" onClick={onClose}><House/>Home</Link><Link to="/cart" onClick={onClose}><ShoppingCart/>Cart</Link><button onClick={()=>toast.info('Exchange requests will be available soon.')}><RefreshCw/>Exchange</button><Link to="/us/user/orders/recycle-bin" onClick={onClose}><Trash2/>Order Recycle Bin</Link><button onClick={()=>toast.info('Wallet will be available soon.')}><Wallet/>Wallet</button><button onClick={()=>toast.info('Gift card orders will be available soon.')}><Gift/>Gift cards</button><Link to="/support" onClick={onClose}><Headset/>Support</Link></div></DialogContent></Dialog>;}

@@ -5,6 +5,7 @@ import { ensureIntegration } from '../_shared/bootstrap.ts';
 import { storefront,cached,PRODUCT,IMAGE,META,quote,vendors } from '../_shared/storefront.ts';
 import { cartOperation } from '../_shared/storefrontCart.ts';
 import { loadProduct } from '../_shared/storefrontProduct.ts';
+
 interface Item{id:string;vendor:string;}
 interface Page{products:{nodes:Item[];pageInfo:{hasNextPage:boolean;endCursor:string|null}};}
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});try{

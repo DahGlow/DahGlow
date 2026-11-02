@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+
 const schema=z.object({password:z.string().min(6,'Use at least 6 characters'),confirm:z.string()}).refine(v=>v.password===v.confirm,{path:['confirm'],message:'Passwords must match'});
 type Fields=z.infer<typeof schema>;
 interface Props{onSuccess:()=>void;}

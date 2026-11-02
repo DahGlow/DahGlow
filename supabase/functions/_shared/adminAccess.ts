@@ -1,5 +1,6 @@
 import { adminDb,check,requireUser } from './config.ts';
 import type { User } from 'npm:@supabase/supabase-js@2';
+
 export class AccessError extends Error { constructor(public status:number){super(status===404?'Not found':'This section is locked');} }
 export interface AdminIdentity { user:User; role:string; permissions:string[]; initial:boolean; }
 export async function rate(key:string,limit=90,seconds=60){const r=await adminDb().rpc('dg_rate_check',{p_key:key,p_limit:limit,p_seconds:seconds});check(r);if(!r.data)throw new Error('Too many requests. Please wait and retry.');}

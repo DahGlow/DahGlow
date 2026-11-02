@@ -1,4 +1,5 @@
 import { Truck } from 'lucide-react';
+
 interface Props{company:string|null;}
 const SOURCES:Record<string,string>={GOFO:'https://www.gofo.com/us/images/logo.svg',USPS:'https://upload.wikimedia.org/wikipedia/commons/6/6b/USPS_Logo.svg',UPS:'https://upload.wikimedia.org/wikipedia/commons/6/6b/UPS_Logo_Shield_2017.svg'};
 export default function CarrierBadge({company}:Props){const normalized=company?.trim().toUpperCase()||'';const name=normalized.includes('GOFO')?'GOFO':normalized.includes('USPS')||normalized.includes('UNITED STATES POSTAL')?'USPS':normalized==='UPS'||normalized.includes('UNITED PARCEL')?'UPS':company||'Carrier pending';return <span className="carrier-badge">{SOURCES[name]?<img src={SOURCES[name]} alt="" onError={e=>{e.currentTarget.style.display='none';}}/>:<Truck size={24}/>}<strong>{name}</strong></span>;}

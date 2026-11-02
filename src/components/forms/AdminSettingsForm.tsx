@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useAdminMutation } from '@/hooks/useAdmin';
 import AdminBrandUpload from '@/components/forms/AdminBrandUpload';
+
 interface Fields{display_name:string;avatar_url:string;notifications:boolean;}
 export default function AdminSettingsForm({profile}:{profile:Fields|null}){const {register,watch,setValue,handleSubmit}=useForm<Fields>({defaultValues:profile||{display_name:'',avatar_url:'',notifications:true}});const mutation=useAdminMutation();return <form className="admin-panel" onSubmit={handleSubmit(p=>mutation.mutate({op:'settings-save',profile:p}))}><h2>Administrator profile</h2><label>Display name<input maxLength={100} {...register('display_name')}/></label><AdminBrandUpload label="Admin profile image" value={watch('avatar_url')} onChange={url=>setValue('avatar_url',url)}/><label className="admin-checkbox"><input type="checkbox" {...register('notifications')}/>Show live activity feed preference</label><button className="admin-button" disabled={mutation.isPending}>Save profile preferences</button></form>;}

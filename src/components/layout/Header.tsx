@@ -6,7 +6,6 @@ import { ASSETS } from '@/constants/products';
 import { useStoreSettings } from '@/hooks/useStoreSettings';
 import SideMenu from '@/components/layout/SideMenu';
 import InfoModal from '@/components/features/InfoModal';
-
 export default function Header(){
  const {t,cart,language,currency}=useShop();const branding=useStoreSettings();const {pathname}=useLocation();const navigate=useNavigate();const [params]=useSearchParams();const [scroll,setScroll]=useState(0);const [menu,setMenu]=useState(false);const [messages,setMessages]=useState(false);const [query,setQuery]=useState('');const home=pathname==='/';
  useEffect(()=>{const update=()=>setScroll(window.scrollY);update();window.addEventListener('scroll',update,{passive:true});return()=>window.removeEventListener('scroll',update);},[pathname]);

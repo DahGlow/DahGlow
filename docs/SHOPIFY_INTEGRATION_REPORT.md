@@ -1,4 +1,3 @@
-
 # Dah Glow Shopify implementation report
 
 Later private-admin and customer-workflow delivery details, current SQL checks, live connection observations and remaining tests are recorded in `docs/PRIVATE_CONTROL_DELIVERY.md`; the original session notes below are historical.

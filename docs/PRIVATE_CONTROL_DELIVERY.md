@@ -1,5 +1,4 @@
 # Dah Glow private administration and customer workflows
-
 Date: 2026-11-02. This report distinguishes implemented source, applied database changes, and actually observed live results. It does not certify an untested production deployment.
 
 ## Private entry URL

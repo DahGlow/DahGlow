@@ -1,3 +1,4 @@
 import { Package,Plane,Truck,PackageCheck } from 'lucide-react';
 import type { Order } from '@/types/shop';
+
 export default function OrderProgress({order}:{order:Order}){const statuses=order.fulfillments?.map(f=>f.displayStatus)||[];const delivered=statuses.includes('DELIVERED');const delivering=statuses.includes('OUT_FOR_DELIVERY');const shipped=order.fulfillmentStatus==='FULFILLED'||order.fulfillmentStatus==='PARTIALLY_FULFILLED';const stage=delivered?3:delivering?2:shipped?1:0;const steps=[{label:'Preparing',Icon:Package},{label:'Shipped',Icon:Plane},{label:'Delivering',Icon:Truck},{label:'Delivered',Icon:PackageCheck}];return <div className="order-progress" aria-label={`Shopify status: ${steps[stage].label}`}>{steps.map(({label,Icon},i)=><div className={i<=stage?'complete':''} key={label}><span><Icon size={25}/></span><p>{label}</p></div>)}</div>;}

@@ -1,4 +1,5 @@
 -- Dah Glow private control and receipt support. No existing user data is deleted or changed.
+
 create table if not exists public.dg_admin_roles (name text primary key, permissions text[] not null);
 insert into public.dg_admin_roles values ('super_admin',array['overview','products','store','vendors','orders','customers','analytics','admins','settings']),('store_manager',array['products','store','vendors']),('orders_manager',array['orders']),('analytics_viewer',array['overview','analytics']),('custom','{}') on conflict do nothing;
 create table if not exists public.dg_admin_allowlist (email text primary key check(email=lower(trim(email))),role text not null references public.dg_admin_roles(name),permissions text[] not null default '{}',active boolean not null default true,initial boolean not null default false,created_at timestamptz not null default now());

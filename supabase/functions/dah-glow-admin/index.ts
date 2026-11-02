@@ -7,6 +7,7 @@ import { page,allNodes,PRODUCT_ADMIN,PRODUCT_LIST,ORDER_ADMIN,ORDER_LIST,CUSTOME
 import { analytics } from '../_shared/adminAnalytics.ts';
 import { saveProduct,stageMedia,publication } from '../_shared/adminProducts.ts';
 import { manageAdmins } from '../_shared/adminManagement.ts';
+
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});try{
  const actor=await authorize(req);if(req.method!=='POST')return json({error:'Not found'},404);if(Number(req.headers.get('content-length'))>500000)return json({error:'Request too large'},413);const input=await req.json();const op=String(input.op),db=adminDb();
  if(op==='session'){const route=await db.from('dg_admin_config').select('route_segment').eq('id',true).single();check(route);if(input.segment!==route.data.route_segment)throw new AccessError(404);return json({role:actor.role,permissions:actor.permissions,email:actor.user.email});}
