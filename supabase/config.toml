@@ -1,0 +1,12 @@
+[functions.shopify-storefront]
+verify_jwt = false
+[functions.shopify-webhook]
+verify_jwt = false
+[functions.shopify-admin-auth]
+verify_jwt = false
+[functions.shopify-token-monitor]
+verify_jwt = false
+[functions.shopify-customer-account]
+verify_jwt = false
+[functions.shopify-setup]
+verify_jwt = false

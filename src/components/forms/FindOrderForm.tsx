@@ -1,0 +1,10 @@
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircle } from 'lucide-react';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import { useCustomerAccount,useCustomerOrders } from '@/hooks/useCustomerAccount';
+const schema=z.object({number:z.string().trim().min(3,'Enter at least 3 characters').max(100)});
+type Fields=z.infer<typeof schema>;
+export default function FindOrderForm(){const navigate=useNavigate();const account=useCustomerAccount();const orders=useCustomerOrders(account.connected);const {register,handleSubmit,formState:{errors,isSubmitting}}=useForm<Fields>({resolver:zodResolver(schema)});const submit=async({number}:Fields)=>{if(!account.connected){toast.info('Connect your Shopify customer account from Orders first. Order numbers alone cannot prove ownership.');return;}let records=orders.orders;let more=orders.hasNextPage;while(more){const next=await orders.fetchNextPage();if(next.error)throw next.error;records=next.data?.pages.flatMap(p=>p.orders)||records;more=next.hasNextPage;}const value=number.toLowerCase();const found=records.find(o=>o.name.toLowerCase()===value||o.name.replace(/^#/,'').toLowerCase()===value||o.tracking.some(t=>t.number?.toLowerCase()===value));if(found)navigate(`/us/user/orders/detail/${encodeURIComponent(found.id)}`);else toast.info('No matching order was found in your verified Shopify account.');};return <form className="find-order-form" onSubmit={handleSubmit(values=>submit(values).catch(error=>toast.error(error.message)))}><h3>Enter order/tracking number to find order</h3><label htmlFor="tracking-number">Order/Tracking Number</label><input id="tracking-number" {...register('number')}/>{errors.number&&<span className="field-error"><AlertCircle size={16}/>{errors.number.message}</span>}<button className="primary-button" type="submit" disabled={isSubmitting||orders.isLoading}>{isSubmitting?'Searching…':'SUBMIT'}</button></form>;}

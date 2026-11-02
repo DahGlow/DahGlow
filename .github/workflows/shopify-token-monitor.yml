@@ -1,0 +1,27 @@
+name: Dah Glow Shopify token monitor
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dah-glow-shopify-token-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify and refresh Shopify Admin authentication
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          test -n "$SUPABASE_URL" && test -n "$SUPABASE_SERVICE_ROLE_KEY" || { echo 'Configure the existing-named backend secrets in GitHub Actions before enabling this scheduler.'; exit 1; }
+          curl --fail-with-body --silent --show-error --retry 2 \
+            --max-time 60 --request POST \
+            --header "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            --header 'Content-Type: application/json' \
+            --data '{}' \
+            "$SUPABASE_URL/functions/v1/shopify-token-monitor"

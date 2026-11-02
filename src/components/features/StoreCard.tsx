@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import { Plus,Check } from 'lucide-react';
 import ProductCard from '@/components/features/ProductCard';
-import { SHUFFLED_PRODUCTS } from '@/constants/products';
+import { useCatalog } from '@/hooks/useCatalog';
 import { useShop } from '@/hooks/useShop';
-interface Props {name:string;index:number;following:boolean;busy:boolean;onToggle:()=>void;}
-export default function StoreCard({name,index,following,busy,onToggle}:Props){const {t}=useShop();return <article className="store-card"><div className="store-title"><div className="store-avatar">{index===0?'DW':'DG'}<span>Trends</span></div><div><h2>{name}</h2><span className="store-tag">{index===0?'#EverydayMuse':'#QuietLuxury'}</span></div><button className={`follow-button ${following?'following':''}`} disabled={busy} onClick={onToggle}>{following?<Check size={17}/>:<Plus size={17}/>} {t(following?'Following':'Follow')}</button></div><div className="store-products">{SHUFFLED_PRODUCTS.slice(index*4,index*4+4).map(p=><ProductCard product={p} key={p.id} compact/>)}</div><p className="store-quote">“ {t('Your style, your way.')} ”</p></article>;}
+import type { Vendor } from '@/types/shop';
+interface Props {vendor:Vendor;following:boolean;busy:boolean;onToggle:()=>void;}
+export default function StoreCard({vendor,following,busy,onToggle}:Props){const {t}=useShop();const {products}=useCatalog({vendor:vendor.name,first:4});return <article className="store-card"><div className="store-title"><Link to={`/stores/${vendor.id}`} className="store-avatar"><img src={vendor.avatar} alt={vendor.name}/><span>Trends</span></Link><Link to={`/stores/${vendor.id}`}><h2>{vendor.name}</h2><span className="store-tag">Explore this store</span></Link><button className={`follow-button ${following?'following':''}`} disabled={busy} onClick={onToggle}>{following?<Check size={17}/>:<Plus size={17}/>} {t(following?'Following':'Follow')}</button></div><div className="store-products">{products.map(p=><ProductCard product={p} key={p.id} compact/>)}</div></article>;}
