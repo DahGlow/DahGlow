@@ -1,0 +1,2 @@
+import { Component,type ReactNode } from 'react';
+export default class ErrorBoundary extends Component<{children:ReactNode},{error:boolean}> { state={error:false}; static getDerivedStateFromError(){return {error:true};} componentDidCatch(error:Error){console.error('Dah Glow:',error);} render(){return this.state.error?<main className="empty-state"><h1>Let’s try that again.</h1><p>Something interrupted your shopping experience.</p><button className="primary-button" onClick={()=>this.setState({error:false})}>Try again</button></main>:this.props.children;} }

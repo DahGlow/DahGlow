@@ -1,0 +1,6 @@
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import banner from '@/assets/glow-banner.jpg';
+import { SHUFFLED_PRODUCTS } from '@/constants/products';
+import { useShop } from '@/hooks/useShop';
+export default function HeroBanner(){const {t,money}=useShop();return <section className="hero-banner" style={{backgroundImage:`url(${banner})`}}><div className="hero-inner"><div className="hero-copy"><span className="eyebrow">{t('THE EVERYDAY EDIT')} <span> / 01</span></span><h1>{t('Find your everyday glow.')}</h1><p>{t('New season. New favorites.')}<br/>{t('Little prices. Big energy.')}</p><Link className="primary-button" to="/deals">{t('Discover the edit')}<ArrowUpRight size={19}/></Link><div className="hero-caption"><span/> DAH GLOW · CURATED FOR YOU</div></div><div className="hero-products">{SHUFFLED_PRODUCTS.slice(0,2).map((p,i)=><Link to={`/product/${p.id}`} key={p.id} className={`hero-product hero-product-${i}`}><span className="hero-product-label">{i===0?'EVERYDAY FAVORITE':'THE NEW OBSESSION'}</span><img src={p.image} alt={p.name}/><span className="hero-price">{money(p.price)} <ArrowUpRight size={14}/></span></Link>)}</div></div><div className="hero-dots"><span className="selected"/><span/><span/></div></section>;}

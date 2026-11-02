@@ -1,0 +1,8 @@
+import { CreditCard,Package,Truck,MessageSquare,RotateCcw,Headset,Store,ShieldCheck,Megaphone,Gift, type LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import { useShop } from '@/hooks/useShop';
+interface Item {label:string;icon:LucideIcon;path?:string;}
+const ORDERS:Item[]=[{label:'Unpaid',icon:CreditCard},{label:'Processing',icon:Package},{label:'Shipped',icon:Truck},{label:'Review',icon:MessageSquare},{label:'Returns',icon:RotateCcw}];
+const SERVICES:Item[]=[{label:'Customer Service',icon:Headset},{label:'Following',icon:Store,path:'/trends?tab=stores'},{label:'Gift Card',icon:Gift},{label:'More Services',icon:Megaphone},{label:'Policy',icon:ShieldCheck}];
+export default function AccountServices(){const {t}=useShop();const navigate=useNavigate();return <>{[{title:'My Orders',items:ORDERS},{title:'More Services',items:SERVICES}].map(group=><section className="account-section" key={group.title}><div className="account-section-title"><h2>{t(group.title)}</h2>{group.title==='My Orders'&&<button onClick={()=>toast.info(t('Nothing here yet'))}>{t('View all')} ›</button>}</div><div className="service-icons">{group.items.map(({label,icon:Icon,path})=><button key={label} onClick={()=>path?navigate(path):toast.info(label==='Customer Service'?'Support preview · hello@dahglow.com':t('Nothing here yet'))}><Icon strokeWidth={1.6}/><span>{t(label)}</span></button>)}</div></section>)}</>;}
