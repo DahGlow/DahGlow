@@ -40,11 +40,11 @@
  .desktop-category-nav{max-width:1600px;margin:auto;display:flex;align-items:center;gap:24px;padding:0 32px;min-height:44px;overflow-x:auto;scrollbar-width:none}
  .desktop-category-nav>a,.desktop-category-nav>button{display:flex;align-items:center;gap:4px;white-space:nowrap;min-height:44px;font-size:14px;border-bottom:2px solid transparent;transition:opacity .2s,transform .2s}
  .desktop-category-nav>a:hover,.desktop-category-nav>button:hover{opacity:.75;transform:translateY(-1px)}.desktop-category-nav .active{border-bottom-color:hsl(var(--background))}
- .home-showcase{display:grid;grid-template-columns:minmax(176px,.95fr) minmax(0,2.4fr) minmax(176px,.95fr);gap:12px;max-width:1600px;padding:16px 32px 0;margin:auto}
- .home-showcase-rail{display:grid;grid-template-rows:repeat(3,1fr);gap:12px}
- .home-edit-tile{position:relative;display:flex;align-items:center;min-height:72px;background-position:center;background-size:cover;border-radius:5px;overflow:hidden;transition:transform .2s}
+ .home-showcase{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.45fr) minmax(0,1fr);align-items:stretch;gap:12px;max-width:1600px;padding:16px 32px 0;margin:auto}
+ .home-showcase-rail{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:12px;min-width:0}
+ .home-edit-tile{position:relative;display:flex;align-items:center;min-width:0;min-height:72px;background-color:hsl(var(--muted));background-position:center;background-size:cover;border-radius:5px;overflow:hidden;transition:transform .2s}
  .home-edit-tile:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,hsl(var(--foreground)/.7),hsl(var(--foreground)/0))}.home-edit-tile>span{position:relative;color:hsl(var(--background));padding:16px 20px;font-size:16px;font-weight:700;line-height:1.2}.home-edit-tile:hover{transform:translateY(-2px)}
- .home-brand-tile{justify-content:center;text-align:center}.home-brand-tile:before{background:hsl(var(--foreground)/.1)}.home-brand-tile>span{background:hsl(var(--foreground)/.82);padding:8px 12px;width:100%;font-size:19px;letter-spacing:.06em}
+ .home-brand-tile{justify-content:center;text-align:center}.home-brand-tile:before{background:hsl(var(--foreground)/.1)}.home-brand-tile>span{background:hsl(var(--foreground)/.82);padding:8px 12px;width:100%;font-size:clamp(16px,1.45vw,20px);font-weight:600;letter-spacing:.04em;line-height:1.4;overflow-wrap:anywhere}
  .home-showcase .hero-banner{margin:0;padding:0;min-width:0;border-radius:6px;overflow:hidden}
  .home-showcase .hero-inner{padding:20px 24px 40px;min-height:252px;gap:16px;max-width:none;position:relative}
  .home-showcase .hero-copy{width:48%}.home-showcase .hero-copy h1{font-size:36px;margin:12px 0}.home-showcase .hero-copy p{font-size:14px;margin:8px 0 12px;line-height:1.5}.home-showcase .hero-copy .eyebrow{font-size:10px;letter-spacing:.12em}.home-showcase .hero-copy .primary-button{min-height:44px;padding:8px 12px;font-size:12px;gap:4px}
