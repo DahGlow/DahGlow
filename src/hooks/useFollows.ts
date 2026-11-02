@@ -1,10 +1,6 @@
-import { useState,useEffect,useCallback } from 'react';
+import { useState } from 'react';
+import { useQuery,useMutation,useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/api';
 import { useAuth } from '@/hooks/useAuth';
-
-export function useFollows() { const {user}=useAuth();const [follows,setFollows]=useState<string[]>([]);const [busy,setBusy]=useState<string|null>(null);
-const refresh=useCallback(async()=>{if(!user){setFollows([]);return;}const {data,error}=await supabase.from('dg_follows').select('store_id').eq('user_id',user.id);if(error){toast.error(error.message);return;}setFollows((data||[]).map(x=>x.store_id));},[user]);
-useEffect(()=>{void refresh();const timer=setInterval(()=>void refresh(),10000);return ()=>clearInterval(timer);},[refresh]);
-const toggle=async(id:string)=>{if(!user){toast.info('Sign in to follow a store.');return;}setBusy(id);const result=follows.includes(id)?await supabase.from('dg_follows').delete().eq('user_id',user.id).eq('store_id',id):await supabase.from('dg_follows').insert({user_id:user.id,store_id:id});if(result.error)toast.error(result.error.message);else await refresh();setBusy(null);};
-return {follows,toggle,busy}; }
+export function useFollows(){const {user}=useAuth();const client=useQueryClient();const [busy,setBusy]=useState<string|null>(null);const key=['store-follows',user?.id];const query=useQuery({queryKey:key,queryFn:async()=>{const {data,error}=await supabase.from('dg_follows').select('store_id').eq('user_id',user!.id);if(error)throw error;return data.map(x=>String(x.store_id));},enabled:!!user,staleTime:0,refetchInterval:10000});const follows=query.data||[];const mutation=useMutation({mutationFn:async(id:string)=>{if(!user)throw new Error('Sign in to follow a store.');const result=follows.includes(id)?await supabase.from('dg_follows').delete().eq('user_id',user.id).eq('store_id',id):await supabase.from('dg_follows').insert({user_id:user.id,store_id:id});if(result.error)throw result.error;},onSuccess:()=>{void client.invalidateQueries({queryKey:['store-follows']});void client.invalidateQueries({queryKey:['store-stats']});},onError:(error:Error)=>toast.error(error.message),onSettled:()=>setBusy(null)});const toggle=async(id:string)=>{if(!user){toast.info('Sign in to follow a store.');return;}setBusy(id);await mutation.mutateAsync(id).catch(()=>undefined);};return {follows,toggle,busy,error:query.error,loading:query.isLoading};}

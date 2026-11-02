@@ -1,0 +1,5 @@
+import { ChevronDown } from 'lucide-react';
+import { formatMoney } from '@/lib/shopify';
+import type { WalletTransaction } from '@/types/wallet';
+interface Props {transaction:WalletTransaction;}
+export default function WalletHistoryEntry({transaction:t}:Props){const label=t.__typename.includes('Expiration')?'Expired':t.__typename.includes('DebitRevert')?'Reversed payment':t.__typename.includes('Debit')?'Shopping':'Credit';const negative=t.__typename.includes('Debit')&&!t.__typename.includes('Revert')||t.__typename.includes('Expiration');return <details className="wallet-history-entry"><summary><div><strong>{label}</strong><time>{new Date(t.createdAt).toLocaleDateString()}</time></div><b>{negative?'−':'+'}{formatMoney(Math.abs(Number(t.amount.amount)),t.amount.currencyCode)}</b><ChevronDown size={18}/></summary><div className="transaction-details"><p>Recorded by Shopify · {new Date(t.createdAt).toLocaleString()}</p><p>Balance after transaction: <strong>{formatMoney(t.balanceAfterTransaction)}</strong></p><p>Source: {t.event.replace(/_/g,' ').toLowerCase()}</p></div></details>;}

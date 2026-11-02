@@ -1,7 +1,7 @@
 import { lazy,Suspense } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import { ShopProvider } from '@/hooks/useShop';
+import AccountShopBoundary from '@/components/features/AccountShopBoundary';
 import { AuthProvider } from '@/hooks/useAuth';
 import Header from '@/components/layout/Header';
 import BottomTabs from '@/components/layout/BottomTabs';
@@ -17,10 +17,14 @@ const ShopifyCallback=lazy(()=>import('@/pages/ShopifyCallback')),IntegrationSta
 const PrivateControl=lazy(()=>import('@/pages/PrivateControl')),LoginCode=lazy(()=>import('@/pages/LoginCode')),ResetPassword=lazy(()=>import('@/pages/ResetPassword')),AccountRecovery=lazy(()=>import('@/pages/AccountRecovery'));
 const EditProfile=lazy(()=>import('@/pages/EditProfile')),EditUsername=lazy(()=>import('@/pages/EditUsername')),ProfileQr=lazy(()=>import('@/pages/ProfileQr')),Support=lazy(()=>import('@/pages/Support'));
 const OrderTrack=lazy(()=>import('@/pages/OrderTrack')),ReceiveSuccess=lazy(()=>import('@/pages/ReceiveSuccess'));
-export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><ShopProvider><ScrollReset/><CustomerBridge/><Header/>
+const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferences=lazy(()=>import('@/pages/ContactPreferences')),MyStores=lazy(()=>import('@/pages/MyStores'));
+const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
+export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><Routes>
   <Route path="/" element={<Shop/>}/><Route path="/trends" element={<Trends/>}/><Route path="/cart" element={<Cart/>}/><Route path="/me" element={<Me/>}/>
   <Route path="/settings" element={<Settings/>}/><Route path="/settings/:type" element={<Preferences/>}/><Route path="/login" element={<Login/>}/>
+  <Route path="/account/switch" element={<SwitchAccounts/>}/><Route path="/account/stores" element={<MyStores/>}/>
+  <Route path="/settings/contact-preferences" element={<ContactPreferences/>}/><Route path="/wallet" element={<Wallet/>}/><Route path="/wallet/history" element={<WalletHistory/>}/><Route path="/wallet/payment" element={<WalletPayment/>}/>
   <Route path="/login/code" element={<LoginCode/>}/><Route path="/account/reset-password" element={<ResetPassword/>}/><Route path="/account/recovery" element={<AccountRecovery/>}/>
   <Route path="/account/profile" element={<EditProfile/>}/><Route path="/account/profile/username" element={<EditUsername/>}/><Route path="/account/profile/qr" element={<ProfileQr/>}/><Route path="/support" element={<Support/>}/>
   <Route path="/auth/callback" element={<AuthCallback/>}/><Route path="/oauth/callback" element={<AuthCallback/>}/><Route path="/shopify/callback" element={<ShopifyCallback/>}/>
@@ -34,4 +38,4 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
  </Routes></Suspense><BottomTabs/><Toaster position="top-center" richColors/>
- </ShopProvider></AuthProvider></ErrorBoundary></BrowserRouter>;}
+ </AccountShopBoundary></AuthProvider></ErrorBoundary></BrowserRouter>;}
