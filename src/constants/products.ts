@@ -1,2 +1,3 @@
 export const CATEGORIES = ['Women','Curve','Kids','Men','Shoes','Tops','Lips','Home'];
+
 export const ASSETS = { deals:'https://img.ltwebstatic.com/v4/p/ccc/2026/03/09/23/1773047383f0f700fd5359994ee5b757e648beadd8_thumbnail_240x.avif', trends:'https://img.ltwebstatic.com/v4/p/ccc/2026/03/09/69/1773046319ce7456bd44ad5837cb586d1022c6323c_thumbnail_144x.avif', brands:'https://img.ltwebstatic.com/v4/p/ccc/2026/08/24/83/17875542345ec8ddbb14dec8e07bc0d9f1a1b83671_thumbnail_240x.avif', cart:'https://img.ltwebstatic.com/images3_ccc/2024/09/14/c4/1726308103afb22656373fc035549a3b184a4363c0.avif', addCart:'https://shein.ltwebstatic.com/svgicons/2025/06/09/17494608673220285452.svg', vip:'https://img.ltwebstatic.com/images3_app/2019/10/18/icon_normal_vip_s0.png' };

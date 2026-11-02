@@ -5,6 +5,7 @@ import { productUrl,formatMoney } from '@/lib/shopify';
 import { optimizedImage } from '@/lib/images';
 import type { Product } from '@/types/shop';
 import { ASSETS } from '@/constants/products';
+
 interface Props {product:Product;compact?:boolean;deal?:boolean;}
 export default function ProductCard({product,compact=false,deal=false}:Props){
  const {t,addCart,cartBusy}=useShop();const navigate=useNavigate();const discount=product.original>product.price?Math.round((1-product.price/product.original)*100):0;

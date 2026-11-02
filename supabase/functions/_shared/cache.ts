@@ -1,4 +1,5 @@
 import { adminDb,check } from './config.ts';
+
 const inflight=new Map<string,Promise<unknown>>();
 export async function cached<T>(key:string,load:()=>Promise<T>,ttl=120):Promise<T>{
  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key));const hash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');

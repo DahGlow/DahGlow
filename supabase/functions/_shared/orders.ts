@@ -1,5 +1,6 @@
 import { adminDb,check } from './config.ts';
 import { adminGraph } from './shopifyAdmin.ts';
+
 export interface Money{amount:string;currencyCode:string;}
 export interface Image{url:string;altText:string|null;}
 export interface OrderItem{title:string;quantity:number;variantTitle:string;image:Image|null;price:Money|null;options:{name:string;value:string}[];}

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useShop } from '@/hooks/useShop';
-
 const CATEGORIES = [
   { name: 'Women', image: 'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/08/1786601829ccbab3b7ea1ca622d278a071f2478f32_thumbnail_240x.avif' },
   { name: 'Men', image: 'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sm260826172252344583234/f764c9723d07666f45378dcab4d60860_square_thumbnail_240x.avif' },

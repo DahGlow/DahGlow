@@ -1,4 +1,5 @@
 import { Gift,Wallet,Truck } from 'lucide-react';
 import { toast } from 'sonner';
 import { useShop } from '@/hooks/useShop';
+
 export default function MemberCards(){const {t}=useShop();return <div className="member-cards"><section className="club-card"><h2>DAHGLOW CLUB</h2><p>Member benefits are coming soon</p><div className="club-perks"><span><Gift/>{t('Free Gifts')}</span><span><Wallet/>{t('Credit Reward')}</span><span><Truck/>{t('Free Shipping')}</span></div><button onClick={()=>toast.info('DahGlow Club memberships are coming soon.')}>{t('Join Now')}</button></section><section className="saver-card"><h2>DAHGLOW <i>Saver</i></h2><p>Your savings hub</p><div><strong>Saver</strong><span>Coming soon</span></div><button onClick={()=>toast.info('DahGlow Saver is coming soon. No payment is required.')}>{t('Join Now')}</button></section></div>;}

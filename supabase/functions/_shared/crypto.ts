@@ -1,4 +1,5 @@
 import { secret,shopDomain } from './config.ts';
+
 const enc=new TextEncoder();
 export const b64=(bytes:Uint8Array)=>btoa(String.fromCharCode(...bytes));
 export const unb64=(text:string)=>Uint8Array.from(atob(text),c=>c.charCodeAt(0));

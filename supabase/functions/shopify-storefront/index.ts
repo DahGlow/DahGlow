@@ -2,6 +2,7 @@ import { corsHeaders,json } from '../_shared/cors.ts';
 import { errorResponse,adminDb,check } from '../_shared/config.ts';
 import { ensureIntegration } from '../_shared/bootstrap.ts';
 import { storefront,cached,PRODUCT,VARIANT,IMAGE,META,CART,quote,vendors } from '../_shared/storefront.ts';
+
 interface PageInfo{hasNextPage:boolean;endCursor:string|null;}
 interface Connection<T>{nodes:T[];pageInfo:PageInfo;}
 interface RawProduct{images:Connection<unknown>;variants:Connection<unknown>;[key:string]:unknown;}

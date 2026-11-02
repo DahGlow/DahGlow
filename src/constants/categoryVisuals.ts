@@ -1,5 +1,6 @@
 // Existing category illustrations are intentionally preserved, not catalog product images.
 export const CATEGORY_VISUALS=[
+    
 {name:'Women',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/08/1786601829ccbab3b7ea1ca622d278a071f2478f32_thumbnail_240x.avif'},
 {name:'Men',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sm260826172252344583234/f764c9723d07666f45378dcab4d60860_square_thumbnail_240x.avif'},
 {name:'Kids',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/12/2c/1786501315128f0be1a14b67201659a31f70bf43e3_thumbnail_240x.avif'},

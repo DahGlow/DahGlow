@@ -2,6 +2,7 @@ import { useState,useEffect,useCallback } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/api';
 import { useAuth } from '@/hooks/useAuth';
+
 export function useFollows() { const {user}=useAuth();const [follows,setFollows]=useState<string[]>([]);const [busy,setBusy]=useState<string|null>(null);
 const refresh=useCallback(async()=>{if(!user){setFollows([]);return;}const {data,error}=await supabase.from('dg_follows').select('store_id').eq('user_id',user.id);if(error){toast.error(error.message);return;}setFollows((data||[]).map(x=>x.store_id));},[user]);
 useEffect(()=>{void refresh();const timer=setInterval(()=>void refresh(),10000);return ()=>clearInterval(timer);},[refresh]);

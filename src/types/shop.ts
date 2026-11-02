@@ -1,4 +1,5 @@
 export interface Money { amount:string; currencyCode:string; }
+
 export interface ProductImage { url:string; altText:string|null; width?:number; height?:number; }
 export interface Metafield { namespace:string; key:string; value:string; type:string; }
 export interface SelectedOption { name:string; value:string; }

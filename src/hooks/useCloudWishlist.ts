@@ -3,6 +3,7 @@ import { useQuery,useMutation,useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/api';
 import { useAuth } from '@/hooks/useAuth';
+
 function guestSaved():string[]{try{return JSON.parse(localStorage.getItem('dg-guest-wishlist')||localStorage.getItem('dg-wishlist')||'[]').filter((id:unknown)=>typeof id==='string'&&!id.startsWith('dg-'));}catch{return [];}}
 const merges=new Map<string,Promise<void>>();
 export function useCloudWishlist(){const {user}=useAuth();const client=useQueryClient();const [guest,setGuest]=useState<string[]>(guestSaved);const key=['wishlist',user?.id];

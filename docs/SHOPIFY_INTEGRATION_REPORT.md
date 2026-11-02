@@ -1,3 +1,4 @@
+
 # Dah Glow Shopify implementation report
 
 Date: 2026-11-02

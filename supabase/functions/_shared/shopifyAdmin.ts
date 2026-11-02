@@ -1,5 +1,6 @@
 import { adminDb,check,secret,shopDomain,version } from './config.ts';
 import { seal,open } from './crypto.ts';
+
 interface TokenRow{ciphertext:string|null;expires_at:string|null;refreshed_at:string|null;scopes:string|null;status:string;}
 async function read(){const result=await adminDb().from('dg_shopify_tokens').select('ciphertext,expires_at,refreshed_at,scopes,status').eq('shop',shopDomain()).maybeSingle();check(result);return result.data as TokenRow|null;}
 async function generate(){const response=await fetch(`https://${shopDomain()}/admin/oauth/access_token`,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'client_credentials',client_id:secret('SHOPIFY_CLIENT_ID'),client_secret:secret('SHOPIFY_CLIENT_SECRET')}),signal:AbortSignal.timeout(20000)});const data=await response.json();if(!response.ok||!data.access_token)throw new Error(`Shopify Admin OAuth ${response.status}: ${typeof data.error==='string'?data.error:'grant rejected; confirm same-organization app installation and scopes'}`);return data as {access_token:string;expires_in:number;scope:string};}

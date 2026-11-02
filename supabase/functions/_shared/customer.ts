@@ -1,6 +1,7 @@
 import { createRemoteJWKSet,jwtVerify } from 'npm:jose@5';
 import { adminDb,check,secret,shopDomain } from './config.ts';
 import { seal,open,url64 } from './crypto.ts';
+
 interface Tokens{access_token:string;refresh_token:string;id_token?:string;expires_in:number;}
 interface Discovery{authorization_endpoint:string;token_endpoint:string;jwks_uri:string;issuer:string;}
 export async function discover(){const response=await fetch(`https://${shopDomain()}/.well-known/openid-configuration`,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw new Error('Shopify Customer Account discovery unavailable; enable new customer accounts and Headless Customer Account API');return await response.json() as Discovery;}

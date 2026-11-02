@@ -1,5 +1,6 @@
 -- Dah Glow Shopify support. Applied to OnSpace Cloud during this session.
 -- All sensitive token values are AES-GCM encrypted in Edge Functions, never stored in plaintext.
+
 create table if not exists public.dg_shopify_tokens (shop text primary key, ciphertext text, expires_at timestamptz, refreshed_at timestamptz, status text not null default 'uninitialized', scopes text, lease_owner uuid, lease_until timestamptz);
 create table if not exists public.dg_shopify_cache (cache_key text primary key, payload jsonb not null, expires_at timestamptz not null);
 create table if not exists public.dg_webhook_events (event_id text primary key, topic text not null, shop text not null, status text not null default 'pending', attempts integer not null default 1, received_at timestamptz not null default now(), processed_at timestamptz, lease_until timestamptz, error text);

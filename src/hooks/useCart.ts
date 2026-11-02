@@ -3,6 +3,7 @@ import { useQuery,useMutation,useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { shopify } from '@/lib/shopify';
 import type { ShopifyCart } from '@/types/shop';
+
 interface MutationResult{cart:ShopifyCart|null;userErrors:{message:string}[];}
 let queue:Promise<unknown>=Promise.resolve();
 export function useCart(){const client=useQueryClient();const [id,setId]=useState(()=>localStorage.getItem('dg-shopify-cart')||'');const query=useQuery({queryKey:['shopify','cart',id],queryFn:async()=>{const data=await shopify<{cart:ShopifyCart|null}>({op:'cart',action:'get',id});if(!data.cart){localStorage.removeItem('dg-shopify-cart');setId('');}return data.cart;},enabled:!!id,staleTime:15000,refetchInterval:60000,retry:1});

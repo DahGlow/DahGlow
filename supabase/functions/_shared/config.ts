@@ -1,4 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
+
 export function secret(name:string) { const value=Deno.env.get(name);if(!value)throw new Error(`Missing backend configuration: ${name}`);return value; }
 export function shopDomain(){const value=secret('SHOPIFY_STORE_DOMAIN').replace(/^https?:\/\//,'').replace(/\/$/,'').toLowerCase();if(!/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(value))throw new Error('SHOPIFY_STORE_DOMAIN must be the canonical *.myshopify.com domain');return value;}
 export const version=()=>Deno.env.get('SHOPIFY_API_VERSION')||'2026-10';
