@@ -29,7 +29,7 @@ export default function HeroBanner(){
 
   const backgroundImage=activeSlide===0?banner:featuredBanners[activeSlide-1].image;
 
-  return <section className="hero-banner" style={{backgroundImage:`url(${backgroundImage})`,backgroundPosition:activeSlide===0?'center':'center top'}} aria-label="Featured banners">
+  return <section className="hero-banner" style={{backgroundImage:`url(${backgroundImage})`,backgroundPosition:'center bottom'}} aria-label="Featured banners">
     {activeSlide===0
       ? <Link className="hero-inner" to="/black-Friday-2026-November-dah-glow" aria-label="Explore Dah Glow Black Friday">
           <div className="hero-copy"><span className="eyebrow">THE NOVEMBER EDIT</span><h1>Find your<br/>everyday glow.</h1><p>Fresh arrivals. Your next favorites.</p><span className="primary-button">Explore Black Friday <ArrowUpRight size={18}/></span></div>
