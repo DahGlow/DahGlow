@@ -5,7 +5,6 @@ import { supabase } from '@/lib/api';
 import { mapProduct } from '@/lib/shopify';
 import { prepareScanImage } from '@/lib/scanImage';
 import type { Recognition,ScanResponse,ScanResult,ScanStage } from '@/types/scan';
-
 async function request<T>(image:File,phase:string,ticket?:string):Promise<T> {
   const body=new FormData();body.append('image',image);body.append('phase',phase);body.append('limit','24');if(ticket)body.append('ticket',ticket);
   const {data,error}=await supabase.functions.invoke('product-image-scan',{body});

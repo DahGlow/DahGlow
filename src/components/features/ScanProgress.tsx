@@ -1,4 +1,5 @@
 import { Check,ScanLine,X } from 'lucide-react';
 import type { ScanStage } from '@/types/scan';
+
 interface Props { image:string;stage:ScanStage;onCancel:()=>void; }
 export default function ScanProgress({image,stage,onCancel}:Props){const steps=['Prepare image','Recognize products','Compare Shopify images'];const active=stage==='preparing'?0:stage==='recognizing'?1:2;return <section className="scan-progress" aria-busy="true" aria-live="polite"><button className="icon-button scan-close" onClick={onCancel} aria-label="Cancel scan"><X/></button><div className="scan-image-frame">{image&&<img src={image} alt="Your image being analyzed"/>}<div className="scan-progress-status"><ScanLine size={40}/><h1>{steps[active]}</h1><p>{active===2?'Finding visually similar products in Dah Glow’s real catalog.':'Keep the whole product visible for a more useful result.'}</p></div></div><ol>{steps.map((step,i)=><li key={step} className={i===active?'current':''}>{i<active?<Check size={20}/>:<span>{i+1}</span>}{step}</li>)}</ol><small>Real image analysis. No simulated progress percentage.</small></section>;}

@@ -1,6 +1,5 @@
 import { ScanError, recognitionSchema } from './scanValidation.ts';
 import type { Recognition } from './scanValidation.ts';
-
 interface ImagePart { type: 'image_url'; image_url: { url: string }; }
 export async function scanAi(prompt: string, images: string[]): Promise<unknown> {
   const key = Deno.env.get('ONSPACE_AI_API_KEY'), base = Deno.env.get('ONSPACE_AI_BASE_URL');

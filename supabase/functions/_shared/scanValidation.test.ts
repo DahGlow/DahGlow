@@ -1,5 +1,4 @@
 import { imageMime,recognitionSchema } from './scanValidation.ts';
-
 Deno.test('validates supported image signatures instead of trusting a filename',()=>{
  if(imageMime(new Uint8Array([255,216,255]))!=='image/jpeg')throw new Error('JPEG was not recognized');
  if(imageMime(new Uint8Array([137,80,78,71,13,10,26,10]))!=='image/png')throw new Error('PNG was not recognized');

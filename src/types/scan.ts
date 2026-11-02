@@ -1,4 +1,5 @@
 import type { Product,RawProduct } from '@/types/shop';
+
 export interface DetectedProduct { name:string;category:string;brand:string|null;confidence:number;details:string[];visibleText:string;searchTerms:string[]; }
 export interface Recognition { objects:DetectedProduct[]; }
 export interface ScanMatch { id:string;objectIndex:number;score:number;reason:string;matchType:'similar';product:Product; }

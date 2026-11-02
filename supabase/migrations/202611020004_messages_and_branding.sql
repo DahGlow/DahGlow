@@ -1,5 +1,6 @@
 -- Real customer notifications and additive admin storage permissions.
 -- This migration does not change or remove existing user data.
+
 insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types)
 values('dg-branding','dg-branding',true,5242880,array['image/jpeg','image/png','image/webp']) on conflict(id) do nothing;
 create table if not exists public.dg_messages(

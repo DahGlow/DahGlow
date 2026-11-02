@@ -3,7 +3,6 @@ import { adminGraph,tokenStatus } from './shopifyAdmin.ts';
 import { cached } from './storefront.ts';
 import { syncMetafieldRegistry } from './metafieldRegistry.ts';
 import { webhookUrl } from './webhookUrl.ts';
-
 export const TOPICS=['ORDERS_CREATE','ORDERS_UPDATED','ORDERS_PAID','ORDERS_CANCELLED','FULFILLMENTS_CREATE','FULFILLMENTS_UPDATE','REFUNDS_CREATE','PRODUCTS_CREATE','PRODUCTS_UPDATE','PRODUCTS_DELETE','INVENTORY_LEVELS_UPDATE'];
 interface Subscription {id:string;topic:string;endpoint:{callbackUrl?:string};}
 interface SubscriptionMutation {webhookSubscription:{id:string}|null;userErrors:{message:string}[];}

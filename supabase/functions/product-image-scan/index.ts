@@ -4,7 +4,6 @@ import { seal,open } from '../_shared/crypto.ts';
 import { scanImage,ScanError,recognitionSchema,type Recognition } from '../_shared/scanValidation.ts';
 import { recognizeImage } from '../_shared/scanAi.ts';
 import { matchCatalog } from '../_shared/scanCatalog.ts';
-
 interface ScanTicket { hash:string; detection:Recognition; expires:number; }
 async function rateLimit(req:Request,phase:string) {
   const address=req.headers.get('cf-connecting-ip')||req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()||'unknown';

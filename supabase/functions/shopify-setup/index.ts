@@ -3,7 +3,6 @@ import { serviceOnly,errorResponse } from '../_shared/config.ts';
 import { adminGraph,tokenStatus } from '../_shared/shopifyAdmin.ts';
 import { storefront,vendors } from '../_shared/storefront.ts';
 import { registerWebhooks } from '../_shared/bootstrap.ts';
-
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});try{
  await serviceOnly(req);const body=await req.json();
  if(body.op==='register-webhooks')return json({results:await registerWebhooks(),note:'API-created webhooks verify against SHOPIFY_CLIENT_SECRET. Manually created webhooks also accept the configured SHOPIFY_WEBHOOK_SECRET. Callback URLs use HTTPS. Gateway JWT verification must remain disabled for this public HMAC-authenticated receiver.'});
