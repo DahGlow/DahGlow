@@ -14,5 +14,4 @@ export const CATEGORY_VISUALS=[
   {name:'Sleepwear',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/si260724173491931276308/6692881bd51e5a110d50dfd9d3c206bc_square_thumbnail_240x.avif'},
   {name:'Sports',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/04/16/63/1776343372c677b479eb9d85b9a1b9a4255b9283f1_thumbnail_240x.avif'},
   {name:'Dress',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260402140899761808771/25b22f31c66963491c894d522e7bacc8_square_thumbnail_240x.avif'},
-  {name:'Toys',image:'https://img.ltwebstatic.com/v4/p/abc/2026/05/26/eb/17797406273383d48af6f65d650d1f5e74be3a8232_thumbnail_240x.avif'},
 ];
