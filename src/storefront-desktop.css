@@ -2,6 +2,7 @@
 .desktop-store-header,.desktop-footer,.desktop-categories,.home-showcase-rail{display:none}
 .site-header-shell{position:sticky;top:0;z-index:40}
 .site-header-shell .store-header{position:relative;top:auto}
+.search-stage .message-icon{display:flex}
 .header-camera{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;color:hsl(var(--subtle));border-radius:4px}
 .header-camera:hover{background:hsl(var(--muted));color:hsl(var(--foreground))}
 .hero-banner-destination{position:absolute;inset:0;z-index:1}
