@@ -10,6 +10,7 @@ const schema=z.object({messages:z.array(z.object({role:z.enum(['user','assistant
 const contactSchema=z.object({name:z.string().trim().min(2).max(120),email:z.string().trim().email().max(254).transform(value=>value.toLowerCase()),orderNumber:z.string().trim().max(100).optional().default(''),subject:z.string().trim().min(3).max(180),message:z.string().trim().min(10).max(5000),website:z.string().max(0).optional().default('')});
 class ContactRateLimitError extends Error{}
 async function contactRate(key:string){const result=await adminDb().rpc('dg_rate_check',{p_key:key,p_limit:5,p_seconds:3600});check(result);if(!result.data)throw new ContactRateLimitError('Too many requests. Please try again later.');}
+function cleanContactText(value:string){return Array.from(value).filter(character=>{const code=character.charCodeAt(0);return code>31&&code!==127;}).join('').trim();}
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});if(req.method!=='POST')return json({error:'POST required'},405);try{
  if(Number(req.headers.get('content-length'))>12000)return json({error:'Request too large'},413);
  const body=await req.json();
@@ -20,7 +21,7 @@ Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{heade
   const digest=async(value:string)=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),byte=>byte.toString(16).padStart(2,'0')).join('');
   await contactRate(`contact-ip:${await digest(remote)}`);
   await contactRate(`contact-email:${await digest(form.email)}`);
-  const inserted=await adminDb().from('dg_contact_requests').insert({name:form.name.replace(/[\u0000-\u001f\u007f]/g,'').trim(),email:form.email,order_number:form.orderNumber.replace(/[\u0000-\u001f\u007f]/g,'').trim()||null,subject:form.subject.replace(/[\u0000-\u001f\u007f]/g,'').trim(),message:form.message.replace(/[\u0000-\u001f\u007f]/g,'').trim()}).select('id,created_at').single();
+  const inserted=await adminDb().from('dg_contact_requests').insert({name:cleanContactText(form.name),email:form.email,order_number:cleanContactText(form.orderNumber)||null,subject:cleanContactText(form.subject),message:cleanContactText(form.message)}).select('id,created_at').single();
   check(inserted);
   return json({received:true,id:inserted.data.id,createdAt:inserted.data.created_at},201);
  }
