@@ -3,7 +3,6 @@ import { shopDomain,adminDb,check,errorResponse } from '../_shared/config.ts';
 import { validHmac } from '../_shared/crypto.ts';
 import { syncAdminOrder } from '../_shared/orders.ts';
 import { syncAffiliateOrder } from '../_shared/affiliateOrders.ts';
-
 const TOPICS=['orders/create','orders/updated','orders/paid','orders/cancelled','fulfillments/create','fulfillments/update','refunds/create','products/create','products/update','products/delete','inventory_levels/update'];
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});

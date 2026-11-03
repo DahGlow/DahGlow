@@ -1,4 +1,5 @@
 /* Paper creator workspace: matte surfaces, coral emphasis, editorial hierarchy. */
+
 :root{--affiliate-accent:12 76% 42%;--affiliate-coral:10 87% 62%;--affiliate-rose:332 81% 51%;--affiliate-peach:28 94% 76%;--affiliate-soft:9 83% 93%;--affiliate-ink:348 49% 31%;--affiliate-paper:30 16% 97%;--affiliate-gold:41 91% 84%;--affiliate-dark:24 74% 9%;--affiliate-sky:194 68% 32%}
 .affiliate-shell{background:hsl(var(--affiliate-paper));min-height:100vh;color:hsl(var(--foreground));padding-bottom:calc(96px + env(safe-area-inset-bottom));font-size:16px}
 .affiliate-shell a,.affiliate-shell button,.affiliate-referral-page a,.affiliate-referral-page button{-webkit-tap-highlight-color:transparent}

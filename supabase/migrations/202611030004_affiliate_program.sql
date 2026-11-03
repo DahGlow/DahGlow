@@ -1,4 +1,5 @@
 -- Dah Glow affiliate program: private identities, saved picks, last-click attribution and verified USD earnings.
+
 create table if not exists public.dg_affiliate_program(
  id boolean primary key default true check(id),
  enabled boolean not null default false,

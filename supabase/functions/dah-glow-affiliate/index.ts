@@ -5,6 +5,7 @@ import { convertAffiliateLink,resolveAffiliateReferral,validAffiliateTarget } fr
 import { affiliateAnalytics } from '../_shared/affiliateAnalytics.ts';
 import { AFFILIATE_RULES,AFFILIATE_RULES_VERSION } from '../_shared/affiliateRules.ts';
 import { authorize,permit,rate,audit } from '../_shared/adminAccess.ts';
+
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});
  if(req.method!=='POST')return json({error:'POST required'},405);

@@ -1,6 +1,7 @@
 import { adminDb,check } from './config.ts';
 import { adminGraph } from './shopifyAdmin.ts';
 import { isUuid } from './affiliateReferrals.ts';
+
 interface AffiliateOrderLine {product:{handle:string}|null;priceAfterAllDiscountsBeforeTaxesSet:{shopMoney:{amount:string;currencyCode:string}};}
 interface AffiliateOrder {id:string;name:string;createdAt:string;email:string|null;cancelledAt:string|null;displayFinancialStatus:string;displayFulfillmentStatus:string;customAttributes:{key:string;value:string}[];customer:{id:string;email:string|null;numberOfOrders:string}|null;returns:{nodes:{status:string}[]};refunds:{id:string}[];fulfillments:{status:string;deliveredAt:string|null}[];lineItems:{nodes:AffiliateOrderLine[];pageInfo:{hasNextPage:boolean;endCursor:string|null}};}
 const LINE='product{handle} priceAfterAllDiscountsBeforeTaxesSet{shopMoney{amount currencyCode}}';

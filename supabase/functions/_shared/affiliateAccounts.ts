@@ -1,5 +1,6 @@
 import { adminDb,check } from './config.ts';
 import type { User } from 'npm:@supabase/supabase-js@2';
+
 export async function ensureAffiliate(user:User){const db=adminDb();const profile=await db.from('user_profiles').select('username').eq('id',user.id).single();check(profile);const displayName=String(profile.data.username||user.user_metadata?.username||`DGW-user${user.id.slice(0,6)}`).slice(0,100);const created=await db.from('dg_affiliates').upsert({user_id:user.id,display_name:displayName},{onConflict:'user_id',ignoreDuplicates:true});check(created);const result=await db.from('dg_affiliates').select('*').eq('user_id',user.id).single();check(result);return result.data;}
 export async function affiliateSummary(user:User){const profile=await ensureAffiliate(user),db=adminDb();check(await db.rpc('dg_verify_affiliate_earnings',{p_user_id:user.id}));const [program,picks,social,earnings,totals]=await Promise.all([
  db.from('dg_affiliate_program').select('*').eq('id',true).single(),db.from('dg_affiliate_picks').select('product_handle').eq('user_id',user.id).order('created_at',{ascending:false}),db.from('dg_affiliate_social').select('provider,profile_url,verified').eq('user_id',user.id),db.from('dg_affiliate_earnings').select('*').eq('user_id',user.id).order('created_at',{ascending:false}).limit(100),db.rpc('dg_affiliate_totals',{p_user_id:user.id})

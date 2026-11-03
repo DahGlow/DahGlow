@@ -1,5 +1,6 @@
 import { toast } from 'sonner';
 import { invoke } from '@/lib/shopify';
+
 export const affiliateApi=<T>(body:Record<string,unknown>)=>invoke<T>('dah-glow-affiliate',body);
 export const affiliateReferralUrl=(code:string)=>`${window.location.origin}/r/${encodeURIComponent(code)}`;
 export async function copyAffiliateText(value:string){await navigator.clipboard.writeText(value);toast.success('Copied to clipboard');}

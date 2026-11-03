@@ -1,4 +1,5 @@
 export const AFFILIATE_RULES_VERSION='2026-11-03';
+
 export const AFFILIATE_RULES=[
  {title:'1. Qualifying Purchase',body:[
  'You are eligible for Commission Fees earned in connection with a Qualifying Purchase, in accordance with the Dah Glow Affiliate Agreement and these Payment Rules. These rules apply to Dah Glow, not the separate SHEIN affiliate program.',
