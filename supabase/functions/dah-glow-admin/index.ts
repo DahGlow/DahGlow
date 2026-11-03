@@ -7,11 +7,49 @@ import { page,allNodes,PRODUCT_ADMIN,PRODUCT_LIST,ORDER_ADMIN,ORDER_LIST,CUSTOME
 import { analytics } from '../_shared/adminAnalytics.ts';
 import { saveProduct,stageMedia,publication } from '../_shared/adminproduct.ts';
 import { manageAdmins } from '../_shared/adminManagement.ts';
+import { tidioRequest,tidioInboxUrl } from '../_shared/tidio.ts';
 
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});try{
  const actor=await authorize(req);if(req.method!=='POST')return json({error:'Not found'},404);if(Number(req.headers.get('content-length'))>500000)return json({error:'Request too large'},413);const input=await req.json();const op=String(input.op),db=adminDb();
  if(op==='session'){const route=await db.from('dg_admin_config').select('route_segment').eq('id',true).single();check(route);if(input.segment!==route.data.route_segment)throw new AccessError(404);return json({role:actor.role,permissions:actor.permissions,email:actor.user.email});}
- const permission=op==='overview'||op==='activity'?'overview':op==='analytics'?'analytics':op.startsWith('product')||op==='media-stage'||op==='publications'||op==='locations'||op==='taxonomy'?'products':op.startsWith('vendor')?'vendors':op.startsWith('store')?'store':op.startsWith('order')?'orders':op.startsWith('customer')?'customers':op==='settings'||op==='settings-save'?'settings':'admins';permit(actor,permission);
+ const permission=op.startsWith('tidio-')||op.startsWith('contact-request')?'support':op==='overview'||op==='activity'?'overview':op==='analytics'?'analytics':op.startsWith('product')||op==='media-stage'||op==='publications'||op==='locations'||op==='taxonomy'?'products':op.startsWith('vendor')?'vendors':op.startsWith('store')?'store':op.startsWith('order')?'orders':op.startsWith('customer')?'customers':op==='settings'||op==='settings-save'?'settings':'admins';permit(actor,permission);
+ if(op==='contact-requests'){
+  const result=await db.from('dg_contact_requests').select('id,name,email,order_number,subject,message,status,tidio_contact_id,tidio_conversation_url,created_at,updated_at').order('created_at',{ascending:false}).limit(100);
+  check(result);return json({requests:result.data});
+ }
+ if(op==='contact-request-status'){
+  const data=z.object({id:z.string().uuid(),status:z.enum(['new','in_progress','resolved'])}).parse(input);
+  check(await db.from('dg_contact_requests').update({status:data.status,updated_at:new Date().toISOString()}).eq('id',data.id));
+  await audit(actor,'contact_request.status.changed',data.id,{status:data.status});
+  return json({saved:true});
+ }
+ if(op==='tidio-contacts'){
+  const cursor=z.string().max(4096).optional().parse(input.cursor);
+  const query=cursor?`?cursor=${encodeURIComponent(cursor)}`:'';
+  const result=await tidioRequest<{contacts:Record<string,unknown>[];meta:{cursor:string|null;limit:number}}>(`/contacts${query}`);
+  const contacts=(Array.isArray(result.contacts)?result.contacts:[]).flatMap(contact=>typeof contact.id==='string'?[{id:contact.id,first_name:contact.first_name??null,last_name:contact.last_name??null,email:contact.email??null,phone:contact.phone??null,country:contact.country??null,city:contact.city??null,created_at:contact.created_at??null}]:[]);
+  return json({contacts,meta:result.meta});
+ }
+ if(op==='tidio-contact-messages'){
+  const data=z.object({contactId:z.string().uuid(),cursor:z.string().max(4096).optional()}).parse(input);
+  const query=data.cursor?`?cursor=${encodeURIComponent(data.cursor)}`:'';
+  const result=await tidioRequest<{messages:Record<string,unknown>[];conversation_url:string|null;meta:{cursor:string|null;limit:number}}>(`/contacts/${data.contactId}/messages${query}`);
+  const messages=(Array.isArray(result.messages)?result.messages:[]).flatMap(message=>typeof message.id==='string'&&typeof message.message==='string'&&typeof message.created_at==='string'?[{id:message.id,author_type:message.author_type,author_id:message.author_id??null,message:message.message,created_at:message.created_at}]:[]);
+  return json({messages,conversation_url:tidioInboxUrl(result.conversation_url),meta:result.meta});
+ }
+ if(op==='tidio-operators'){
+  const result=await tidioRequest<{operators:Record<string,unknown>[]}>('/operators');
+  const operators=(Array.isArray(result.operators)?result.operators:[]).flatMap(operator=>typeof operator.id==='string'?[{id:operator.id,name:operator.name??null,email:operator.email??null,role:operator.role??null,active:operator.active===true,last_seen:operator.last_seen??null,picture:tidioInboxUrl(operator.picture)}]:[]);
+  return json({operators});
+ }
+ if(op==='tidio-events'){
+  const contactId=z.string().uuid().optional().parse(input.contactId);
+  const activity=z.boolean().optional().parse(input.activity);
+  let query=db.from('dg_tidio_webhook_events').select('webhook_id,topic,contact_id,ticket_id,occurred_at,reason,received_at').order('occurred_at',{ascending:false}).limit(30);
+  if(activity)query=query.in('topic',['conversation.solved_by_lyro','conversation.operator_replied']);
+  else if(contactId)query=query.eq('contact_id',contactId);
+  const result=await query;check(result);return json({events:result.data});
+ }
  if(op==='overview'||op==='analytics')return json(await analytics(input));
  if(op==='activity'){const webhook=await db.from('dg_order_activity').select('*').order('created_at',{ascending:false}).limit(30);check(webhook);const logs=await db.from('dg_admin_activity').select('id,action,resource,created_at').order('created_at',{ascending:false}).limit(20);check(logs);return json({events:webhook.data,audit:logs.data});}
  if(op==='products')return json(await page('products',PRODUCT_LIST,input));

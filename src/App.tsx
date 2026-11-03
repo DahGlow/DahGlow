@@ -12,6 +12,7 @@ import BottomTabs from '@/components/layout/BottomTabs';
 import ScrollReset from '@/components/layout/ScrollReset';
 import CustomerBridge from '@/components/features/CustomerBridge';
 import ErrorBoundary from '@/components/features/ErrorBoundary';
+import TidioWidget from '@/components/features/TidioWidget';
 const Shop=lazy(()=>import('@/pages/Shop')),Trends=lazy(()=>import('@/pages/Trends')),Cart=lazy(()=>import('@/pages/Cart')),Me=lazy(()=>import('@/pages/Me'));
 const Settings=lazy(()=>import('@/pages/Settings')),Preferences=lazy(()=>import('@/pages/Preferences')),Login=lazy(()=>import('@/pages/Login')),AuthCallback=lazy(()=>import('@/pages/AuthCallback'));
 const ProductDetail=lazy(()=>import('@/pages/ProductDetail')),Wishlist=lazy(()=>import('@/pages/Wishlist')),SuperDeals=lazy(()=>import('@/pages/SuperDeals')),Search=lazy(()=>import('@/pages/Search'));
@@ -24,6 +25,7 @@ const OrderTrack=lazy(()=>import('@/pages/OrderTrack')),ReceiveSuccess=lazy(()=>
 const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferences=lazy(()=>import('@/pages/ContactPreferences')),MyStores=lazy(()=>import('@/pages/MyStores'));
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
 const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
+const Contact=lazy(()=>import('@/pages/Contact'));
 const SentryRoutes=Sentry.withSentryReactRouterV6Routing(Routes);
 export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><SentryRoutes>
@@ -32,7 +34,7 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/account/switch" element={<SwitchAccounts/>}/><Route path="/account/stores" element={<MyStores/>}/>
   <Route path="/settings/contact-preferences" element={<ContactPreferences/>}/><Route path="/wallet" element={<Wallet/>}/><Route path="/wallet/history" element={<WalletHistory/>}/><Route path="/wallet/payment" element={<WalletPayment/>}/>
   <Route path="/login/code" element={<LoginCode/>}/><Route path="/account/reset-password" element={<ResetPassword/>}/><Route path="/account/recovery" element={<AccountRecovery/>}/>
-  <Route path="/account/profile" element={<EditProfile/>}/><Route path="/account/profile/username" element={<EditUsername/>}/><Route path="/account/profile/qr" element={<ProfileQr/>}/><Route path="/support" element={<Support/>}/>
+  <Route path="/account/profile" element={<EditProfile/>}/><Route path="/account/profile/username" element={<EditUsername/>}/><Route path="/account/profile/qr" element={<ProfileQr/>}/><Route path="/support" element={<Support/>}/><Route path="/contact" element={<Contact/>}/>
   <Route path="/auth/callback" element={<AuthCallback/>}/><Route path="/oauth/callback" element={<AuthCallback/>}/><Route path="/shopify/callback" element={<ShopifyCallback/>}/>
   <Route path="/products/:handle" element={<ProductDetail/>}/><Route path="/product/:id" element={<ProductDetail/>}/>
   <Route path="/wishlist" element={<Wishlist/>}/><Route path="/deals" element={<SuperDeals/>}/><Route path="/search" element={<Search/>}/>
@@ -44,5 +46,5 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/us/user/orders/track/:id" element={<OrderTrack/>}/><Route path="/us/user/orders/receive-success/:id" element={<ReceiveSuccess/>}/>
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
- </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><Analytics/><SpeedInsights/><Toaster position="top-center" richColors/>
+ </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><TidioWidget/><Analytics/><SpeedInsights/><Toaster position="top-center" richColors/>
  </AccountShopBoundary></AuthProvider></ErrorBoundary></BrowserRouter>;}

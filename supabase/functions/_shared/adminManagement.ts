@@ -2,8 +2,8 @@
 import { z } from 'npm:zod@3';
 import { adminDb,check } from './config.ts';
 import { audit,type AdminIdentity } from './adminAccess.ts';
-const roles=['store_manager','orders_manager','analytics_viewer','custom'] as const;
-const permissions=['overview','products','store','vendors','orders','customers','analytics','admins','settings'];
+const roles=['support_agent','store_manager','orders_manager','analytics_viewer','custom'] as const;
+const permissions=['overview','products','store','vendors','orders','customers','support','analytics','admins','settings'];
 const grant=z.object({email:z.string().email().transform(e=>e.trim().toLowerCase()),role:z.enum(roles),permissions:z.array(z.string()).default([])});
 export async function manageAdmins(actor:AdminIdentity,input:Record<string,unknown>){if(actor.role!=='super_admin'||!actor.initial)throw new Error('Only the two founding administrators may manage administrator access.');const db=adminDb();
  if(input.op==='admins') {const members=await db.from('dg_admin_allowlist').select('email,role,permissions,active,initial,created_at');check(members);const invites=await db.from('dg_admin_invitations').select('*').order('created_at',{ascending:false}).limit(100);check(invites);return {members:members.data,invitations:invites.data,permissions,roles};}

@@ -1,0 +1,29 @@
+.contact-requests-panel{margin-bottom:20px;padding:18px;border:1px solid hsl(var(--admin-border));border-radius:10px;background:hsl(var(--admin-panel));color:hsl(var(--admin-text))}
+.contact-requests-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
+.contact-requests-heading h3{font-size:14px;font-weight:600}
+.contact-requests-heading p,.contact-request-note{margin-top:5px;color:hsl(var(--admin-subtle));font-size:10px;line-height:1.6}
+.contact-requests-heading>span{padding:4px 9px;border:1px solid hsl(var(--admin-gold)/.3);border-radius:20px;color:hsl(var(--admin-gold));font-size:10px;white-space:nowrap}
+.contact-request-list{display:grid;gap:9px}
+.contact-request{padding:14px;border:1px solid hsl(var(--admin-border));border-radius:7px;background:hsl(var(--admin-bg)/.45);min-width:0}
+.contact-request-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.contact-request-top h4{font-size:12px;font-weight:600;overflow-wrap:anywhere}
+.contact-request-top p,.contact-request-top time,.contact-request-order{margin-top:5px;color:hsl(var(--admin-subtle));font-size:10px;overflow-wrap:anywhere}
+.contact-request-top a{color:hsl(var(--admin-gold));text-decoration:underline;text-underline-offset:2px}
+.contact-request-top time{flex-shrink:0;margin:0;text-align:right}
+.contact-request-message{margin:12px 0!important;color:hsl(var(--admin-text));font-size:11px!important;line-height:1.7!important;white-space:pre-wrap;overflow-wrap:anywhere}
+.contact-request-order strong{color:hsl(var(--admin-text));font-weight:500}
+.contact-request-footer{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding-top:10px;border-top:1px solid hsl(var(--admin-border))}
+.contact-request-footer label{display:flex;align-items:center;gap:8px;margin:0!important;color:hsl(var(--admin-subtle));font-size:10px}
+.contact-request-footer select{min-height:34px!important;width:auto!important;padding:5px 25px 5px 8px!important;font-size:10px!important}
+.contact-request-footer>span{color:hsl(var(--admin-subtle));font-size:9px;overflow-wrap:anywhere}
+.contact-request-footer code{color:hsl(var(--admin-gold));font-size:9px}
+.contact-request-footer .admin-button{min-height:34px;padding:6px 9px;font-size:9px}
+.contact-request-note{margin-top:12px}
+@media(max-width:600px){
+ .contact-requests-panel{padding:13px}
+ .contact-request{padding:11px}
+ .contact-request-top{display:block}
+ .contact-request-top time{display:block;margin-top:7px;text-align:left}
+ .contact-request-footer{align-items:flex-start;gap:10px}
+ .contact-request-footer label{flex-wrap:wrap}
+}
