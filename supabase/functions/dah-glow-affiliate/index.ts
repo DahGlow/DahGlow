@@ -15,6 +15,11 @@ Deno.serve(async req=>{
   if(body.op==='rules')return json({rules:AFFILIATE_RULES,version:AFFILIATE_RULES_VERSION});
   if(body.op==='resolve')return json(await resolveAffiliateReferral(req,body));
   if(body.op==='lookup'){const code=String(body.code||'').toUpperCase();if(!/^[A-Z0-9]{8}$/.test(code))return json({found:false});const remote=req.headers.get('x-forwarded-for')?.split(',')[0]||'unknown';await rate(`affiliate-lookup:${remote}`,60,60);const result=await adminDb().from('dg_affiliates').select('display_name').eq('referral_code',code).eq('active',true).maybeSingle();check(result);return json({found:!!result.data,name:result.data?.display_name});}
+  if(body.op==='program-settings'){
+   const actor=await authorize(req);permit(actor,'store');
+   const result=await adminDb().from('dg_affiliate_program').select('enabled,commission_rate,returning_rate').eq('id',true).single();check(result);
+   return json({program:result.data});
+  }
   const user=await requireUser(req);await rate(`affiliate:${user.id}`,120,60);
   if(body.op==='summary')return json(await affiliateSummary(user));
   await ensureAffiliate(user);
