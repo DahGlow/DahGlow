@@ -27,15 +27,16 @@ export default function HeroBanner(){
   const selectSlide=(index:number)=>setActiveSlide((index+slides.length)%slides.length);
 
   const backgroundImage=activeSlide===0?banner:featuredBanners[activeSlide-1].image;
+  const slideProducts=products.slice(activeSlide*2,activeSlide*2+2);
 
   return <section className="hero-banner" style={{backgroundImage:`url(${backgroundImage})`,backgroundPosition:'center bottom'}} aria-label="Featured banners">
     {activeSlide===0
       ? <Link className="hero-inner" to="/black-Friday-2026-November-dah-glow" aria-label="Explore Dah Glow Black Friday">
           <div className="hero-copy"><span className="eyebrow">THE NOVEMBER EDIT</span><h1>Find your<br/>everyday glow.</h1><p>Fresh arrivals. Your next favorites.</p><span className="primary-button">Explore Black Friday <ArrowUpRight size={18}/></span></div>
-          <div className="hero-products">{products.slice(0,2).map((p,i)=><div key={p.id} className={`hero-product hero-product-${i}`}>{p.image&&<img src={p.image} alt={p.name}/>}<span className="hero-price">{formatMoney(p.price,p.currency)}</span></div>)}</div>
+          <div className="hero-products">{slideProducts.map((p,i)=><div key={p.id} className={`hero-product hero-product-${i}`}>{p.image&&<img src={p.image} alt={p.name}/>}<span className="hero-price">{formatMoney(p.price,p.currency)}</span></div>)}</div>
         </Link>
       : <div className="hero-inner hero-inner-featured" aria-label="Featured collection">
-          <div className="hero-products">{products.slice(0,2).map((p,i)=><div key={p.id} className={`hero-product hero-product-${i}`}>{p.image&&<img src={p.image} alt={p.name}/>}<span className="hero-price">{formatMoney(p.price,p.currency)}</span></div>)}</div>
+          <div className="hero-products">{slideProducts.map((p,i)=><div key={p.id} className={`hero-product hero-product-${i}`}>{p.image&&<img src={p.image} alt={p.name}/>}<span className="hero-price">{formatMoney(p.price,p.currency)}</span></div>)}</div>
         </div>}
     <div className="hero-carousel-controls" aria-label="Banner navigation">
       <button type="button" aria-label="Previous banner" onClick={()=>selectSlide(activeSlide-1)}><ArrowLeft size={16}/></button>
