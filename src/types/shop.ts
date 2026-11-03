@@ -10,7 +10,7 @@ export interface Product { createdAt?:string; id:string; handle:string; name:str
 export interface RawProduct { createdAt?:string; id:string;handle:string;title:string;description:string;descriptionHtml:string;vendor:string;productType:string;tags:string[];availableForSale:boolean;options:ProductOption[];priceRange:{minVariantPrice:Money};compareAtPriceRange:{minVariantPrice:Money};images:{nodes:ProductImage[]};variants:{nodes:Variant[]};metafields:(Metafield|null)[]; }
 export interface CartLine { id:string;quantity:number;cost:{totalAmount:Money};merchandise:{id:string;title:string;availableForSale:boolean;selectedOptions:SelectedOption[];price:Money;image:ProductImage|null;product:{handle:string;title:string;vendor:string}}; }
 export interface ShopifyCart { id:string;checkoutUrl:string;totalQuantity:number;cost:{subtotalAmount:Money;totalAmount:Money};lines:{nodes:CartLine[];pageInfo:{hasNextPage:boolean;endCursor:string|null}}; }
-export interface Vendor { id:string;name:string;avatar:string;displayName?:string;description?:string;profileUrl?:string; }
+export interface Vendor { id:string;name:string;avatar:string;displayName?:string;description?:string;profileUrl?:string;businessEmail?:string;businessAddress?:string; }
 export interface PageInfo { hasNextPage:boolean;endCursor:string|null; }
 export interface OrderItem { title:string;quantity:number;variantTitle:string;image:ProductImage|null;price:Money|null;options:SelectedOption[]; }
 export interface Tracking { number:string|null;company:string|null;url:string|null; }
