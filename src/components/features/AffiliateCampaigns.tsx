@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Share2 } from 'lucide-react';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 import { affiliateApi,shareAffiliateLink } from '@/lib/affiliate';
 import { toast } from 'sonner';
 import boost from '@/assets/affiliate-commission-boost.webp';

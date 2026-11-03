@@ -1,6 +1,6 @@
 import { Link,useNavigate } from 'react-router-dom';
 import { Heart,Share2,ShoppingBag } from 'lucide-react';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 import { useShop } from '@/hooks/useShop';
 import { affiliateApi,shareAffiliateLink } from '@/lib/affiliate';
 import { formatMoney,productUrl } from '@/lib/shopify';

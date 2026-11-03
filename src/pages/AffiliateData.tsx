@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import AffiliateLayout from '@/components/layout/AffiliateLayout';
 import AffiliateDataChart from '@/components/features/AffiliateDataChart';
 import { affiliateApi } from '@/lib/affiliate';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 import type { AffiliateStats } from '@/types/affiliate';
 
 const periods = [1, 7, 30];

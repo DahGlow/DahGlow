@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 import { useProduct } from '@/hooks/useCatalog';
 import AffiliateLayout from '@/components/layout/AffiliateLayout';
 import AffiliateProductRow from '@/components/features/AffiliateProductRow';

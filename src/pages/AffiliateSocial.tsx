@@ -1,7 +1,7 @@
 import { ExternalLink, Instagram, Share2 } from 'lucide-react';
 import AffiliateLayout from '@/components/layout/AffiliateLayout';
 import AffiliateSocialForm from '@/components/forms/AffiliateSocialForm';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 
 const providers = [
   { id: 'instagram', label: 'Instagram', Icon: Instagram },

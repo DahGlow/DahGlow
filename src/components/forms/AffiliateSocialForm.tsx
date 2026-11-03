@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CircleAlert } from 'lucide-react';
 import { toast } from 'sonner';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 
 const schema=z.object({url:z.string().url('Enter a full public profile URL').refine(value=>value.startsWith('https://'),'Use a secure HTTPS link')});
 interface Props {provider:string;url?:string;onSaved:()=>void;}

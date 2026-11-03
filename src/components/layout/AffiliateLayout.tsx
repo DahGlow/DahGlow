@@ -8,7 +8,7 @@ import {
   Share2,
   UsersRound,
 } from 'lucide-react';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 import { affiliateReferralUrl, shareAffiliateLink } from '@/lib/affiliate';
 
 const links = [

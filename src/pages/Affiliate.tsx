@@ -5,7 +5,7 @@ import AffiliateBoostPreview from '@/components/features/AffiliateBoostPreview';
 import AffiliateCampaigns from '@/components/features/AffiliateCampaigns';
 import AffiliateCatalog from '@/components/features/AffiliateCatalog';
 import AffiliateShortcuts from '@/components/features/AffiliateShortcuts';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 
 export default function Affiliate() {
   const affiliate = useAffiliate();

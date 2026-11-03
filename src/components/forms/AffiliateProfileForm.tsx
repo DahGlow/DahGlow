@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { useAffiliate } from '@/hooks/useAffiliate';
+import { useAffiliate } from '@/hooks/affiliateWorkspace';
 import type { AffiliateProfile } from '@/types/affiliate';
 
 const categories = ['Women', 'Men', 'Kids', 'Home', 'Beauty', 'Shoes', 'Accessories'] as const;
