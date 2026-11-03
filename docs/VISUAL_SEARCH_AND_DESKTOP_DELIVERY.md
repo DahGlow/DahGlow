@@ -30,7 +30,7 @@
 8. Every returned item is conservatively labeled **Visually similar**. Image-only inference does not verify exact identity; no fabricated exact-match badge is added. Shopify vendor is shown as catalog vendor, not invented manufacturer data.
 9. The results show the uploaded photo, detected products, per-object filtering, real prices/availability, working `/products/:handle` links, scope limitations and another-scan/retry actions. Photos/results remain in tab memory and are cleared on refresh.
 
-**Reliability:** 45-second timeout per inference call, automatic OnSpace AI fallback after an OpenRouter request failure, independent rate-limit and service-error states, validation of JSON responses and catalog IDs. If both providers fail, a scan error is returned, never fallback fake products. Backend logs contain object/match counts, provider names and error categories, never image bytes, tickets or API credentials. Closing a scan cancels local display, not necessarily a request already running at a provider.
+**Reliability:** 45-second timeout per inference call. OpenRouter is asked for strict JSON-schema output and routes only to endpoints that support the requested structured response; OnSpace AI fallback runs after any primary-provider failure. Both responses are validated against the recognition/match schemas. If both providers fail, a scan error is returned, never fallback fake products. An OnSpace HTTP 402 means the workspace AI service needs billing or additional credits. Backend logs contain object/match counts, provider names and safe error stages, never image bytes, model output, tickets or API credentials. Closing a scan cancels local display, not necessarily a request already running at a provider.
 
 ## Admin storage
 

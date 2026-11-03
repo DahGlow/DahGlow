@@ -2,12 +2,23 @@
 import { z } from 'npm:zod@3';
 import { storefront, PRODUCT, META, quote } from './storefront.ts';
 import { visibleProducts } from './publicStore.ts';
-import { scanAi } from './scanAi.ts';
+import { scanAi,type ScanJsonSchema } from './scanAi.ts';
 import { ScanError, type Recognition } from './scanValidation.ts';
 
 interface CatalogProduct { id:string; handle:string; title:string; vendor:string; productType:string; description:string; tags:string[]; images:{nodes:{url:string}[]}; }
 interface CatalogPage { products:{nodes:CatalogProduct[];pageInfo:{hasNextPage:boolean;endCursor:string|null}}; }
 const rankSchema=z.object({matches:z.array(z.object({id:z.string(),objectIndex:z.number().int().min(0).max(4),score:z.number().min(0).max(1),reason:z.string().max(240)})).max(80)});
+const rankJsonSchema:ScanJsonSchema={name:'product_matches',schema:{
+  type:'object',
+  properties:{matches:{type:'array',maxItems:80,items:{type:'object',properties:{
+    id:{type:'string'},
+    objectIndex:{type:'integer',minimum:0,maximum:4},
+    score:{type:'number',minimum:0,maximum:1},
+    reason:{type:'string',maxLength:240},
+  },required:['id','objectIndex','score','reason'],additionalProperties:false}}},
+  required:['matches'],
+  additionalProperties:false,
+}};
 function relevance(p:CatalogProduct,d:Recognition) {
   const text=`${p.title} ${p.vendor} ${p.productType} ${p.tags.join(' ')} ${p.description.slice(0,500)}`.toLowerCase();
   const terms=d.objects.flatMap(o=>[o.category,...o.searchTerms,...o.details]).join(' ').toLowerCase().match(/[\p{L}\p{N}]{3,}/gu)||[];
@@ -26,7 +37,7 @@ export async function matchCatalog(image:string,detection:Recognition,limit:numb
     const info=batch.map(p=>({id:p.id,title:p.title,category:p.productType,vendor:p.vendor,description:p.description.slice(0,200),tags:p.tags}));
     const images=batch.map(p=>{const u=new URL(p.images.nodes[0].url);if(u.hostname==='cdn.shopify.com')u.searchParams.set('width','320');return u.toString();});
     const prompt=`Compare the first image (uploaded photo) against the following catalog images, in exactly the same order as catalog entries. Detected objects: ${JSON.stringify(detection.objects)}. Catalog: ${JSON.stringify(info)}. Return {"matches":[{"id":"catalog id","objectIndex":0,"score":0.0,"reason":"visible similarity evidence"}]}. Compare images AND attributes, not keywords alone. Score visual similarity 0..1. Include only relevant visually similar products scoring at least 0.55. Do not assume any exact match or brand identity. Omit unrelated items; an empty list is valid.`;
-    const result=await scanAi(prompt,[image,...images],data=>rankSchema.safeParse(data).success);
+    const result=await scanAi(prompt,[image,...images],data=>rankSchema.safeParse(data).success,rankJsonSchema,data=>{const parsed=rankSchema.safeParse(data);return parsed.success?[]:parsed.error.issues.map(issue=>issue.path.join('.')||'root');});
     const parsed=rankSchema.safeParse(result.data);if(!parsed.success)throw new ScanError('Visual comparison returned an invalid result. Please retry.',502);
     return {matches:parsed.data.matches.filter(m=>batch.some(p=>p.id===m.id)&&m.score>=0.55&&m.objectIndex<detection.objects.length),provider:result.provider};
   }));
