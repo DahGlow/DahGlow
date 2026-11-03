@@ -71,6 +71,15 @@
  .footer-payment{margin-top:32px}.footer-payment p{display:flex;align-items:center;gap:12px;color:hsl(var(--subtle));line-height:1.6;max-width:480px}.footer-payment-logos{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}.payment-logo{display:grid;place-items:center;min-width:52px;height:32px;padding:3px 7px;border:1px solid hsl(var(--border));border-radius:4px;background:#fff;color:#172b85;font-size:11px;font-weight:800;line-height:1;text-align:center;white-space:nowrap}.payment-logo>span{display:block}.payment-logo svg{width:44px;height:28px}.payment-logo-visa{font-size:17px;font-style:italic;letter-spacing:-.08em}.payment-logo-american-express{background:#2368b2;color:#fff;font-size:7px;letter-spacing:.02em}.payment-logo-diners-club{color:#17659a;font-size:8px}.payment-logo-discover{color:#202020;font-size:9px}.payment-logo-discover:after{content:'';width:24px;height:4px;margin-top:-3px;border-radius:50%;background:#ef7b24}.payment-logo-jcb{background:#fff;color:#1761a9;font-size:15px;font-style:italic}.payment-logo-apple-pay,.payment-logo-google-pay,.payment-logo-shopify-pay,.payment-logo-android-pay{color:#222;font-size:10px;font-weight:600}.payment-logo-shopify-pay>span{display:flex;gap:3px}.payment-logo-shopify-pay>span>span{color:#6b8e23}.footer-payment-status{display:block;margin-top:10px;color:hsl(var(--subtle));font-size:12px}.footer-bottom{margin-top:48px;display:flex;justify-content:space-between;gap:24px;align-items:flex-end}.footer-bottom p{color:hsl(var(--subtle));font-size:14px}.footer-bottom nav{display:flex;flex-wrap:wrap;gap:0 16px}.footer-bottom nav a,.footer-bottom nav button{min-height:44px;font-size:14px;display:flex;align-items:center;text-decoration:underline;color:hsl(var(--subtle));padding:0}.footer-bottom div>a{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:14px}.footer-back-top{width:48px;height:48px;display:grid;place-items:center;border:1px solid hsl(var(--border));border-radius:4px}.footer-back-top:hover{background:hsl(var(--muted))}
 }
 
+.shop-page .home-recommendations .product-card{background:transparent;border-radius:0;padding-bottom:10px}
+.shop-page .home-recommendations .product-skeleton{background:transparent}
+.flash-carousel .product-card{background:hsl(var(--background))}
+.deals-content,.trends-content{width:100%;max-width:none;border-radius:0}
+
+@media(min-width:1024px){
+ .home-feature-layout{grid-template-columns:minmax(0,1fr);max-width:none;width:100%;gap:16px}
+}
+
 @media(min-width:1280px){.shop-page .recommendations>.product-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}.home-showcase .hero-inner{min-height:280px}.home-showcase .hero-product img{height:190px}.desktop-header-actions{gap:4px}}
 @media(prefers-reduced-motion:reduce){.home-edit-tile,.hero-product,.hero-carousel-controls>button,.desktop-category-nav>a,.desktop-category-nav>button,.desktop-categories img{transition:none}}
 @media(max-width:1023px){
