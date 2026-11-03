@@ -3,7 +3,7 @@ import { Share2 } from 'lucide-react';
 import { useAffiliate } from '@/hooks/useAffiliate';
 import { affiliateApi,shareAffiliateLink } from '@/lib/affiliate';
 import { toast } from 'sonner';
-import boost from '@/assets/affiliate-boost.jpg';
+import boost from '@/assets/affiliate-commission-boost.webp';
 import friday from '@/assets/black-friday.jpg';
 
 const CAMPAIGNS=[{name:'Commission Boost',description:'Curated products for your next share. Rates follow the published program settings.',image:boost,path:'/affiliate/boost'},{name:'Dah Glow Super Deals',description:'Discover current store offers. Actual discounts appear on each product.',image:friday,path:'/deals'},{name:'The November Edit',description:'Explore the latest Dah Glow seasonal collection.',image:friday,path:'/black-Friday-2026-November-dah-glow'}];
