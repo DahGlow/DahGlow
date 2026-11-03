@@ -9,6 +9,8 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 @media(max-width:639px){.hero-inner{min-height:210px;padding:14px 14px 28px;gap:10px}.hero-copy h1{font-size:26px;margin:8px 0}.hero-copy p{font-size:10px;line-height:1.45;margin:8px 0 10px}.hero-copy .primary-button{font-size:10px;padding:8px 10px;min-height:34px}.hero-product img{height:112px}.hero-product-1{margin-top:18px}.category-circles{grid-template-columns:none;grid-template-rows:repeat(2,auto);grid-auto-columns:calc((100% - 36px)/4);grid-auto-flow:column;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x}.category-circles::-webkit-scrollbar{display:none}}
+@media(max-width:639px){.super-rail .rail-products{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;touch-action:pan-x}.super-rail .rail-products::-webkit-scrollbar{display:none}.super-rail .rail-products>.product-card{flex:0 0 calc((100% - 8px)/2);min-width:0;scroll-snap-align:start}}
+@media(max-width:639px){.shop-page .product-grid,.shop-page .feature-pair .rail-products{grid-template-columns:minmax(0,1fr)}.shop-page .super-rail .rail-products>.product-card{flex-basis:100%}}
 @media(min-width:640px){.category-circles{grid-template-columns:repeat(6,minmax(0,1fr))}}
 
 /* Shopify shopping system: consistent glass layers, compact account surfaces. */
