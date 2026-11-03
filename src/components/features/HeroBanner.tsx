@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import banner from '@/assets/glow-banner.jpg';
@@ -25,6 +25,11 @@ export default function HeroBanner(){
   const {products}=useCatalog({sort:'CREATED_AT',reverse:true,first:12});
   const [activeSlide,setActiveSlide]=useState(0);
   const selectSlide=(index:number)=>setActiveSlide((index+slides.length)%slides.length);
+  useEffect(()=>{
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const timer=window.setInterval(()=>setActiveSlide(current=>(current+1)%slides.length),5000);
+    return ()=>window.clearInterval(timer);
+  },[]);
 
   const backgroundImage=activeSlide===0?banner:featuredBanners[activeSlide-1].image;
   const slideProducts=products.slice(activeSlide*2,activeSlide*2+2);

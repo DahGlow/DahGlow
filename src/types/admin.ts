@@ -8,7 +8,7 @@ export interface AdminOrder {id:string;name:string;createdAt:string;cancelledAt:
 export interface Connection<T>{nodes:T[];pageInfo:{hasNextPage:boolean;endCursor:string|null};}
 export interface Analytics {start:string;end:string;timezone:string;currency:string;metrics:Record<string,number>;series:{date:string;payments:number;refunds:number;net:number;orders:number;customers:number}[];topCustomers:{id:string;name:string;email:string;orders:number;paid:number;lastOrder:string}[];categories:{name:string;gross:number}[];vendors:{name:string;gross:number}[];performance:{name:string;quantity:number;gross:number}[];notes:string;}
 export interface StoreSettings{name:string;description:string;logo:string;profileImage:string;contactEmail:string;contactPhone:string;announcement:string;socialLinks:Record<string,string>;}
-export interface VendorSettings{vendor:string;display_name:string;description:string;avatar_url:string;visible:boolean;business_email?:string;business_address?:string;}
+export interface VendorSettings{vendor:string;display_name:string;description:string;avatar_url:string;profile_url?:string;visible:boolean;business_email?:string;business_address?:string;}
 export interface ManagedVendor{name:string;products:{id:string;title:string;handle:string;status:string}[];settings:Partial<VendorSettings>;}
 export interface AdminMember {email:string;role:string;permissions:string[];active:boolean;initial:boolean;created_at:string;}
 export interface AdminInvitation {id:string;email:string;role:string;expires_at:string;accepted_at:string|null;revoked_at:string|null;}
