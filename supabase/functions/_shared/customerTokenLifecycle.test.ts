@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import {
  CustomerOAuthError,
  CustomerReauthRequiredError,
+ customerAccountSessionRecord,
  customerRefreshRequest,
  getCustomerAccessToken,
  validateCustomerTokens,
@@ -35,7 +36,12 @@ function fixture(overrides:Partial<CustomerTokenSession>={}){
 
 test('initial authorization response stores both tokens and a valid session is reused',async()=>{
  const tokens=validateCustomerTokens(initialResponse);
- const state=fixture({tokens,expiresAt:new Date(now+3600000).toISOString(),tokenUpdatedAt:new Date(now).toISOString()});
+ const record=customerAccountSessionRecord('buyer-1','sealed-token-pair',tokens,now);
+ assert.equal(record.ciphertext,'sealed-token-pair');
+ assert.equal(record.expires_at,new Date(now+3600000).toISOString());
+ assert.equal(record.session_status,'connected');
+ assert.equal(record.refresh_lease_owner,null);
+ const state=fixture({tokens,expiresAt:record.expires_at,tokenUpdatedAt:record.token_updated_at});
  assert.equal(await getCustomerAccessToken('buyer-1',state.deps),'initial-access');
  assert.equal(state.getAttempts(),0);
  assert.equal(state.getSession().tokens.refresh_token,'initial-refresh');

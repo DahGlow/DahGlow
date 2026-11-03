@@ -44,6 +44,21 @@ export function customerTokenExpiry(tokens:CustomerTokens,now=Date.now()){
  return new Date(now+tokens.expires_in*1000).toISOString();
 }
 
+export function customerAccountSessionRecord(customerId:string,ciphertext:string,tokens:CustomerTokens,now=Date.now()){
+ const timestamp=new Date(now).toISOString();
+ return {
+  customer_id:customerId,
+  ciphertext,
+  expires_at:customerTokenExpiry(tokens,now),
+  token_updated_at:timestamp,
+  session_status:'connected' as const,
+  refresh_lease_owner:null,
+  refresh_lease_until:null,
+  refresh_attempts:0,
+  updated_at:timestamp
+ };
+}
+
 export function customerRefreshRequest(clientId:string,refreshToken:string){
  return new URLSearchParams({grant_type:'refresh_token',client_id:clientId,refresh_token:refreshToken});
 }

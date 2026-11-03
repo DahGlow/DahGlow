@@ -6,6 +6,10 @@ alter table public.dg_customer_accounts
  add column if not exists refresh_attempts integer not null default 0,
  add column if not exists refresh_attempted_at timestamptz;
 
+update public.dg_customer_accounts
+set token_updated_at=updated_at
+where token_updated_at is distinct from updated_at;
+
 do $$ begin
  if not exists(select 1 from pg_constraint where conrelid='public.dg_customer_accounts'::regclass and conname='dg_customer_accounts_session_status_check') then
   alter table public.dg_customer_accounts add constraint dg_customer_accounts_session_status_check check(session_status in ('connected','reauth_required'));
