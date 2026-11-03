@@ -79,7 +79,7 @@
  .mobile-footer{display:flex;align-items:center;flex-direction:column;gap:12px}
  .mobile-footer-brand{font-size:13px;font-weight:800;letter-spacing:.14em}
  .mobile-footer-brand span{color:hsl(var(--primary))}
- .mobile-footer nav{display:flex;align-items:center;justify-content:center;gap:22px}
+ .mobile-footer nav{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 14px}
  .mobile-footer nav a{min-height:32px;display:inline-flex;align-items:center;color:hsl(var(--subtle));font-size:11px}
  .mobile-footer>p{color:hsl(var(--subtle));font-size:9px}
 }

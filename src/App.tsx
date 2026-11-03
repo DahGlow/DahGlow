@@ -24,6 +24,7 @@ const PrivateControl=lazy(()=>import('@/pages/PrivateControl')),LoginCode=lazy((
 const EditProfile=lazy(()=>import('@/pages/EditProfile')),EditUsername=lazy(()=>import('@/pages/EditUsername')),ProfileQr=lazy(()=>import('@/pages/ProfileQr')),Support=lazy(()=>import('@/pages/Support'));
 const OrderTrack=lazy(()=>import('@/pages/OrderTrack')),ReceiveSuccess=lazy(()=>import('@/pages/ReceiveSuccess'));
 const CheckoutComplete=lazy(()=>import('@/pages/CheckoutComplete'));
+const StorePolicy=lazy(()=>import('@/pages/StorePolicy'));
 const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferences=lazy(()=>import('@/pages/ContactPreferences')),MyStores=lazy(()=>import('@/pages/MyStores'));
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
 const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
@@ -50,6 +51,8 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/us/user/coupons" element={<Coupons/>}/><Route path="/us/user/points" element={<Points/>}/><Route path="/integration" element={<IntegrationStatus/>}/>
   <Route path="/us/user/orders/track/:id" element={<OrderTrack/>}/><Route path="/us/user/orders/receive-success/:id" element={<ReceiveSuccess/>}/>
   <Route path="/checkout/complete" element={<CheckoutComplete/>}/>
+  <Route path="/shipping-information" element={<StorePolicy policyKey="shippingPolicy"/>}/>
+  <Route path="/returns-refunds" element={<StorePolicy policyKey="refundPolicy"/>}/>
   <Route path="/affiliate" element={<Affiliate/>}/><Route path="/affiliate/items" element={<AffiliateItems/>}/>
   <Route path="/affiliate/boost" element={<AffiliateBoost/>}/><Route path="/affiliate/bonus" element={<AffiliateBonus/>}/>
   <Route path="/affiliate/earnings" element={<AffiliateEarnings/>}/><Route path="/affiliate/data" element={<AffiliateData/>}/>
