@@ -148,6 +148,12 @@ Use Settings → Shopify connection status, or /integration, after the functions
 9. Shopify-hosted checkout/order status controls return behavior. No arbitrary post-payment redirect has been assumed. Customers return to Dah Glow Orders and connect their verified Shopify account.
 10. Run the live test matrix above before treating the store as production-verified. Populate real coupon/point entitlements through trusted store administration only; no cash redemption rate or reward rules were invented.
 
+## Customer token refresh lifecycle
+
+Apply `supabase/migrations/202611030003_customer_refresh_rotation.sql` before deploying the updated `shopify-customer-account` Edge Function. Customer token refresh uses the shop's discovered OpenID `token_endpoint` and the same public client ID used for authorization. Refreshed access and rotated refresh tokens are sealed and saved together under a database lease; a stale lease owner cannot overwrite a newer token pair. Shopify `invalid_grant` marks the existing account session as `reauth_required` without removing the customer association or order records. The Orders page then prompts the customer to reconnect.
+
+The lifecycle unit tests can be run with `node --experimental-strip-types --test supabase/functions/_shared/customerTokenLifecycle.test.ts`. They cover initial token validation, refresh-token rotation, simultaneous requests, invalid-grant reauthentication, and the refresh grant parameters. Shopify documents that only customer-account clients configured on the shop receive refresh tokens; app-configured customer-authentication clients need a fresh PKCE authorization flow instead. See [Customer Account API authentication](https://shopify.dev/docs/api/customer/latest#authentication).
+
 ## Known boundaries
 
 - Backend Realtime is unsupported; React Query polling and webhook invalidation are used.
