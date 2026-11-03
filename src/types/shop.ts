@@ -1,7 +1,8 @@
 export interface Money { amount:string; currencyCode:string; }
 
 export interface ProductImage { url:string; altText:string|null; width?:number; height?:number; }
-export interface Metafield { namespace:string; key:string; value:string; type:string; }
+export interface MetaobjectReference { id:string; fields:{key:string;value:string|null}[]; }
+export interface Metafield { namespace:string; key:string; value:string; type:string; reference?:MetaobjectReference|null; references?:{nodes:(MetaobjectReference|null)[]}; }
 export interface SelectedOption { name:string; value:string; }
 export interface Variant { id:string; title:string; availableForSale:boolean; quantityAvailable:number|null; selectedOptions:SelectedOption[]; price:Money; compareAtPrice:Money|null; image:ProductImage|null; metafields:(Metafield|null)[]; }
 export interface ProductOption { name:string; optionValues:{name:string;swatch?:{color:string|null;image:{previewImage:ProductImage|null}|null}|null}[]; }
