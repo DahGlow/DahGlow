@@ -3,6 +3,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import AccountShopBoundary from '@/components/features/AccountShopBoundary';
 import { AuthProvider } from '@/hooks/useAuth';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from '@/components/layout/Header';
 import DesktopFooter from '@/components/layout/DesktopFooter';
 import BottomTabs from '@/components/layout/BottomTabs';
