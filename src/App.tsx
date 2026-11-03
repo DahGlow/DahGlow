@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { Sentry } from '@/lib/sentry';
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/react';
 import AccountShopBoundary from '@/components/features/AccountShopBoundary';
 import { AuthProvider } from '@/hooks/useAuth';
 import { SpeedInsights } from "@vercel/speed-insights/react"
@@ -43,5 +44,5 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/us/user/orders/track/:id" element={<OrderTrack/>}/><Route path="/us/user/orders/receive-success/:id" element={<ReceiveSuccess/>}/>
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
- </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><Toaster position="top-center" richColors/>
+ </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><Analytics/><SpeedInsights/><Toaster position="top-center" richColors/>
  </AccountShopBoundary></AuthProvider></ErrorBoundary></BrowserRouter>;}
