@@ -2,6 +2,9 @@
 .desktop-store-header,.desktop-footer,.desktop-categories,.home-showcase-rail{display:none}
 .site-header-shell{position:sticky;top:0;z-index:40}
 .site-header-shell .store-header{position:relative;top:auto}
+.product-gallery .gallery-rail{touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.product-gallery .gallery-thumbnails{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain}
+.product-gallery .gallery-thumbnails button{flex:0 0 56px}
 .search-stage .message-icon{display:flex}
 .header-camera{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;color:hsl(var(--subtle));border-radius:4px}
 .header-camera:hover{background:hsl(var(--muted));color:hsl(var(--foreground))}
