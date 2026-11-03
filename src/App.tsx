@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import { Sentry } from '@/lib/sentry';
 import { Toaster } from 'sonner';
 import AccountShopBoundary from '@/components/features/AccountShopBoundary';
 import { AuthProvider } from '@/hooks/useAuth';
@@ -22,8 +23,9 @@ const OrderTrack=lazy(()=>import('@/pages/OrderTrack')),ReceiveSuccess=lazy(()=>
 const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferences=lazy(()=>import('@/pages/ContactPreferences')),MyStores=lazy(()=>import('@/pages/MyStores'));
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
 const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
+const SentryRoutes=Sentry.withSentryReactRouterV6Routing(Routes);
 export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
- <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><Routes>
+ <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><SentryRoutes>
   <Route path="/" element={<Shop/>}/><Route path="/trends" element={<Trends/>}/><Route path="/cart" element={<Cart/>}/><Route path="/me" element={<Me/>}/>
   <Route path="/settings" element={<Settings/>}/><Route path="/settings/:type" element={<Preferences/>}/><Route path="/login" element={<Login/>}/>
   <Route path="/account/switch" element={<SwitchAccounts/>}/><Route path="/account/stores" element={<MyStores/>}/>
@@ -41,5 +43,5 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/us/user/orders/track/:id" element={<OrderTrack/>}/><Route path="/us/user/orders/receive-success/:id" element={<ReceiveSuccess/>}/>
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
- </Routes></Suspense><DesktopFooter/><BottomTabs/><Toaster position="top-center" richColors/>
+ </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><Toaster position="top-center" richColors/>
  </AccountShopBoundary></AuthProvider></ErrorBoundary></BrowserRouter>;}
