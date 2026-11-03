@@ -2,6 +2,7 @@ import { z } from 'npm:zod@3';
 import { adminGraph } from './shopifyAdmin.ts';
 import { PRODUCT_ADMIN,userErrors } from './adminQueries.ts';
 import { audit,invalidateCatalog,type AdminIdentity } from './adminAccess.ts';
+
 const money=z.string().regex(/^\d+(\.\d{1,2})?$/);
 const file=z.object({id:z.string().optional(),originalSource:z.string().url().optional(),alt:z.string().max(300).optional(),contentType:z.enum(['IMAGE','VIDEO']).optional()});
 const option=z.object({name:z.string().min(1).max(100),values:z.array(z.object({name:z.string().min(1)})).min(1).max(100)});
