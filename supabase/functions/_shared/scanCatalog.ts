@@ -14,7 +14,7 @@ function relevance(p:CatalogProduct,d:Recognition) {
   return [...new Set(terms)].reduce((score,t)=>score+(text.includes(t)?1:0),0);
 }
 export async function matchCatalog(image:string,detection:Recognition,limit:number) {
-  if (!detection.objects.length) return {matches:[],evaluated:0,candidates:0,limited:false};
+  if (!detection.objects.length) return {matches:[],evaluated:0,candidates:0,limited:false,providers:[]};
   const terms=[...new Set(detection.objects.flatMap(o=>o.searchTerms))].slice(0,15);
   const query=terms.map(t=>`(title:${quote(t)} OR product_type:${quote(t)} OR tag:${quote(t)})`).join(' OR ');
   const fetchPage=(query:string)=>storefront<CatalogPage>(`query($query:String,$meta:[HasMetafieldsIdentifier!]!){products(first:200,query:$query){nodes{${PRODUCT}}pageInfo{hasNextPage endCursor}}}`,{query,meta:META});
@@ -25,12 +25,13 @@ export async function matchCatalog(image:string,detection:Recognition,limit:numb
   const results=await Promise.all(chunks.map(async batch=>{
     const info=batch.map(p=>({id:p.id,title:p.title,category:p.productType,vendor:p.vendor,description:p.description.slice(0,200),tags:p.tags}));
     const images=batch.map(p=>{const u=new URL(p.images.nodes[0].url);if(u.hostname==='cdn.shopify.com')u.searchParams.set('width','320');return u.toString();});
-    const data=await scanAi(`Compare the first image (uploaded photo) against the following catalog images, in exactly the same order as catalog entries. Detected objects: ${JSON.stringify(detection.objects)}. Catalog: ${JSON.stringify(info)}. Return {"matches":[{"id":"catalog id","objectIndex":0,"score":0.0,"reason":"visible similarity evidence"}]}. Compare images AND attributes, not keywords alone. Score visual similarity 0..1. Include only relevant visually similar products scoring at least 0.55. Do not assume any exact match or brand identity. Omit unrelated items; an empty list is valid.`,[image,...images]);
-    const parsed=rankSchema.safeParse(data);if(!parsed.success)throw new ScanError('Visual comparison returned an invalid result. Please retry.',502);
-    return parsed.data.matches.filter(m=>batch.some(p=>p.id===m.id)&&m.score>=0.55&&m.objectIndex<detection.objects.length);
+    const prompt=`Compare the first image (uploaded photo) against the following catalog images, in exactly the same order as catalog entries. Detected objects: ${JSON.stringify(detection.objects)}. Catalog: ${JSON.stringify(info)}. Return {"matches":[{"id":"catalog id","objectIndex":0,"score":0.0,"reason":"visible similarity evidence"}]}. Compare images AND attributes, not keywords alone. Score visual similarity 0..1. Include only relevant visually similar products scoring at least 0.55. Do not assume any exact match or brand identity. Omit unrelated items; an empty list is valid.`;
+    const result=await scanAi(prompt,[image,...images],data=>rankSchema.safeParse(data).success);
+    const parsed=rankSchema.safeParse(result.data);if(!parsed.success)throw new ScanError('Visual comparison returned an invalid result. Please retry.',502);
+    return {matches:parsed.data.matches.filter(m=>batch.some(p=>p.id===m.id)&&m.score>=0.55&&m.objectIndex<detection.objects.length),provider:result.provider};
   }));
-  const unique=new Map<string,typeof results[number][number]>();
-  results.flat().forEach(m=>{if(!unique.has(m.id)||unique.get(m.id)!.score<m.score)unique.set(m.id,m);});
+  const unique=new Map<string,typeof results[number]['matches'][number]>();
+  results.flatMap(result=>result.matches).forEach(m=>{if(!unique.has(m.id)||unique.get(m.id)!.score<m.score)unique.set(m.id,m);});
   const matches=[...unique.values()].sort((a,b)=>b.score-a.score).slice(0,limit).map(m=>({...m,matchType:'similar',product:shortlist.find(p=>p.id===m.id)!}));
-  return {matches,evaluated:shortlist.length,candidates:candidates.length,limited:candidates.length>48||page.products.pageInfo.hasNextPage||!!fallback?.products.pageInfo.hasNextPage};
+  return {matches,evaluated:shortlist.length,candidates:candidates.length,limited:candidates.length>48||page.products.pageInfo.hasNextPage||!!fallback?.products.pageInfo.hasNextPage,providers:[...new Set(results.map(result=>result.provider))]};
 }

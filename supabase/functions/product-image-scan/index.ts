@@ -4,7 +4,7 @@ import { seal,open } from '../_shared/crypto.ts';
 import { scanImage,ScanError,recognitionSchema,type Recognition } from '../_shared/scanValidation.ts';
 import { recognizeImage } from '../_shared/scanAi.ts';
 import { matchCatalog } from '../_shared/scanCatalog.ts';
-interface ScanTicket { hash:string; detection:Recognition; expires:number; }
+interface ScanTicket { hash:string; detection:Recognition; provider:'OpenRouter'|'OnSpace AI'; expires:number; }
 async function rateLimit(req:Request,phase:string) {
   const address=req.headers.get('cf-connecting-ip')||req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()||'unknown';
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(address))),n=>n.toString(16).padStart(2,'0')).join('');
@@ -19,19 +19,20 @@ Deno.serve(async req=>{
     if(!['recognize','match'].includes(phase))throw new ScanError('Invalid scan action.');
     await rateLimit(req,phase);
     if(phase==='recognize') {
-      const detection=await recognizeImage(image);
-      const ticket=await seal({hash,detection,expires:Date.now()+600000});
-      console.log('Product image recognition completed',{objects:detection.objects.length});
-      return json({detection,ticket,service:'OnSpace AI · Gemini 3 Flash',source:'Shopify Storefront'});
+      const {detection,provider}=await recognizeImage(image);
+      const ticket=await seal({hash,detection,provider,expires:Date.now()+600000});
+      console.log('Product image recognition completed',{objects:detection.objects.length,provider});
+      return json({detection,ticket,service:provider,source:'Shopify Storefront'});
     }
     const proof=String(form.get('ticket')||'');if(!proof||proof.length>20000)throw new ScanError('Scan expired. Please scan the image again.');
     let ticket:ScanTicket;try{ticket=await open<ScanTicket>(proof);}catch{throw new ScanError('Scan expired. Please scan the image again.');}
-    if(ticket.hash!==hash||ticket.expires<Date.now())throw new ScanError('Scan expired or the image changed. Please scan again.');
+    if(ticket.hash!==hash||ticket.expires<Date.now()||!['OpenRouter','OnSpace AI'].includes(ticket.provider))throw new ScanError('Scan expired or the image changed. Please scan again.');
     const detection=recognitionSchema.parse(ticket.detection);
     const limit=Math.max(1,Math.min(36,Number(form.get('limit'))||24));
     const result=await matchCatalog(image,detection,limit);
-    console.log('Product visual search completed',{evaluated:result.evaluated,matches:result.matches.length});
-    return json({...result,detection,service:'OnSpace AI · Gemini 3 Flash',source:'Shopify Storefront'});
+    const providers=[...new Set([ticket.provider,...result.providers])];
+    console.log('Product visual search completed',{evaluated:result.evaluated,matches:result.matches.length,providers});
+    return json({...result,detection,service:providers.join(' + '),source:'Shopify Storefront'});
   } catch(error) {
     const timeout=error instanceof Error&&(error.name==='TimeoutError'||error.name==='AbortError');
     const status=error instanceof ScanError?error.status:timeout?504:502;

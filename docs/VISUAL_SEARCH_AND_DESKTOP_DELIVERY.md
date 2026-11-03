@@ -12,9 +12,9 @@
 
 ## Recognition service and catalog
 
-**Service:** OnSpace AI, `google/gemini-3-flash-preview`, through the injected `ONSPACE_AI_BASE_URL` and `ONSPACE_AI_API_KEY` on the server. The default multimodal model from the platform guidance is used. No OpenRouter, Hugging Face or other provider key is added to the frontend. The already-configured OpenRouter key is not used by visual search.
+**Service:** OpenRouter, `google/gemini-2.5-flash`, is the primary multimodal provider. If its request fails, visual search retries through OnSpace AI using `google/gemini-3-flash-preview` and the server-side `ONSPACE_AI_BASE_URL` and `ONSPACE_AI_API_KEY`. Configure `OPENROUTER_API_KEY` as a Supabase Edge Function secret; provider keys are never sent to the frontend. Responses identify the provider(s) used.
 
-**Free-tier caveat:** This is a managed workspace AI service, not a guaranteed free API. Recognition and ranking consume workspace AI credits according to its allowance and billing. No unverified free-tier claim is made and no extra paid provider account is required. A self-hosted CLIP service cannot run as a traditional model server in this project's serverless-only runtime, so it was not represented as available.
+**Cost caveat:** OpenRouter requests use the configured OpenRouter account and may incur its charges. Fallback requests consume workspace AI credits according to the OnSpace allowance and billing. Neither provider is represented as guaranteed free. A self-hosted CLIP service cannot run as a traditional model server in this project's serverless-only runtime, so it was not represented as available.
 
 **Data source:** The connected Shopify Storefront API, with existing private product/vendor visibility controls. No external product search, web scraping, invented prices, catalog IDs, brands, availability or URLs.
 
@@ -30,7 +30,7 @@
 8. Every returned item is conservatively labeled **Visually similar**. Image-only inference does not verify exact identity; no fabricated exact-match badge is added. Shopify vendor is shown as catalog vendor, not invented manufacturer data.
 9. The results show the uploaded photo, detected products, per-object filtering, real prices/availability, working `/products/:handle` links, scope limitations and another-scan/retry actions. Photos/results remain in tab memory and are cleared on refresh.
 
-**Reliability:** 45-second timeout per inference call, independent rate-limit and service-error states, validation of JSON responses and catalog IDs. A failed recognition or comparison yields an actionable error, not fallback fake products. Backend logs contain object/match counts and error categories, never image bytes, tickets or API credentials. Closing a scan cancels local display, not necessarily a request already running at the provider.
+**Reliability:** 45-second timeout per inference call, automatic OnSpace AI fallback after an OpenRouter request failure, independent rate-limit and service-error states, validation of JSON responses and catalog IDs. If both providers fail, a scan error is returned, never fallback fake products. Backend logs contain object/match counts, provider names and error categories, never image bytes, tickets or API credentials. Closing a scan cancels local display, not necessarily a request already running at a provider.
 
 ## Admin storage
 
