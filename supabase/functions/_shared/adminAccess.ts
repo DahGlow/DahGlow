@@ -12,7 +12,7 @@ export async function authorize(req:Request):Promise<AdminIdentity>{
   if(invite.data&&invite.data.role!=='super_admin'){check(await db.from('dg_admin_allowlist').insert({email,role:invite.data.role,permissions:invite.data.permissions}));check(await db.from('dg_admin_invitations').update({accepted_at:new Date().toISOString()}).eq('id',invite.data.id));row=await db.from('dg_admin_allowlist').select('*').eq('email',email).maybeSingle();check(row);}
  }
  if(!row.data?.active)throw new AccessError(404);await rate(`admin:${user.id}`);const role=await db.from('dg_admin_roles').select('permissions').eq('name',row.data.role).single();check(role);
- return {user,role:row.data.role,permissions:[...new Set<string>([...role.data.permissions,...row.data.permissions])],initial:row.data.initial};
+ return {user,role:row.data.role,permissions:[...new Set<string>([...role.data.permissions,...row.data.permissions,...(row.data.role==='super_admin'?['support']:[])])],initial:row.data.initial};
 }
 export function permit(actor:AdminIdentity,permission:string){if(!actor.permissions.includes(permission))throw new AccessError(403);}
 export async function audit(actor:AdminIdentity,action:string,resource?:string,details:Record<string,unknown>={}){check(await adminDb().from('dg_admin_activity').insert({actor_id:actor.user.id,action,resource,details}));}

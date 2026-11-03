@@ -26,6 +26,9 @@ const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferenc
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
 const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
 const Contact=lazy(()=>import('@/pages/Contact'));
+const Affiliate=lazy(()=>import('@/pages/Affiliate')),AffiliateItems=lazy(()=>import('@/pages/AffiliateItems')),AffiliateBoost=lazy(()=>import('@/pages/AffiliateBoost')),AffiliateBonus=lazy(()=>import('@/pages/AffiliateBonus'));
+const AffiliateEarnings=lazy(()=>import('@/pages/AffiliateEarnings')),AffiliateData=lazy(()=>import('@/pages/AffiliateData')),AffiliateSocial=lazy(()=>import('@/pages/AffiliateSocial')),AffiliateAccount=lazy(()=>import('@/pages/AffiliateAccount'));
+const AffiliateSettings=lazy(()=>import('@/pages/AffiliateSettings')),AffiliateConvert=lazy(()=>import('@/pages/AffiliateConvert')),AffiliateReferral=lazy(()=>import('@/pages/AffiliateReferral'));
 const SentryRoutes=Sentry.withSentryReactRouterV6Routing(Routes);
 export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><SentryRoutes>
@@ -44,6 +47,12 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/us/user/orders/recycle-bin" element={<OrderRecycleBin/>}/><Route path="/us/user/orders/detail/:id" element={<OrderDetail/>}/>
   <Route path="/us/user/coupons" element={<Coupons/>}/><Route path="/us/user/points" element={<Points/>}/><Route path="/integration" element={<IntegrationStatus/>}/>
   <Route path="/us/user/orders/track/:id" element={<OrderTrack/>}/><Route path="/us/user/orders/receive-success/:id" element={<ReceiveSuccess/>}/>
+  <Route path="/affiliate" element={<Affiliate/>}/><Route path="/affiliate/items" element={<AffiliateItems/>}/>
+  <Route path="/affiliate/boost" element={<AffiliateBoost/>}/><Route path="/affiliate/bonus" element={<AffiliateBonus/>}/>
+  <Route path="/affiliate/earnings" element={<AffiliateEarnings/>}/><Route path="/affiliate/data" element={<AffiliateData/>}/>
+  <Route path="/affiliate/social" element={<AffiliateSocial/>}/><Route path="/affiliate/account" element={<AffiliateAccount/>}/>
+  <Route path="/affiliate/account/settings" element={<AffiliateSettings/>}/><Route path="/affiliate/convert" element={<AffiliateConvert/>}/>
+  <Route path="/r/:code" element={<AffiliateReferral/>}/><Route path="/r/:code/:linkId" element={<AffiliateReferral/>}/>
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
  </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><TidioWidget/><Analytics/><SpeedInsights/><Toaster position="top-center" richColors/>
