@@ -5,7 +5,7 @@ import { authorize,permit,AccessError,audit,invalidateCatalog } from '../_shared
 import { adminGraph,tokenStatus } from '../_shared/shopifyAdmin.ts';
 import { page,allNodes,PRODUCT_ADMIN,PRODUCT_LIST,ORDER_ADMIN,ORDER_LIST,CUSTOMER_ADMIN,userErrors } from '../_shared/adminQueries.ts';
 import { analytics } from '../_shared/adminAnalytics.ts';
-import { saveProduct,stageMedia,publication } from '../_shared/adminProducts.ts';
+import { saveProduct,stageMedia,publication } from '../_shared/adminproduct.ts';
 import { manageAdmins } from '../_shared/adminManagement.ts';
 
 Deno.serve(async req=>{if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});try{
