@@ -12,7 +12,7 @@ import BottomTabs from '@/components/layout/BottomTabs';
 import ScrollReset from '@/components/layout/ScrollReset';
 import CustomerBridge from '@/components/features/CustomerBridge';
 import ErrorBoundary from '@/components/features/ErrorBoundary';
-mport TidioWidget from '@/components/features/TidioWidget';
+import TidioWidget from '@/components/features/TidioWidget';
 
 const Shop=lazy(()=>import('@/pages/Shop')),Trends=lazy(()=>import('@/pages/Trends')),Cart=lazy(()=>import('@/pages/Cart')),Me=lazy(()=>import('@/pages/Me'));
 const Settings=lazy(()=>import('@/pages/Settings')),Preferences=lazy(()=>import('@/pages/Preferences')),Login=lazy(()=>import('@/pages/Login')),AuthCallback=lazy(()=>import('@/pages/AuthCallback'));
