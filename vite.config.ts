@@ -7,13 +7,17 @@ const privateHeaders:Plugin={name:'dah-glow-private-headers',configureServer(ser
 export default defineConfig({
   plugins: [react(), privateHeaders, sentryVitePlugin({
     org: "dawine",
-    project: "dah-glow"
+    project: "dah-glow",
+    errorHandler: (error) => {
+      console.warn(`[sentry-vite-plugin] Release or sourcemap upload failed; continuing build: ${error.message}`);
+    }
   })],
 
   resolve: { alias: { '@': path.resolve(__dirname, './src') } },
   server: { host: '0.0.0.0', port: 5173 },
 
   build: {
-    sourcemap: true
+    sourcemap: true,
+    chunkSizeWarningLimit: 1000
   }
 });
