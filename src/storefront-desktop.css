@@ -84,3 +84,4 @@
  .mobile-footer>p{color:hsl(var(--subtle));font-size:9px}
 }
 @media(min-width:1024px){.mobile-footer{display:none}}
+@media(max-width:639px){.shop-page .home-recommendations .product-card,.shop-page .home-feature-layout .product-card{background:transparent}.shop-page .home-feature-layout .feature-rail{width:100%;background:hsl(var(--background))}.shop-page .home-feature-layout .feature-pair{grid-template-columns:minmax(0,1fr)}}
