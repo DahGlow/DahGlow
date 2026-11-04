@@ -27,6 +27,7 @@ const CheckoutComplete=lazy(()=>import('@/pages/CheckoutComplete'));
 const StorePolicy=lazy(()=>import('@/pages/StorePolicy'));
 const StyleInspiration=lazy(()=>import('@/pages/StyleInspiration')),InspirationDetail=lazy(()=>import('@/pages/InspirationDetail'));
 const AboutDahGlow=lazy(()=>import('@/pages/AboutDahGlow'));
+const HelpCenter=lazy(()=>import('@/pages/HelpCenter'));
 const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferences=lazy(()=>import('@/pages/ContactPreferences')),MyStores=lazy(()=>import('@/pages/MyStores'));
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
 const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
@@ -55,6 +56,7 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/checkout/complete" element={<CheckoutComplete/>}/>
   <Route path="/inspiration" element={<StyleInspiration/>}/><Route path="/inspiration/:slug" element={<InspirationDetail/>}/>
   <Route path="/about" element={<AboutDahGlow/>}/>
+  <Route path="/help-center" element={<HelpCenter/>}/>
   <Route path="/shipping-information" element={<StorePolicy policyKey="shippingPolicy"/>}/>
   <Route path="/returns-refunds" element={<StorePolicy policyKey="refundPolicy"/>}/>
   <Route path="/affiliate" element={<Affiliate/>}/><Route path="/affiliate/items" element={<AffiliateItems/>}/>
