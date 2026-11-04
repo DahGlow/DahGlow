@@ -57,3 +57,27 @@
 .header-row .header-search {
   color: #20191a;
 }
+
+@media (max-width: 1023px) {
+  .mobile-store-header.scrolled,
+  .mobile-store-header.scrolled.solid {
+    background: #fff;
+    color: #20191a;
+    border-bottom-color: #eee9e9;
+    backdrop-filter: blur(16px);
+  }
+
+  .mobile-store-header.scrolled .brand,
+  .mobile-store-header.scrolled .icon-button,
+  .mobile-store-header.scrolled .category-nav a {
+    color: #20191a;
+  }
+
+  .mobile-store-header.scrolled .icon-button:hover {
+    background: #f5f2f2;
+  }
+
+  .mobile-store-header.scrolled .header-search {
+    border-color: #20191a;
+  }
+}
