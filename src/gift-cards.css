@@ -45,6 +45,18 @@
 .gift-amount-option span{overflow:hidden;color:#e4d7d9;font-size:11px;text-overflow:ellipsis;white-space:nowrap}
 .gift-amount-option strong{font-family:Georgia,serif;font-size:20px;font-weight:400}
 .gift-amount-option small{overflow:hidden;color:#aa999d;font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+.gift-custom-amount,.gift-schedule-field{position:relative;display:grid;gap:8px;margin-top:12px;color:#e9dcde;font-size:11px;font-weight:600}
+.gift-custom-amount>span{position:absolute;top:35px;left:13px;color:#c0afb2;font-size:14px}
+.gift-custom-amount input,.gift-schedule-field input{width:100%;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:2px;padding:11px 12px;background:#120e10;color:#fff;font:inherit;font-weight:400}
+.gift-custom-amount input{padding-left:29px}
+.gift-schedule-field small{color:#aa999d;font-size:10px;font-weight:400;line-height:1.6}
+.gift-delivery-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gift-delivery-options button{display:flex;align-items:center;gap:11px;min-height:68px;padding:13px;border:1px solid rgba(255,255,255,.14);background:#171113;color:var(--gift-text);text-align:left;cursor:pointer}
+.gift-delivery-options button.is-selected{border-color:var(--gift-pink);background:rgba(231,162,179,.1)}
+.gift-delivery-options button>svg{flex:0 0 auto;color:var(--gift-gold)}
+.gift-delivery-options button span{display:grid;gap:5px}
+.gift-delivery-options button strong{font-size:11px}
+.gift-delivery-options button small{color:#aa999d;font-size:9px;line-height:1.45}
 .gift-state{display:grid;justify-items:start;gap:12px;padding:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);color:var(--gift-muted);font-size:13px;line-height:1.7}
 .gift-state p{margin:0}
 .gift-state>svg{color:var(--gift-pink)}
@@ -62,6 +74,8 @@
 .gift-personal-fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .gift-personal-fields label{display:grid;grid-template-columns:1fr auto;gap:7px;color:#e9dcde;font-size:11px;font-weight:600}
 .gift-personal-fields label>span{color:#aa999d;font-weight:400}
+.gift-personal-fields .gift-self-toggle{display:flex;grid-column:1/-1;align-items:center;gap:9px;font-weight:400}
+.gift-personal-fields .gift-self-toggle input{width:16px;min-height:16px;grid-column:auto;margin:0;accent-color:var(--gift-pink)}
 .gift-personal-fields input,.gift-personal-fields textarea{grid-column:1/-1;width:100%;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:2px;padding:11px 12px;background:#120e10;color:#fff;font:inherit;font-weight:400;resize:vertical}
 .gift-personal-fields input::placeholder,.gift-personal-fields textarea::placeholder{color:#8f8083}
 .gift-personal-fields input:focus,.gift-personal-fields textarea:focus{border-color:var(--gift-pink);outline:2px solid rgba(231,162,179,.18)}
@@ -108,6 +122,18 @@
 .gift-balance-icon{display:grid;place-items:center;width:56px;height:56px;border:1px solid rgba(215,189,138,.44);border-radius:50%;color:var(--gift-gold)}
 .gift-balance-section h2{margin:0;font-family:Georgia,serif;font-size:clamp(27px,4vw,39px);font-weight:400}
 .gift-balance-section>div>p:not(.gift-eyebrow){max-width:650px;color:var(--gift-muted);font-size:13px;line-height:1.8}
+.gift-balance-form{display:grid;gap:9px;max-width:600px;margin:22px 0}
+.gift-balance-form>label{color:#e9dcde;font-size:11px;font-weight:600}
+.gift-balance-form>div{display:flex;gap:9px}
+.gift-balance-form input{flex:1;min-width:0;min-height:44px;border:1px solid rgba(255,255,255,.16);border-radius:2px;padding:11px 12px;background:#171113;color:#fff;font:inherit}
+.gift-balance-form input::placeholder{color:#8f8083}
+.gift-balance-form input:focus{border-color:var(--gift-pink);outline:2px solid rgba(231,162,179,.18)}
+.gift-balance-form button{flex:0 0 auto}
+.gift-balance-form button:disabled{opacity:.6;cursor:wait}
+.gift-balance-message{color:#ffb4bc!important}
+.gift-balance-result{display:grid;gap:5px;max-width:600px;margin:15px 0;padding:16px;border:1px solid rgba(215,189,138,.35);background:rgba(255,255,255,.025)}
+.gift-balance-result span,.gift-balance-result small{color:#c0afb2;font-size:11px}
+.gift-balance-result strong{color:var(--gift-pink);font-family:Georgia,serif;font-size:28px;font-weight:400}
 .gift-outline-button{min-height:43px;border-color:rgba(231,162,179,.55);background:transparent;color:var(--gift-text)!important;font-size:11px}
 .gift-faq-section{background:#151113}
 .gift-faq-list{max-width:880px;border-top:1px solid rgba(255,255,255,.14)}
@@ -154,4 +180,5 @@
 @keyframes gift-orbit{to{transform:rotate(360deg)}}
 @media(max-width:900px){.gift-hero{grid-template-columns:1fr 0.86fr;gap:3vw;padding-right:6vw;padding-left:6vw}.gift-hero h1{font-size:clamp(52px,9vw,88px)}.gift-hero-bottom{right:6vw;left:6vw}.gift-buy-layout{grid-template-columns:minmax(0,1.1fr) minmax(235px,.8fr);gap:28px}.gift-section,.gift-moments,.gift-gallery-section,.gift-how-section,.gift-faq-section{padding-right:6vw;padding-left:6vw}.gift-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}.gift-occasion-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.gift-balance-section{padding-right:7vw;padding-left:7vw}}
 @media(max-width:640px){.gift-hero{display:flex;flex-direction:column;align-items:stretch;gap:35px;min-height:0;padding:69px 22px 74px}.gift-hero-copy{order:0}.gift-hero h1{font-size:clamp(56px,16vw,86px)}.gift-hero-description{margin-top:19px;font-size:14px}.gift-hero-actions{align-items:flex-start;gap:17px;margin-top:25px}.gift-primary-button{min-height:48px;padding:0 17px;font-size:11px}.gift-text-link{font-size:11px}.gift-hero-note{align-items:flex-start;margin-top:25px}.gift-hero-visual{order:1;width:min(100%,450px);aspect-ratio:1.15;margin:0 auto}.gift-hero-visual-label{right:20px;bottom:20px;left:20px}.gift-hero-bottom{right:22px;bottom:20px;left:22px;font-size:7px}.gift-section,.gift-moments,.gift-gallery-section,.gift-how-section,.gift-faq-section{padding:68px 22px}.gift-section-heading{margin-bottom:29px}.gift-section-heading h2{font-size:clamp(36px,10.5vw,54px)}.gift-section-heading>p:last-child{font-size:12px}.gift-buy-layout{grid-template-columns:1fr;gap:30px}.gift-preview-panel{position:relative;top:auto;grid-row:1}.gift-preview-card{aspect-ratio:1.35}.gift-amount-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gift-amount-option{min-height:84px;padding:12px}.gift-design-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gift-design-option img{aspect-ratio:1.4}.gift-design-option span{font-size:11px}.gift-personal-fields{gap:12px}.gift-occasion-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gift-occasion{min-height:117px;padding:14px}.gift-occasion>span{top:12px;left:13px}.gift-occasion strong{font-size:17px}.gift-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gift-gallery figure{aspect-ratio:1}.gift-how-grid{grid-template-columns:1fr 1fr}.gift-how-grid article{min-height:135px;padding:18px 12px;border-bottom:1px solid rgba(255,255,255,.12)}.gift-how-grid article:first-child{padding-left:12px}.gift-how-grid article:nth-child(2){border-right:0}.gift-how-grid article:nth-child(3){border-bottom:0}.gift-how-grid article:last-child{border-bottom:0}.gift-how-grid h3{font-size:17px}.gift-how-grid p{font-size:10px}.gift-balance-section{grid-template-columns:42px 1fr;gap:15px;padding:49px 22px}.gift-balance-icon{width:40px;height:40px}.gift-balance-icon svg{width:19px}.gift-balance-section>div>p:not(.gift-eyebrow){font-size:12px}.gift-faq-list summary{padding:18px 0;font-size:12px}.gift-faq-list details>p{font-size:11px}.gift-final-cta{padding:76px 22px 84px}.gift-final-cta h2{font-size:clamp(38px,11vw,54px)}.payment-policy-hero{padding:77px 22px 62px}.payment-policy-content{padding:39px 22px 75px}.payment-policy-intro,.payment-methods-panel{grid-template-columns:39px 1fr;gap:13px;padding:26px 0}.payment-policy-icon{width:36px;height:36px}.payment-policy-icon svg{width:18px}.payment-policy-content h2{font-size:25px}.payment-policy-content p:not(.gift-eyebrow){font-size:12px}.payment-policy-cards{grid-template-columns:1fr;padding:25px 0;gap:9px}.payment-policy-cards article{min-height:0;padding:18px}.payment-policy-cards h3{margin:13px 0 6px}.payment-policy-terms{padding:20px}.payment-policy-terms>div{align-items:flex-start;flex-direction:column;gap:14px}}
+@media(max-width:640px){.gift-balance-form>div{align-items:stretch;flex-direction:column}.gift-balance-form .gift-outline-button{width:100%}.gift-delivery-options{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.gift-page *,.payment-policy-page *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

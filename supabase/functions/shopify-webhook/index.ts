@@ -3,6 +3,7 @@ import { shopDomain,adminDb,check,errorResponse } from '../_shared/config.ts';
 import { validHmac } from '../_shared/crypto.ts';
 import { syncAdminOrder } from '../_shared/orders.ts';
 import { syncAffiliateOrder } from '../_shared/affiliateOrders.ts';
+import { processPaidGiftCardOrder } from '../_shared/giftCardWorkflow.ts';
 const TOPICS=['orders/create','orders/updated','orders/paid','orders/cancelled','fulfillments/create','fulfillments/update','refunds/create','products/create','products/update','products/delete','inventory_levels/update'];
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return new Response(null,{headers:corsHeaders});
@@ -22,7 +23,7 @@ Deno.serve(async req=>{
   if(topic.startsWith('products/')||topic.startsWith('inventory_levels/'))check(await adminDb().from('dg_shopify_cache').update({expires_at:new Date(0).toISOString()}).neq('cache_key',''));
   else{
    const id=topic.startsWith('orders/')?body.admin_graphql_api_id||`gid://shopify/Order/${body.id}`:`gid://shopify/Order/${body.order_id}`;
-   await syncAdminOrder(id);await syncAffiliateOrder(id);const saved=await adminDb().from('dg_orders').select('payload,user_id').eq('id',id).maybeSingle();check(saved);
+   await syncAdminOrder(id);await syncAffiliateOrder(id);if(topic==='orders/paid')await processPaidGiftCardOrder(id);const saved=await adminDb().from('dg_orders').select('payload,user_id').eq('id',id).maybeSingle();check(saved);
    check(await adminDb().from('dg_order_activity').upsert({event_id:eventId,topic,order_id:id,order_name:saved.data?.payload?.name||body.name||null,customer_name:body.customer?[body.customer.first_name,body.customer.last_name].filter(Boolean).join(' '):null,total:saved.data?.payload?.total||null,financial_status:saved.data?.payload?.financialStatus||body.financial_status||null}));
    if(saved.data?.user_id){const p=saved.data.payload;const status=String(p.fulfillmentStatus||p.financialStatus||'updated').replace(/_/g,' ').toLowerCase();check(await adminDb().from('dg_messages').upsert({user_id:saved.data.user_id,event_key:`${eventId}:${topic}`,category:'order',title:`Order ${p.name||body.name||''} updated`,body:`Your order status is ${status}. Open your order for the latest details.`,href:`/us/user/orders/detail/${encodeURIComponent(id)}`},{onConflict:'user_id,event_key',ignoreDuplicates:true}));}
   }

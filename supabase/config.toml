@@ -1,6 +1,9 @@
 [functions.shopify-storefront]
 verify_jwt = false
 
+[functions.shopify-gift-cards]
+verify_jwt = false
+
 # Shopify does not send Supabase JWTs. The receiver verifies Shopify HMAC itself.
 [functions.shopify-webhook]
 enabled = true
