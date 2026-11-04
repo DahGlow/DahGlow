@@ -1,33 +1,55 @@
 .store-header,
 .store-header.solid,
 .store-header.over-hero {
-  background: #fff;
-  color: #20191a;
-  border-bottom: 1px solid #eee9e9;
+  background: #000;
+  color: #fff;
+  border-bottom: 1px solid #303030;
   backdrop-filter: none;
 }
 
 .store-header .brand,
 .store-header .icon-button {
-  color: #20191a;
+  color: #fff;
 }
 
 .desktop-announcement {
-  background: #fff;
-  color: #20191a;
-  border-bottom: 1px solid #eee9e9;
+  background: #000;
+  color: #fff;
+  border-bottom: 1px solid #303030;
 }
 
 .desktop-store-benefits,
 .desktop-header-main {
-  background: #fff;
+  background: #000;
+  color: #fff;
+}
+
+.desktop-store-benefits a {
+  color: #d0d0d0;
+}
+
+.desktop-store-benefits i {
+  background: #404040;
+}
+
+.desktop-header-row .header-search {
   color: #20191a;
 }
 
+.desktop-header-actions .icon-button,
+.desktop-category-nav > a,
+.desktop-category-nav > button {
+  color: #fff;
+}
+
 .desktop-header-actions .icon-button:hover {
-  background: #f5f2f2;
+  background: #292929;
 }
 
 .desktop-category-nav .active {
-  border-bottom-color: #20191a;
+  border-bottom-color: #fff;
+}
+
+.header-row .header-search {
+  color: #20191a;
 }
