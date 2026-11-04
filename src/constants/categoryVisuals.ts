@@ -1,17 +1,18 @@
-export const CATEGORY_VISUALS=[
-  {name:'Women',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/08/1786601829ccbab3b7ea1ca622d278a071f2478f32_thumbnail_240x.avif'},
-  {name:'Men',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sm260826172252344583234/f764c9723d07666f45378dcab4d60860_square_thumbnail_240x.avif'},
-  {name:'Kids',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/12/2c/1786501315128f0be1a14b67201659a31f70bf43e3_thumbnail_240x.avif'},
+export interface CategoryVisual {name:string;image:string;fallbackImage?:string;rotateImage?:boolean;}
+export const CATEGORY_VISUALS:CategoryVisual[]=[
+  {name:'Women',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/c8/1786601576f6318663320d80f3cf685f3c990b5638_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/08/1786601829ccbab3b7ea1ca622d278a071f2478f32_thumbnail_240x.avif'},
+  {name:'Men',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sm260827173796372645067/4eee6b52959d448a0afa677ded1ba04c_square_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sm260826172252344583234/f764c9723d07666f45378dcab4d60860_square_thumbnail_240x.avif'},
+  {name:'Kids',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/05/77/178589765829450e36ae0d1ea5ec8f949736679eb4_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/12/2c/1786501315128f0be1a14b67201659a31f70bf43e3_thumbnail_240x.avif'},
   {name:'Shoes',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/05/27/1a/17798724355bcea2b90f01798102ff9192fd4891fb_thumbnail_240x.avif'},
   {name:'Tops',image:'https://img.ltwebstatic.com/v4/p/aiapiimg/2026/08/20/c7/1787235185cea58874e47ac5f8a04d6c4ed3bdddb3_thumbnail_240x.avif'},
-  {name:'Home',image:'https://img.ltwebstatic.com/v4/p/abc/2026/06/01/53/178028664728345672ec623b47b02edfec9b7e8f15_thumbnail_240x.avif'},
+  {name:'Home',image:'https://img.ltwebstatic.com/v4/p/abc/2026/04/21/f1/1776774104dfe598ea8ed76b90ee58fd99fd2a8e07_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abc/2026/06/01/53/178028664728345672ec623b47b02edfec9b7e8f15_thumbnail_240x.avif'},
   {name:'Curve',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260803171301078338233/32e9f479b1b82de869533dcdd5cb7481_square_thumbnail_240x.avif'},
-  {name:'Winter',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/c8/1786601576f6318663320d80f3cf685f3c990b5638_thumbnail_240x.avif'},
+  {name:'Winter',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260609083427940383888/096d72b6e272311773045caf53506bef_square_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/c8/1786601576f6318663320d80f3cf685f3c990b5638_thumbnail_240x.avif'},
   {name:'Jewelry',image:'https://img.ltwebstatic.com/v4/p/aiapiimg/2026/08/18/c3/1787024631293a51accad10409aea2f0e98702e6be_thumbnail_240x.avif'},
   {name:'Baby',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/11/ae/178643508064a122850195314f9583a71dfb479253_thumbnail_240x.avif'},
   {name:'Phone',image:'https://img.ltwebstatic.com/v4/p/abc/2026/05/25/1b/177969746659b79945df6f50674763cef3f5f6ad35_thumbnail_240x.avif'},
-  {name:'Beauty',image:'https://img.ltwebstatic.com/v4/p/abc/2026/05/25/7a/177968509203861d2a5d54d80f9a26bc702086f558_thumbnail_240x.avif'},
+  {name:'Beauty',image:'https://img.ltwebstatic.com/v4/p/abc/2026/05/25/7a/177968509203861d2a5d54d80f9a26bc702086f558_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abc/2026/05/25/cc/1779685758da19d2eb17a517802b72e7a4d9a327c8_thumbnail_240x.avif',rotateImage:true},
   {name:'Sleepwear',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/si260724173491931276308/6692881bd51e5a110d50dfd9d3c206bc_square_thumbnail_240x.avif'},
   {name:'Sports',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/04/16/63/1776343372c677b479eb9d85b9a1b9a4255b9283f1_thumbnail_240x.avif'},
-  {name:'Dress',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260402140899761808771/25b22f31c66963491c894d522e7bacc8_square_thumbnail_240x.avif'},
+  {name:'Dress',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260911135329848571644/84ca50e9844cb98c709b269501faec29_square_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260402140899761808771/25b22f31c66963491c894d522e7bacc8_square_thumbnail_240x.avif'},
 ];
