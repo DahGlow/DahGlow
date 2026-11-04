@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Follow these seven steps to find your Dah Glow order, track its shipping progress, confirm delivery, and leave a review.">
+  <meta name="theme-color" content="#ffffff">
+  <title>How to Track My Order | Dah Glow</title>
+  <style>
+    :root{color-scheme:light;--ink:#20191a;--muted:#766e70;--line:#eee9e9;--pink:#b34f68}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:#fff;color:var(--ink);font:15px/1.65 Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .desktop-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 18px #24171908}
+    .header-main{max-width:1440px;min-height:74px;padding:12px 5vw;margin:auto;display:grid;grid-template-columns:1fr minmax(230px,480px) 1fr;align-items:center;gap:28px}
+    .brand{font-size:25px;font-weight:800;letter-spacing:.14em;text-decoration:none;white-space:nowrap}.brand span{color:var(--pink)}
+    .search{height:42px;border:1px solid #dcd6d7;display:flex;align-items:center;border-radius:4px;overflow:hidden}
+    .search input{width:100%;height:100%;min-width:0;border:0;padding:0 12px;font:inherit;font-size:13px;outline:none}
+    .search button{height:100%;width:46px;background:#21191b;color:#fff;border:0;font-size:18px;cursor:pointer}
+    .header-links{display:flex;justify-content:flex-end;align-items:center;gap:22px}
+    .header-links a,.desktop-nav a{font-size:12px;text-decoration:none;color:#393133;white-space:nowrap}
+    .desktop-nav{max-width:1440px;margin:auto;padding:0 5vw;display:flex;gap:25px;align-items:center;min-height:40px;overflow:auto;scrollbar-width:none}
+    .desktop-nav::-webkit-scrollbar{display:none}
+    .mobile-header{display:none}
+    main{max-width:1280px;margin:auto;padding:26px 5vw 86px}
+    .breadcrumb{margin:0 0 17px;color:#91888a;font-size:12px}
+    .breadcrumb a{color:inherit;text-decoration:none}.breadcrumb span{margin:0 8px;color:#c6bfc0}
+    .intro{text-align:center;margin:0 auto 34px}
+    h1,h2,p{margin-top:0}
+    h1{margin-bottom:10px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(35px,5vw,55px);font-weight:400;letter-spacing:-.045em;line-height:1.08}
+    .intro>p:last-child{margin:0;color:var(--muted);font-size:14px}
+    .step{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:36px;padding:26px 0 30px;border-top:1px solid var(--line)}
+    .step-copy{padding:4px 0}
+    .step h2{margin:0 0 12px;font:700 16px/1.4 Inter,Arial,sans-serif}
+    .step-number{color:var(--pink)}
+    .step p{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+    .step-image{display:block;width:100%;height:auto;max-height:360px;object-fit:contain;background:#fff;border:1px solid #f1eeee;padding:8px}
+    .footer{background:#faf9f9;border-top:1px solid var(--line)}
+    .footer-inner{max-width:1440px;margin:auto;padding:32px 5vw 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .footer-brand{text-decoration:none;font-size:17px;font-weight:800;letter-spacing:.11em}
+    .footer-links{display:flex;flex-wrap:wrap;gap:10px 22px}
+    .footer-links a{font-size:12px;color:#625b5d;text-decoration:none}
+    .copyright{max-width:1440px;margin:auto;padding:0 5vw 22px;color:#938b8d;font-size:11px}
+    @media(max-width:760px){
+      body{font-size:14px}
+      .desktop-header{display:none}
+      .mobile-header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 14px #24171908}
+      .mobile-header .brand{font-size:19px}
+      .mobile-actions{display:flex;align-items:center;gap:17px}
+      .mobile-actions a{display:grid;place-items:center;min-width:24px;min-height:38px;color:#292324;text-decoration:none;font-size:19px}
+      .mobile-actions .bag{font-size:17px}
+      main{padding:18px 18px 60px}
+      .breadcrumb{font-size:11px;margin-bottom:15px}
+      .intro{margin-bottom:20px}
+      .intro>p:last-child{font-size:13px}
+      .step{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:14px;padding:20px 0 22px}
+      .step-copy{padding:0}
+      .step h2{margin-bottom:8px;font-size:15px}
+      .step p{font-size:12px}
+      .step-image{max-height:none;padding:6px}
+      .footer-inner{align-items:flex-start;flex-direction:column;padding:25px 18px 16px}
+      .footer-links{gap:10px 16px}
+      .copyright{padding:0 18px 20px}
+    }
+    @media(max-width:480px){.step{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="desktop-header">
+    <div class="header-main">
+      <a class="brand" href="/" aria-label="Dah Glow home">DAH GLOW<span>.</span></a>
+      <form class="search" action="/search" method="get" role="search">
+        <input type="search" name="q" aria-label="Search Dah Glow" placeholder="Search beauty and self-care">
+        <button type="submit" aria-label="Search">⌕</button>
+      </form>
+      <nav class="header-links" aria-label="Quick links">
+        <a href="/me">Account</a><a href="/wishlist">Wishlist</a><a href="/cart">Bag</a>
+      </nav>
+    </div>
+    <nav class="desktop-nav" aria-label="Shop categories">
+      <a href="/">Shop</a><a href="/search?q=Women">Women</a><a href="/search?q=Men">Men</a><a href="/search?q=Kids">Kids</a><a href="/search?q=Beauty">Beauty &amp; Health</a><a href="/search?q=Home">Home &amp; Living</a><a href="/deals">Deals</a>
+    </nav>
+  </header>
+  <header class="mobile-header">
+    <a class="brand" href="/" aria-label="Dah Glow home">DAH GLOW<span>.</span></a>
+    <nav class="mobile-actions" aria-label="Quick links">
+      <a href="/search" aria-label="Search">⌕</a><a href="/wishlist" aria-label="Wishlist">♡</a><a class="bag" href="/cart" aria-label="Shopping bag">▢</a>
+    </nav>
+  </header>
+
+  <main>
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span>How to Track My Order</p>
+    <section class="intro">
+      <h1>How to Track My Order</h1>
+      <p>Track your order with a few clicks.</p>
+    </section>
+    <section class="step" aria-labelledby="step-1-title">
+      <div class="step-copy"><h2 id="step-1-title"><span class="step-number">Step 1</span> Account login</h2><p>Log into your account.</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2023/12/25/ac/17034729456395840f4798d3c19d4dde12de2410f3.avif" alt="Sign in or register for your account" loading="lazy">
+    </section>
+    <section class="step" aria-labelledby="step-2-title">
+      <div class="step-copy"><h2 id="step-2-title"><span class="step-number">Step 2</span> Order Search</h2><p>In “Personal Center”, click “View All” or “My Orders” to get an overview of your order history and status.</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2023/12/25/ac/170347294513ffa08ef5aa85f546f89fc9dc8c7b6b.avif" alt="Find your order in the My Orders page" loading="lazy">
+    </section>
+    <section class="step" aria-labelledby="step-3-title">
+      <div class="step-copy"><h2 id="step-3-title"><span class="step-number">Step 3</span> Processing Orders</h2><p>Check your package tracking and estimated delivery time. Select “Tracking Content” or “Track” to open the order tracking page. Select “Expedite shipment” to speed up processing when available.</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2023/12/25/ac/170347294526467b7f81ea2e468fecc610f2c647d1.avif" alt="View tracking details for a processing order" loading="lazy">
+    </section>
+    <section class="step" aria-labelledby="step-4-title">
+      <div class="step-copy"><h2 id="step-4-title"><span class="step-number">Step 4</span> Shipped Orders</h2><p>Check your package tracking and estimated delivery time. Select “Tracking Content” or “Track” for details. Select “Urgent Delivery” to speed up shipment when available.</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2024/01/10/dc/17048694510d62d8b586aad241fc0e5b6228dff21d.avif" alt="Track a shipped order and view delivery options" loading="lazy">
+    </section>
+    <section class="step" aria-labelledby="step-5-title">
+      <div class="step-copy"><h2 id="step-5-title"><span class="step-number">Step 5</span> Order Abnormity</h2><p>Check your order details or click the notification to see information about any order abnormality.</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2023/12/25/ac/1703472945a01db317a23b143793443cecdb70a650.avif" alt="Review an order notification" loading="lazy">
+    </section>
+    <section class="step" aria-labelledby="step-6-title">
+      <div class="step-copy"><h2 id="step-6-title"><span class="step-number">Step 6</span> Order Confirmation</h2><p>Once you receive your package, select “Received” to confirm delivery and earn Bonus Points (Shop &amp; Save).</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2023/12/25/ac/17034729453058caf1f8e5ad3669faa9b9bef8026f.avif" alt="Confirm that you received your order" loading="lazy">
+    </section>
+    <section class="step" aria-labelledby="step-7-title">
+      <div class="step-copy"><h2 id="step-7-title"><span class="step-number">Step 7</span> Review Submission</h2><p>In “Review”, you can check previous reviews or write a review for your order.</p></div>
+      <img class="step-image" src="https://img.ltwebstatic.com/images3_acp/2023/12/25/ac/1703472945cd5fcb6a54f58f8b137f3cca07a27b02.avif" alt="Open the Review section to write a review" loading="lazy">
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="/">DAH GLOW.</a>
+      <nav class="footer-links" aria-label="Customer care">
+        <a href="/help-center">Help center</a><a href="/shipping-information">Shipping</a><a href="/returns-refunds">Returns &amp; refunds</a><a href="/contact">Contact us</a><a href="/payment-policy">Payment policy</a>
+      </nav>
+    </div>
+    <p class="copyright">© <span id="year"></span> Dah Glow. All rights reserved.</p>
+  </footer>
+  <script>document.getElementById('year').textContent=String(new Date().getFullYear());</script>
+</body>
+</html>

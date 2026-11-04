@@ -14,6 +14,7 @@ import '@/tidio-support.css';
 import '@/affiliate.css';
 import '@/style-inspiration.css';
 import '@/about-dahglow.css';
+import '@/header-white.css';
 
 const root=ReactDOM.createRoot(document.getElementById('root')!);
 root.render(<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>);

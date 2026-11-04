@@ -1,0 +1,33 @@
+.store-header,
+.store-header.solid,
+.store-header.over-hero {
+  background: #fff;
+  color: #20191a;
+  border-bottom: 1px solid #eee9e9;
+  backdrop-filter: none;
+}
+
+.store-header .brand,
+.store-header .icon-button {
+  color: #20191a;
+}
+
+.desktop-announcement {
+  background: #fff;
+  color: #20191a;
+  border-bottom: 1px solid #eee9e9;
+}
+
+.desktop-store-benefits,
+.desktop-header-main {
+  background: #fff;
+  color: #20191a;
+}
+
+.desktop-header-actions .icon-button:hover {
+  background: #f5f2f2;
+}
+
+.desktop-category-nav .active {
+  border-bottom-color: #20191a;
+}
