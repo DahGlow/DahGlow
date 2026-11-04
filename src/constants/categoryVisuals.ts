@@ -5,7 +5,7 @@ export const CATEGORY_VISUALS:CategoryVisual[]=[
   {name:'Kids',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/05/77/178589765829450e36ae0d1ea5ec8f949736679eb4_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/12/2c/1786501315128f0be1a14b67201659a31f70bf43e3_thumbnail_240x.avif'},
   {name:'Shoes',image:'https://img.ltwebstatic.com/v4/p/abccv/2026/05/27/1a/17798724355bcea2b90f01798102ff9192fd4891fb_thumbnail_240x.avif'},
   {name:'Tops',image:'https://img.ltwebstatic.com/v4/p/aiapiimg/2026/08/20/c7/1787235185cea58874e47ac5f8a04d6c4ed3bdddb3_thumbnail_240x.avif'},
-  {name:'Home',image:'https://img.ltwebstatic.com/v4/p/abc/2026/04/21/f1/1776774104dfe598ea8ed76b90ee58fd99fd2a8e07_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abc/2026/06/01/53/178028664728345672ec623b47b02edfec9b7e8f15_thumbnail_240x.avif'},
+  {name:'Home',image:'https://img.ltwebstatic.com/v4/p/abc/2026/06/01/53/178028664728345672ec623b47b02edfec9b7e8f15_thumbnail_240x.avif'},
   {name:'Curve',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260803171301078338233/32e9f479b1b82de869533dcdd5cb7481_square_thumbnail_240x.avif'},
   {name:'Winter',image:'https://img.ltwebstatic.com/v4/p/dps/sbc-cutout-task/sz260609083427940383888/096d72b6e272311773045caf53506bef_square_thumbnail_240x.avif',fallbackImage:'https://img.ltwebstatic.com/v4/p/abccv/2026/08/13/c8/1786601576f6318663320d80f3cf685f3c990b5638_thumbnail_240x.avif'},
   {name:'Jewelry',image:'https://img.ltwebstatic.com/v4/p/aiapiimg/2026/08/18/c3/1787024631293a51accad10409aea2f0e98702e6be_thumbnail_240x.avif'},
