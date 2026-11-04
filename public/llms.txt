@@ -1,0 +1,34 @@
+# Dah Glow
+
+> Dah Glow is an online store for fashion, beauty, accessories, and home finds, with new arrivals, curated inspiration, and deals.
+
+Dah Glow storefront: https://us.dahglow.com/
+
+## Shop
+
+- [Shop Dah Glow](https://us.dahglow.com/): Browse products across fashion, beauty, accessories, and home.
+- [Deals](https://us.dahglow.com/deals): Browse current discounted products.
+- [Trends](https://us.dahglow.com/trends): Explore trending products and styles.
+- [Gift Cards](https://us.dahglow.com/gift-cards): Purchase a digital gift card and check its balance.
+
+## Help and policies
+
+- [Help Center](https://us.dahglow.com/help-center): Find answers to common shopping and account questions.
+- [Shipping Information](https://us.dahglow.com/shipping-information): Review shipping options and information.
+- [Returns and Refunds](https://us.dahglow.com/returns-refunds): Review return and refund information.
+- [Payment Policy](https://us.dahglow.com/payment-policy): Learn about payment options and checkout.
+- [How to Pay](https://us.dahglow.com/en/How-to-Pay-a-278.html): Read payment and checkout guidance.
+- [Coupon Policy](https://us.dahglow.com/en/coupon-policy-a-2026.html): Review coupon and promotional discount guidance.
+- [Gift Card Terms and Conditions](https://us.dahglow.com/en/gift-card-a-708.html): Review gift card purchase, delivery, and redemption terms.
+- [How to Track an Order](https://us.dahglow.com/en/How-to-track-my-order-a-496.html): Follow order tracking and delivery steps.
+- [Contact Dah Glow](https://us.dahglow.com/contact): Contact customer care.
+
+## About
+
+- [About Dah Glow](https://us.dahglow.com/about): Learn about the store.
+- [Style Inspiration](https://us.dahglow.com/inspiration): Browse beauty, fashion, and self-care inspiration.
+
+## Additional information
+
+- [XML sitemap](https://us.dahglow.com/sitemap.xml): Discover additional public pages.
+- Product availability, prices, discounts, shipping options, and checkout terms may change. The information shown on the relevant Dah Glow page and at checkout is authoritative.
