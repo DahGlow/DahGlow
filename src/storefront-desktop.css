@@ -37,6 +37,8 @@
  body{zoom:.9}
  .mobile-store-header,.desktop-announcement,.mobile-category-circles,.mobile-shop-footer{display:none!important}
  .desktop-store-header{display:block}
+ .desktop-store-header{position:sticky;top:0;z-index:40;transform:translateY(0);transition:transform .22s ease}
+ .desktop-store-header.scroll-hidden{transform:translateY(-100%)}
  .desktop-store-benefits{min-height:36px;display:flex;justify-content:center;align-items:center;gap:48px;background:hsl(var(--cream));color:hsl(var(--club));font-size:14px;padding:4px 24px}
  .desktop-store-benefits>span{display:flex;align-items:center;gap:8px}.desktop-store-benefits strong{font-weight:700}.desktop-store-benefits a{color:hsl(var(--subtle));text-decoration:underline;text-underline-offset:3px}.desktop-store-benefits i{height:20px;width:1px;background:hsl(var(--border))}
  .desktop-header-main{background:hsl(var(--foreground));color:hsl(var(--background))}
