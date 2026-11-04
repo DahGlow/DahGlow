@@ -32,6 +32,7 @@ const SwitchAccounts=lazy(()=>import('@/pages/SwitchAccounts')),ContactPreferenc
 const Wallet=lazy(()=>import('@/pages/Wallet')),WalletHistory=lazy(()=>import('@/pages/WalletHistory')),WalletPayment=lazy(()=>import('@/pages/WalletPayment'));
 const VisualSearch=lazy(()=>import('@/pages/VisualSearchRoute')),MessageCenter=lazy(()=>import('@/pages/MessageCenter'));
 const Contact=lazy(()=>import('@/pages/Contact'));
+const GiftCards=lazy(()=>import('@/pages/GiftCards')),PaymentPolicy=lazy(()=>import('@/pages/PaymentPolicy'));
 const Affiliate=lazy(()=>import('@/pages/Affiliate')),AffiliateItems=lazy(()=>import('@/pages/AffiliateItems')),AffiliateBoost=lazy(()=>import('@/pages/AffiliateBoost')),AffiliateBonus=lazy(()=>import('@/pages/AffiliateBonus'));
 const AffiliateEarnings=lazy(()=>import('@/pages/AffiliateEarnings')),AffiliateData=lazy(()=>import('@/pages/AffiliateData')),AffiliateSocial=lazy(()=>import('@/pages/AffiliateSocial')),AffiliateAccount=lazy(()=>import('@/pages/AffiliateAccount'));
 const AffiliateSettings=lazy(()=>import('@/pages/AffiliateSettings')),AffiliateConvert=lazy(()=>import('@/pages/AffiliateConvert')),AffiliateReferral=lazy(()=>import('@/pages/AffiliateReferral'));
@@ -59,6 +60,7 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/help-center" element={<HelpCenter/>}/>
   <Route path="/shipping-information" element={<StorePolicy policyKey="shippingPolicy"/>}/>
   <Route path="/returns-refunds" element={<StorePolicy policyKey="refundPolicy"/>}/>
+  <Route path="/gift-cards" element={<GiftCards/>}/><Route path="/payment-policy" element={<PaymentPolicy/>}/>
   <Route path="/affiliate" element={<Affiliate/>}/><Route path="/affiliate/items" element={<AffiliateItems/>}/>
   <Route path="/affiliate/boost" element={<AffiliateBoost/>}/><Route path="/affiliate/bonus" element={<AffiliateBonus/>}/>
   <Route path="/affiliate/earnings" element={<AffiliateEarnings/>}/><Route path="/affiliate/data" element={<AffiliateData/>}/>

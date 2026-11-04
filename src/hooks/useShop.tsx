@@ -2,8 +2,8 @@ import { createContext,useContext,useState,useEffect,type ReactNode } from 'reac
 import { TRANSLATIONS } from '@/constants/translations';
 import { useCart } from '@/hooks/useCart';
 import { useCloudWishlist } from '@/hooks/useCloudWishlist';
-import type { CartLine,ShopifyCart,Language } from '@/types/shop';
-interface ShopContextType {language:Language;currency:string;setLanguage:(l:Language)=>void;setCurrency:(c:string)=>void;t:(s:string)=>string;money:(p:number,currency?:string)=>string;cart:CartLine[];shopifyCart:ShopifyCart|null;cartLoading:boolean;cartBusy:boolean;cartError:Error|null;addCart:(variantId:string,quantity?:number)=>Promise<void>;updateCart:(lineId:string,quantity:number)=>void;checkout:()=>Promise<void>;wishlist:string[];toggleWish:(handle:string)=>void;wishBusy:boolean;recent:string[];viewProduct:(handle:string)=>void;}
+import type { CartLine,CartLineAttribute,ShopifyCart,Language } from '@/types/shop';
+interface ShopContextType {language:Language;currency:string;setLanguage:(l:Language)=>void;setCurrency:(c:string)=>void;t:(s:string)=>string;money:(p:number,currency?:string)=>string;cart:CartLine[];shopifyCart:ShopifyCart|null;cartLoading:boolean;cartBusy:boolean;cartError:Error|null;addCart:(variantId:string,quantity?:number,attributes?:CartLineAttribute[])=>Promise<void>;updateCart:(lineId:string,quantity:number)=>void;checkout:()=>Promise<void>;wishlist:string[];toggleWish:(handle:string)=>void;wishBusy:boolean;recent:string[];viewProduct:(handle:string)=>void;}
 const ShopContext=createContext<ShopContextType>(null!);
 function stored<T>(key:string,fallback:T):T{try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
 function detect():Language{const lang=navigator.language.toLowerCase().split('-')[0];return ['en','fr','es','zh'].includes(lang)?lang as Language:'en';}
