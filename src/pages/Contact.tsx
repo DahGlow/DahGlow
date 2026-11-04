@@ -157,8 +157,8 @@ function Contact(){
 
   <section className="contact-info-strip" aria-label="Verified Dah Glow contact details">
    <div><span className="contact-eyebrow">REACH US DIRECTLY</span><h2>Real details.<br/><em>Real support.</em></h2></div>
-   {contactEmail?<a href={`mailto:${encodeURIComponent(contactEmail)}`}><Mail size={18}/><span><small>STORE EMAIL</small><strong>{contactEmail}</strong></span></a>:<div className="contact-info-missing"><Mail size={18}/><span><small>STORE EMAIL</small><strong>Not published yet</strong></span></div>}
-   {contactPhone?<a href={`tel:${encodeURIComponent(contactPhone.replace(/[^\d+]/g,''))}`}><Phone size={18}/><span><small>STORE PHONE</small><strong>{contactPhone}</strong></span></a>:<div className="contact-info-missing"><Phone size={18}/><span><small>STORE PHONE</small><strong>Not published yet</strong></span></div>}
+   {contactEmail?<a href={`mailto:${encodeURIComponent(contactEmail)}`}><Mail size={18}/><span><small>STORE EMAIL</small><strong>{contactEmail}</strong></span></a>:<div className="contact-info-missing"><Mail size={18}/><span><small>STORE EMAIL</small><strong>dawiniefleury20@gmail.com</strong></span></div>}
+   {contactPhone?<a href={`tel:${encodeURIComponent(contactPhone.replace(/[^\d+]/g,''))}`}><Phone size={18}/><span><small>STORE PHONE</small><strong>{contactPhone}</strong></span></a>:<div className="contact-info-missing"><Phone size={18}/><span><small>STORE PHONE</small><strong>+18573917861</strong></span></div>}
    <p>{settings.isLoading?'Loading store contact details…':!contactEmail&&!contactPhone?'Store contact details can be configured by an administrator in Store settings.':'Contact information provided by Dah Glow store settings.'}</p>
   </section>
  </main>;
