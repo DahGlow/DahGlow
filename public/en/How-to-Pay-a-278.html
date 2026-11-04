@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn about payment methods, checkout security, discounts, and taxes when shopping with Dah Glow.">
+  <meta name="theme-color" content="#ffffff">
+  <title>How to Pay | Dah Glow</title>
+  <style>
+    :root{color-scheme:light;--ink:#20191a;--muted:#766e70;--line:#eee9e9;--pink:#b34f68;--soft:#fbf6f7;--gold:#a88854}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:#fff;color:var(--ink);font:15px/1.65 Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .desktop-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 18px #24171908}
+    .header-main{max-width:1440px;min-height:74px;padding:12px 5vw;margin:auto;display:grid;grid-template-columns:1fr minmax(230px,480px) 1fr;align-items:center;gap:28px}
+    .brand{font-size:25px;font-weight:800;letter-spacing:.14em;text-decoration:none;white-space:nowrap}.brand span{color:var(--pink)}
+    .search{height:42px;border:1px solid #dcd6d7;display:flex;align-items:center;border-radius:4px;overflow:hidden}
+    .search input{width:100%;height:100%;min-width:0;border:0;padding:0 12px;font:inherit;font-size:13px;outline:none}
+    .search button{height:100%;width:46px;background:#21191b;color:#fff;border:0;font-size:18px;cursor:pointer}
+    .header-links{display:flex;justify-content:flex-end;align-items:center;gap:22px}
+    .header-links a,.desktop-nav a{font-size:12px;text-decoration:none;color:#393133;white-space:nowrap}
+    .desktop-nav{max-width:1440px;margin:auto;padding:0 5vw;display:flex;gap:25px;align-items:center;min-height:40px;overflow:auto;scrollbar-width:none}
+    .desktop-nav::-webkit-scrollbar{display:none}
+    .mobile-header{display:none}
+    main{max-width:1280px;margin:auto;padding:26px 5vw 86px}
+    .breadcrumb{margin:0 0 17px;color:#91888a;font-size:12px}
+    .breadcrumb a{color:inherit;text-decoration:none}.breadcrumb span{margin:0 8px;color:#c6bfc0}
+    .intro{text-align:center;margin:0 auto 42px}
+    .eyebrow{margin:0 0 8px;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0}
+    h1{margin-bottom:10px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(35px,5vw,55px);font-weight:400;letter-spacing:-.045em;line-height:1.08}
+    .intro>p:last-child{margin:0;color:var(--muted);font-size:14px}
+    .payment-section{padding:24px 0 27px;border-top:1px solid var(--line)}
+    .section-heading{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+    .section-number{display:grid;place-items:center;flex:0 0 30px;height:30px;border:1px solid #eadfe1;border-radius:50%;color:var(--pink);font-size:10px;font-weight:700}
+    h2{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;letter-spacing:-.02em}
+    .method-grid{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+    .method{display:flex;align-items:center;justify-content:center;min-width:94px;height:57px;padding:8px 12px;border:1px solid #eee9e9;border-radius:6px;background:#fff}
+    .method img{display:block;width:auto;max-width:126px;height:auto;max-height:38px;object-fit:contain}
+    .method .fallback{display:none;color:#242021;font-size:13px;font-weight:700}
+    .method img[hidden]+.fallback{display:block}
+    .method.paypal{min-width:148px;height:54px}.method.paypal img{max-width:122px;max-height:38px}
+    .method.venmo{min-width:74px;height:59px;background:#008cff;border:0}.method.venmo img{max-width:58px;max-height:31px}
+    .method.cashapp{min-width:67px;height:59px;background:#00c853;border:0}.method.cashapp img{max-width:42px;max-height:42px}
+    .method.klarna{min-width:83px;height:52px;background:#ffb3cf;border:0}.method.klarna img{max-width:68px;max-height:38px}
+    .method.zip{min-width:90px}
+    .payment-copy{max-width:1100px;margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+    .payment-copy a{color:var(--pink);text-underline-offset:3px}
+    .notice{display:grid;grid-template-columns:28px 1fr;gap:12px;margin-top:30px;padding:20px 22px;background:var(--soft);border:1px solid #f1e7e9;border-radius:7px}
+    .notice-mark{color:var(--pink);font-weight:700}
+    .notice h2{margin:0 0 5px;font:600 14px/1.4 Inter,Arial,sans-serif}
+    .notice p{margin:0;color:var(--muted);font-size:12px}
+    .footer{background:#faf9f9;border-top:1px solid var(--line)}
+    .footer-inner{max-width:1440px;margin:auto;padding:32px 5vw 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .footer-brand{text-decoration:none;font-size:17px;font-weight:800;letter-spacing:.11em}
+    .footer-links{display:flex;flex-wrap:wrap;gap:10px 22px}
+    .footer-links a{font-size:12px;color:#625b5d;text-decoration:none}
+    .copyright{max-width:1440px;margin:auto;padding:0 5vw 22px;color:#938b8d;font-size:11px}
+    @media(max-width:760px){
+      body{font-size:14px}
+      .desktop-header{display:none}
+      .mobile-header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 3px 14px #24171908}
+      .mobile-header .brand{font-size:19px}
+      .mobile-actions{display:flex;align-items:center;gap:17px}
+      .mobile-actions a{display:grid;place-items:center;min-width:24px;min-height:38px;color:#292324;text-decoration:none;font-size:19px}
+      .mobile-actions .bag{font-size:17px}
+      main{padding:18px 18px 60px}
+      .breadcrumb{font-size:11px;margin-bottom:15px}
+      .intro{margin-bottom:25px}
+      .intro>p:last-child{font-size:13px}
+      .payment-section{padding:20px 0 22px}
+      .section-heading{margin-bottom:13px}
+      h2{font-size:19px}
+      .method-grid{gap:8px;margin-bottom:13px}
+      .method{min-width:80px;height:50px;padding:7px 9px}
+      .method img{max-width:104px;max-height:32px}
+      .method.paypal{min-width:125px;height:48px}
+      .method.paypal img{max-width:104px;max-height:33px}
+      .method.venmo{min-width:64px;height:52px}
+      .method.cashapp{min-width:60px;height:52px}
+      .method.klarna{min-width:76px;height:48px}
+      .payment-copy{font-size:12px;line-height:1.7}
+      .notice{margin-top:22px;padding:16px;grid-template-columns:22px 1fr;gap:9px}
+      .footer-inner{align-items:flex-start;flex-direction:column;padding:25px 18px 16px}
+      .footer-links{gap:10px 16px}
+      .copyright{padding:0 18px 20px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="desktop-header">
+    <div class="header-main">
+      <a class="brand" href="/" aria-label="Dah Glow home">DAH GLOW<span>.</span></a>
+      <form class="search" action="/search" method="get" role="search">
+        <input type="search" name="q" aria-label="Search Dah Glow" placeholder="Search beauty and self-care">
+        <button type="submit" aria-label="Search">⌕</button>
+      </form>
+      <nav class="header-links" aria-label="Quick links">
+        <a href="/me">Account</a><a href="/wishlist">Wishlist</a><a href="/cart">Bag</a>
+      </nav>
+    </div>
+    <nav class="desktop-nav" aria-label="Shop categories">
+      <a href="/">Shop</a><a href="/search?q=Women">Women</a><a href="/search?q=Men">Men</a><a href="/search?q=Kids">Kids</a><a href="/search?q=Beauty">Beauty &amp; Health</a><a href="/search?q=Home">Home &amp; Living</a><a href="/deals">Deals</a>
+    </nav>
+  </header>
+  <header class="mobile-header">
+    <a class="brand" href="/" aria-label="Dah Glow home">DAH GLOW<span>.</span></a>
+    <nav class="mobile-actions" aria-label="Quick links">
+      <a href="/search" aria-label="Search">⌕</a><a href="/wishlist" aria-label="Wishlist">♡</a><a class="bag" href="/cart" aria-label="Shopping bag">▢</a>
+    </nav>
+  </header>
+
+  <main>
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span>How to Pay</p>
+    <section class="intro">
+      <p class="eyebrow">DAH GLOW CHECKOUT</p>
+      <h1>How to Pay</h1>
+      <p>Choose from the payment options shown for your order at Shopify checkout.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="cards-title">
+      <div class="section-heading"><span class="section-number">01</span><h2 id="cards-title">Credit and debit cards</h2></div>
+      <div class="method-grid" aria-label="Card payment methods">
+        <div class="method"><img src="https://img.ltwebstatic.com/images3_acp/2021/04/09/161793311589a2694cadea2884d760ac0901d89b9e.avif" alt="Visa" loading="lazy" onerror="this.hidden=true"><span class="fallback">VISA</span></div>
+        <div class="method"><img src="https://sheinsz.ltwebstatic.com/image/card/n-3-mastercard_vf9b0f97.png?v=shein_364" alt="Mastercard" loading="lazy" onerror="this.hidden=true"><span class="fallback">Mastercard</span></div>
+        <div class="method"><img src="https://sheinsz.ltwebstatic.com/image/card/n-8-maestro_v781c6fd.png?v=shein_364" alt="Maestro" loading="lazy" onerror="this.hidden=true"><span class="fallback">Maestro</span></div>
+        <div class="method"><img src="https://sheinsz.ltwebstatic.com/image/card/n-7-american-express_vb186b55.png?v=shein_364" alt="American Express" loading="lazy" onerror="this.hidden=true"><span class="fallback">American Express</span></div>
+        <div class="method"><img src="https://sheinsz.ltwebstatic.com/image/card/n-discove_v426359e.png?v=shein_364" alt="Discover" loading="lazy" onerror="this.hidden=true"><span class="fallback">Discover</span></div>
+        <div class="method"><img src="https://img.ltwebstatic.com/images3_pi/2019/10/11/157077952410307b1cbe1d05b2c99fbbc8e48e9cdc.avif" alt="Diners Club" loading="lazy" onerror="this.hidden=true"><span class="fallback">Diners Club</span></div>
+      </div>
+      <p class="payment-copy">If you choose a card option at checkout, enter the requested card details in Shopify’s secure payment form. Check the card number and expiration details before submitting. Dah Glow does not receive your full card number.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="paypal-title">
+      <div class="section-heading"><span class="section-number">02</span><h2 id="paypal-title">PayPal</h2></div>
+      <div class="method-grid"><div class="method paypal"><img src="https://shein.ltwebstatic.com/advertise/shein/www/images_sheIn/paie1.png" alt="PayPal" loading="lazy" onerror="this.hidden=true"><span class="fallback">PayPal</span></div></div>
+      <p class="payment-copy">If PayPal is available for your order, select it during checkout and follow the instructions provided by PayPal. Review the final amount before authorizing payment.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="venmo-title">
+      <div class="section-heading"><span class="section-number">03</span><h2 id="venmo-title">Venmo</h2></div>
+      <div class="method-grid"><div class="method venmo"><img src="https://img.ltwebstatic.com/images3_acp/2022/08/16/1660629933098f7d729a7fef1acfdbbb6254849b02.avif" alt="Venmo" loading="lazy" onerror="this.hidden=true"><span class="fallback">Venmo</span></div></div>
+      <p class="payment-copy">When Venmo is offered at checkout, choose it and follow the prompts to authorize your payment through Venmo.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="afterpay-title">
+      <div class="section-heading"><span class="section-number">04</span><h2 id="afterpay-title">Afterpay</h2></div>
+      <div class="method-grid"><div class="method"><img src="https://img.ltwebstatic.com/v4/p/ccc/2025/08/21/b1/1755746234455f89d831f7a24bfc7f59629629639a.avif" alt="Afterpay" loading="lazy" onerror="this.hidden=true"><span class="fallback">Afterpay</span></div></div>
+      <p class="payment-copy">If Afterpay appears as an option for your order, its checkout flow will show any available payment schedule and terms for your review before you confirm.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="cashapp-title">
+      <div class="section-heading"><span class="section-number">05</span><h2 id="cashapp-title">Cash App Pay</h2></div>
+      <div class="method-grid"><div class="method cashapp"><img src="https://img.ltwebstatic.com/images3_acp/2023/06/08/168621664132024a0b90467aa211d96b14e650aad7.avif" alt="Cash App Pay" loading="lazy" onerror="this.hidden=true"><span class="fallback">Cash App</span></div></div>
+      <p class="payment-copy">If Cash App Pay is presented at checkout, select it and complete the authorization in the Cash App payment flow.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="klarna-title">
+      <div class="section-heading"><span class="section-number">06</span><h2 id="klarna-title">Klarna</h2></div>
+      <div class="method-grid"><div class="method klarna"><img src="https://img.ltwebstatic.com/v4/p/ach/2025/06/10/d5/17495439067bf62cc57e0f71008380f59d7a724ec4.avif" alt="Klarna" loading="lazy" onerror="this.hidden=true"><span class="fallback">Klarna</span></div></div>
+      <p class="payment-copy">Where Klarna is available, review its payment options, eligibility, and terms in the Klarna checkout experience before confirming your order.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="affirm-title">
+      <div class="section-heading"><span class="section-number">07</span><h2 id="affirm-title">Affirm</h2></div>
+      <div class="method-grid"><div class="method"><img src="https://img.ltwebstatic.com/images3_acp/2023/12/08/0c/170201547962c3979b09015353e78377b744418bca.avif" alt="Affirm" loading="lazy" onerror="this.hidden=true"><span class="fallback">Affirm</span></div></div>
+      <p class="payment-copy">If Affirm is available for your purchase, the payment plan and applicable terms will be shown in its checkout flow for you to review.</p>
+    </section>
+
+    <section class="payment-section" aria-labelledby="zip-title">
+      <div class="section-heading"><span class="section-number">08</span><h2 id="zip-title">Zip</h2></div>
+      <div class="method-grid"><div class="method zip"><img src="https://img.ltwebstatic.com/images3_acp/2021/09/15/163168807492c1050e154bdad8150da033adb2fabd.avif" alt="Zip" loading="lazy" onerror="this.hidden=true"><span class="fallback">Zip</span></div></div>
+      <p class="payment-copy">If Zip is offered for your order, its payment schedule and terms will be displayed before you complete the payment.</p>
+    </section>
+
+    <aside class="notice">
+      <span class="notice-mark" aria-hidden="true">i</span>
+      <div><h2>Before you place your order</h2><p>The payment methods pictured here are for reference. Options depend on your location, order, and current checkout settings; Shopify checkout is the source of truth. Confirm the currency, discounts, taxes, and final total shown there before paying. Any installment eligibility or terms are set by the payment provider.</p></div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="/">DAH GLOW.</a>
+      <nav class="footer-links" aria-label="Customer care">
+        <a href="/help-center">Help center</a><a href="/shipping-information">Shipping</a><a href="/returns-refunds">Returns &amp; refunds</a><a href="/contact">Contact us</a><a href="/payment-policy">Payment policy</a>
+      </nav>
+    </div>
+    <p class="copyright">© <span id="year"></span> Dah Glow. All rights reserved.</p>
+  </footer>
+  <script>document.getElementById('year').textContent=String(new Date().getFullYear());</script>
+</body>
+</html>

@@ -60,6 +60,7 @@ export default function PaymentPolicy() {
         <h1>Payment <em>Policy</em></h1>
         <p>Clear information about payments and checkout on Dah Glow.</p>
         <a href="#payment-details" className="gift-primary-button">Explore payment details <ArrowRight size={17}/></a>
+        <a href="/en/How-to-Pay-a-278.html" className="gift-outline-button">How to Pay <ArrowRight size={16}/></a>
       </section>
 
       <section className="payment-policy-content" id="payment-details">
