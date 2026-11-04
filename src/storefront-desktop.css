@@ -48,7 +48,7 @@
  .desktop-header-row .header-search input{height:44px;padding:8px 12px;font-size:16px}.desktop-header-row .header-search>button{height:40px;min-width:52px;border-radius:3px}
  .desktop-header-actions{display:flex;align-items:center;justify-content:flex-end;gap:0}.desktop-header-actions .icon-button:hover{background:hsl(var(--background)/.15)}
  .desktop-header-count{width:52px!important;gap:3px}.desktop-header-count small{font-size:12px}
- .desktop-category-nav{max-width:1600px;margin:auto;display:flex;align-items:center;gap:24px;padding:0 32px;min-height:44px;overflow-x:auto;scrollbar-width:none}
+ .desktop-category-nav{max-width:1600px;margin:auto;display:flex;flex-wrap:wrap;align-items:center;gap:0 16px;padding:4px 32px;min-height:44px;overflow:visible}
  .desktop-category-nav>a,.desktop-category-nav>button{display:flex;align-items:center;gap:4px;white-space:nowrap;min-height:44px;font-size:14px;border-bottom:2px solid transparent;transition:opacity .2s,transform .2s}
  .desktop-category-nav>a:hover,.desktop-category-nav>button:hover{opacity:.75;transform:translateY(-1px)}.desktop-category-nav .active{border-bottom-color:hsl(var(--background))}
  .home-showcase{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.45fr) minmax(0,1fr);align-items:stretch;gap:12px;max-width:1600px;padding:16px 32px 0;margin:auto}
