@@ -5,6 +5,7 @@ import CatalogResults from '@/components/features/CatalogResults';
 import ProductCard from '@/components/features/ProductCard';
 import campaignBanner from '@/assets/black-friday.jpg';
 import { useCatalog } from '@/hooks/useCatalog';
+import { usePageMeta } from '@/hooks/usePageMeta';
 
 const CATEGORIES = [
   'All',
@@ -29,6 +30,7 @@ const SORT_OPTIONS = [
 ];
 
 export default function SuperDeals() {
+  usePageMeta('Super Deals | Dah Glow Beauty & Selfcare', 'Browse current sale products and price drops in the Dah Glow catalog.', { canonicalPath: '/deals' });
   const [params, setParams] = useSearchParams();
   const category = params.get('category') || 'All';
   const sort = params.get('sort') || 'BEST_SELLING';

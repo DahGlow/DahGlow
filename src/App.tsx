@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import { BrowserRouter,Routes,Route,useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Sentry } from '@/lib/sentry';
 import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
@@ -17,6 +18,7 @@ import TidioWidget from '@/components/features/TidioWidget';
 const Shop=lazy(()=>import('@/pages/Shop')),Trends=lazy(()=>import('@/pages/Trends')),Cart=lazy(()=>import('@/pages/Cart')),Me=lazy(()=>import('@/pages/Me'));
 const Settings=lazy(()=>import('@/pages/Settings')),Preferences=lazy(()=>import('@/pages/Preferences')),Login=lazy(()=>import('@/pages/Login')),AuthCallback=lazy(()=>import('@/pages/AuthCallback'));
 const ProductDetail=lazy(()=>import('@/pages/ProductDetail')),Wishlist=lazy(()=>import('@/pages/Wishlist')),SuperDeals=lazy(()=>import('@/pages/SuperDeals')),Search=lazy(()=>import('@/pages/Search'));
+const CollectionLanding=lazy(()=>import('@/pages/CollectionLanding'));
 const BlackFriday=lazy(()=>import('@/pages/BlackFriday')),VendorStore=lazy(()=>import('@/pages/VendorStore')),Orders=lazy(()=>import('@/pages/Orders')),OrderDetail=lazy(()=>import('@/pages/OrderDetail'));
 const FindOrder=lazy(()=>import('@/pages/FindOrder')),OrderRecycleBin=lazy(()=>import('@/pages/OrderRecycleBin')),Coupons=lazy(()=>import('@/pages/Coupons')),Points=lazy(()=>import('@/pages/Points'));
 const ShopifyCallback=lazy(()=>import('@/pages/ShopifyCallback')),IntegrationStatus=lazy(()=>import('@/pages/IntegrationStatus')),NotFound=lazy(()=>import('@/pages/NotFound'));
@@ -37,7 +39,8 @@ const Affiliate=lazy(()=>import('@/pages/Affiliate')),AffiliateItems=lazy(()=>im
 const AffiliateEarnings=lazy(()=>import('@/pages/AffiliateEarnings')),AffiliateData=lazy(()=>import('@/pages/AffiliateData')),AffiliateSocial=lazy(()=>import('@/pages/AffiliateSocial')),AffiliateAccount=lazy(()=>import('@/pages/AffiliateAccount'));
 const AffiliateSettings=lazy(()=>import('@/pages/AffiliateSettings')),AffiliateConvert=lazy(()=>import('@/pages/AffiliateConvert')),AffiliateReferral=lazy(()=>import('@/pages/AffiliateReferral'));
 const SentryRoutes=Sentry.withSentryReactRouterV6Routing(Routes);
-export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
+function RobotsPolicy(){const {pathname}=useLocation();useEffect(()=>{const privateRoute=/^\/(private-control|account|settings|wallet|login|affiliate|us\/user|checkout|cart|me|wishlist|messages|scan-product|auth|oauth|integration)(\/|$)/.test(pathname);if(!privateRoute)return;let meta=document.querySelector<HTMLMetaElement>('meta[name="robots"]');const created=!meta;if(!meta){meta=document.createElement('meta');meta.name='robots';document.head.appendChild(meta);}const previous=meta.content;meta.content='noindex,nofollow';return()=>{if(created)meta?.remove();else if(meta)meta.content=previous;};},[pathname]);return null;}
+export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><RobotsPolicy/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><SentryRoutes>
   <Route path="/" element={<Shop/>}/><Route path="/trends" element={<Trends/>}/><Route path="/cart" element={<Cart/>}/><Route path="/me" element={<Me/>}/>
   <Route path="/settings" element={<Settings/>}/><Route path="/settings/:type" element={<Preferences/>}/><Route path="/login" element={<Login/>}/>
@@ -47,6 +50,7 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/account/profile" element={<EditProfile/>}/><Route path="/account/profile/username" element={<EditUsername/>}/><Route path="/account/profile/qr" element={<ProfileQr/>}/><Route path="/support" element={<Support/>}/><Route path="/contact" element={<Contact/>}/>
   <Route path="/auth/callback" element={<AuthCallback/>}/><Route path="/oauth/callback" element={<AuthCallback/>}/><Route path="/shopify/callback" element={<ShopifyCallback/>}/>
   <Route path="/products/:handle" element={<ProductDetail/>}/><Route path="/product/:id" element={<ProductDetail/>}/>
+  <Route path="/collections/:slug" element={<CollectionLanding/>}/>
   <Route path="/wishlist" element={<Wishlist/>}/><Route path="/deals" element={<SuperDeals/>}/><Route path="/search" element={<Search/>}/>
   <Route path="/scan-product/*" element={<VisualSearch/>}/><Route path="/messages" element={<MessageCenter/>}/>
   <Route path="/black-Friday-2026-November-dah-glow" element={<BlackFriday/>}/><Route path="/stores/:slug" element={<VendorStore/>}/>
