@@ -24,6 +24,7 @@
 .region-preferences-form select{height:48px;padding:8px 12px;background:hsl(var(--background));border:1px solid hsl(var(--border));color:hsl(var(--foreground));border-radius:4px;font:inherit}
 .region-preferences-form select:focus-visible{outline:2px solid hsl(var(--primary));outline-offset:3px}
 .shop-page .home-recommendations .section-title{justify-content:center;text-align:center}
+.shop-page .home-recommendations .product-card{background:transparent}
 .region-preferences-form p{font-size:16px;line-height:1.6}
 .region-preferences-form .primary-button{background:hsl(var(--primary))}
 .contact-preference-row{display:flex;gap:24px;align-items:center;padding:24px 0;border-bottom:1px solid hsl(var(--border));font-size:16px}
@@ -84,3 +85,9 @@
  .mobile-footer>p{color:hsl(var(--subtle));font-size:9px}
 }
 @media(min-width:1024px){.mobile-footer{display:none}}
+.side-menu{top:0!important;bottom:0!important;height:100vh!important;height:100dvh!important;max-height:none!important;margin:0!important;box-sizing:border-box!important}
+.mobile-store-header .header-search .header-camera{flex:0 0 36px;width:36px;height:36px}
+.cart-icon>svg{width:26px;height:26px;stroke-width:1.8}
+.tab-cart{display:grid;place-items:center;min-width:28px;min-height:28px}
+.tab-cart>svg{width:26px;height:26px;stroke-width:1.7}
+.tab-cart>span{right:-5px;top:-3px}
