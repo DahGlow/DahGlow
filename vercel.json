@@ -1,6 +1,15 @@
 {
   "headers": [
     {
+      "source": "/(private-control|account|settings|wallet|login|affiliate|us/user|checkout|cart|me|wishlist|messages|scan-product|auth|oauth|integration|support|r|search|shopify/callback)(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/((?!assets/).*)",
       "headers": [
         {
@@ -11,6 +20,30 @@
     }
   ],
   "rewrites": [
+    { "source": "/trends", "destination": "/trends/index.html" },
+    { "source": "/deals", "destination": "/deals/index.html" },
+    { "source": "/collections/lip-gloss", "destination": "/collections/lip-gloss/index.html" },
+    { "source": "/collections/skincare", "destination": "/collections/skincare/index.html" },
+    { "source": "/collections/beauty-makeup", "destination": "/collections/beauty-makeup/index.html" },
+    { "source": "/collections/new-arrivals", "destination": "/collections/new-arrivals/index.html" },
+    { "source": "/collections/all", "destination": "/collections/all/index.html" },
+    { "source": "/black-Friday-2026-November-dah-glow", "destination": "/black-Friday-2026-November-dah-glow/index.html" },
+    { "source": "/about", "destination": "/about/index.html" },
+    { "source": "/contact", "destination": "/contact/index.html" },
+    { "source": "/help-center", "destination": "/help-center/index.html" },
+    { "source": "/shipping-information", "destination": "/shipping-information/index.html" },
+    { "source": "/returns-refunds", "destination": "/returns-refunds/index.html" },
+    { "source": "/gift-cards", "destination": "/gift-cards/index.html" },
+    { "source": "/payment-policy", "destination": "/payment-policy/index.html" },
+    { "source": "/inspiration", "destination": "/inspiration/index.html" },
+    { "source": "/inspiration/soft-pink-everyday-glow", "destination": "/inspiration/soft-pink-everyday-glow/index.html" },
+    { "source": "/inspiration/the-simple-morning-ritual", "destination": "/inspiration/the-simple-morning-ritual/index.html" },
+    { "source": "/inspiration/a-little-evening-glam", "destination": "/inspiration/a-little-evening-glam/index.html" },
+    { "source": "/inspiration/skin-prep-and-a-soft-reset", "destination": "/inspiration/skin-prep-and-a-soft-reset/index.html" },
+    { "source": "/inspiration/the-polished-finishing-touch", "destination": "/inspiration/the-polished-finishing-touch/index.html" },
+    { "source": "/inspiration/easy-texture-everyday-hair", "destination": "/inspiration/easy-texture-everyday-hair/index.html" },
+    { "source": "/inspiration/the-soft-glam-edit", "destination": "/inspiration/the-soft-glam-edit/index.html" },
+    { "source": "/inspiration/a-slower-at-home-spa", "destination": "/inspiration/a-slower-at-home-spa/index.html" },
     { "source": "/((?!assets/).*)", "destination": "/index.html" }
   ]
 }

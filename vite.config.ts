@@ -3,7 +3,7 @@ import { defineConfig,type Plugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
-const privateHeaders:Plugin={name:'dah-glow-private-headers',configureServer(server){server.middlewares.use((req,res,next)=>{if(req.url?.startsWith('/private-control/'))res.setHeader('X-Robots-Tag','noindex, nofollow, noarchive');next();});},configurePreviewServer(server){server.middlewares.use((req,res,next)=>{if(req.url?.startsWith('/private-control/'))res.setHeader('X-Robots-Tag','noindex, nofollow, noarchive');next();});}};
+const privateHeaders:Plugin={name:'dah-glow-private-headers',configureServer(server){server.middlewares.use((req,res,next)=>{if(/^\/(private-control|account|settings|wallet|login|affiliate|us\/user|checkout|cart|me|wishlist|messages|scan-product|auth|oauth|integration|support|r|search|shopify\/callback)(\/|[?#]|$)/.test(req.url||''))res.setHeader('X-Robots-Tag','noindex, nofollow');next();});},configurePreviewServer(server){server.middlewares.use((req,res,next)=>{if(/^\/(private-control|account|settings|wallet|login|affiliate|us\/user|checkout|cart|me|wishlist|messages|scan-product|auth|oauth|integration|support|r|search|shopify\/callback)(\/|[?#]|$)/.test(req.url||''))res.setHeader('X-Robots-Tag','noindex, nofollow');next();});}};
 export default defineConfig({
   plugins: [react(), privateHeaders, sentryVitePlugin({
     org: "dawine",

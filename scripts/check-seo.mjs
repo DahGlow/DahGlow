@@ -7,8 +7,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDirectory = path.join(root, 'dist');
 const sitemap = readFileSync(path.join(outputDirectory, 'sitemap.xml'), 'utf8');
 const seoPages = JSON.parse(readFileSync(path.join(root, 'src', 'data', 'seo-pages.json'), 'utf8'));
+const vercelConfig = JSON.parse(readFileSync(path.join(root, 'vercel.json'), 'utf8'));
 const sitemapUrls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(([, url]) => url);
 const expectedPaths = new Set(seoPages.map(page => page.path));
+const routeRewrites = new Map(vercelConfig.rewrites.map(rewrite => [rewrite.source, rewrite.destination]));
 const titles = new Set();
 const descriptions = new Set();
 
@@ -27,6 +29,19 @@ function getCanonical(html) {
 
 assert.equal(sitemapUrls.length, expectedPaths.size, 'Sitemap and public SEO route registry have the same size');
 assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, 'Sitemap URLs are unique');
+assert.ok(
+  vercelConfig.headers.some(header =>
+    header.source.startsWith('/(private-control|') &&
+    header.headers.some(item => item.key === 'X-Robots-Tag' && item.value === 'noindex, nofollow'),
+  ),
+  'Vercel sends noindex headers for private routes',
+);
+
+for (const page of seoPages.filter(page => page.path !== '/' && !page.path.endsWith('.html'))) {
+  const expectedDestination = `${page.path}/index.html`;
+  assert.equal(routeRewrites.get(page.path), expectedDestination, `${page.path} rewrites to its prerendered HTML`);
+  assert.ok(existsSync(path.join(outputDirectory, expectedDestination.slice(1))), `${page.path} has a prerendered HTML file`);
+}
 
 for (const url of sitemapUrls) {
   const parsedUrl = new URL(url);
