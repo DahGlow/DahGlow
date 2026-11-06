@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { Sentry } from '@/lib/sentry';
 import { Toaster } from 'sonner';
@@ -39,7 +39,36 @@ const Affiliate=lazy(()=>import('@/pages/Affiliate')),AffiliateItems=lazy(()=>im
 const AffiliateEarnings=lazy(()=>import('@/pages/AffiliateEarnings')),AffiliateData=lazy(()=>import('@/pages/AffiliateData')),AffiliateSocial=lazy(()=>import('@/pages/AffiliateSocial')),AffiliateAccount=lazy(()=>import('@/pages/AffiliateAccount'));
 const AffiliateSettings=lazy(()=>import('@/pages/AffiliateSettings')),AffiliateConvert=lazy(()=>import('@/pages/AffiliateConvert')),AffiliateReferral=lazy(()=>import('@/pages/AffiliateReferral'));
 const SentryRoutes=Sentry.withSentryReactRouterV6Routing(Routes);
-export default function App(){return <BrowserRouter><PageMetaProvider><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
+export default function App(){
+  useEffect(() => {
+    const preventImageInteraction = (event: Event) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest?.('img')) {
+        event.preventDefault();
+      }
+    };
+
+    const preventImageCopy = (event: ClipboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest?.('img')) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', preventImageInteraction);
+    document.addEventListener('dragstart', preventImageInteraction);
+    document.addEventListener('selectstart', preventImageInteraction);
+    document.addEventListener('copy', preventImageCopy);
+
+    return () => {
+      document.removeEventListener('contextmenu', preventImageInteraction);
+      document.removeEventListener('dragstart', preventImageInteraction);
+      document.removeEventListener('selectstart', preventImageInteraction);
+      document.removeEventListener('copy', preventImageCopy);
+    };
+  }, []);
+
+  return <BrowserRouter><PageMetaProvider><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><SentryRoutes>
   <Route path="/" element={<Shop/>}/><Route path="/trends" element={<Trends/>}/><Route path="/cart" element={<Cart/>}/><Route path="/me" element={<Me/>}/>
   <Route path="/settings" element={<Settings/>}/><Route path="/settings/:type" element={<Preferences/>}/><Route path="/login" element={<Login/>}/>
