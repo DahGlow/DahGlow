@@ -75,31 +75,6 @@ export default function AboutDahGlow() {
     'Discover Dah Glow, a beauty and selfcare destination created to inspire women through beauty, personal style, selfcare, and confidence.',
   );
 
-  useEffect(() => {
-    const descriptors = [
-      { attribute: 'property', name: 'og:image', content: deepSkinPortrait },
-      { attribute: 'property', name: 'og:image:alt', content: 'Dah Glow beauty, selfcare, and confidence editorial' },
-      { attribute: 'name', name: 'twitter:image', content: deepSkinPortrait },
-    ];
-    const previous = descriptors.map(({ attribute, name, content }) => {
-      let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${name}"]`);
-      const created = !element;
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, name);
-        document.head.appendChild(element);
-      }
-      const oldContent = element.content;
-      element.content = content;
-      return { element, created, oldContent };
-    });
-
-    return () => previous.forEach(({ element, created, oldContent }) => {
-      if (created) element.remove();
-      else element.content = oldContent;
-    });
-  }, []);
-
   const handleHeroPointerMove = (event: ReactPointerEvent<HTMLElement>) => {
     if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const bounds = event.currentTarget.getBoundingClientRect();

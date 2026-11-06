@@ -56,7 +56,7 @@ export default function CollectionLanding() {
   } : { query: '__unknown_collection__', first: 1 });
   const products = catalog.products;
   const canonicalPath = `/collections/${slug}`;
-  const noindex = !collection || (!catalog.isLoading && !catalog.error && products.length === 0);
+  const noindex = !collection;
 
   usePageMeta(
     collection?.title || 'Collection Not Found | Dah Glow',

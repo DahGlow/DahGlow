@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter,Routes,Route,useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { Sentry } from '@/lib/sentry';
 import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
+import { PageMetaProvider } from '@/hooks/usePageMeta';
 import AccountShopBoundary from '@/components/features/AccountShopBoundary';
 import { AuthProvider } from '@/hooks/useAuth';
 import { SpeedInsights } from "@vercel/speed-insights/react"
@@ -39,8 +39,7 @@ const Affiliate=lazy(()=>import('@/pages/Affiliate')),AffiliateItems=lazy(()=>im
 const AffiliateEarnings=lazy(()=>import('@/pages/AffiliateEarnings')),AffiliateData=lazy(()=>import('@/pages/AffiliateData')),AffiliateSocial=lazy(()=>import('@/pages/AffiliateSocial')),AffiliateAccount=lazy(()=>import('@/pages/AffiliateAccount'));
 const AffiliateSettings=lazy(()=>import('@/pages/AffiliateSettings')),AffiliateConvert=lazy(()=>import('@/pages/AffiliateConvert')),AffiliateReferral=lazy(()=>import('@/pages/AffiliateReferral'));
 const SentryRoutes=Sentry.withSentryReactRouterV6Routing(Routes);
-function RobotsPolicy(){const {pathname}=useLocation();useEffect(()=>{const privateRoute=/^\/(private-control|account|settings|wallet|login|affiliate|us\/user|checkout|cart|me|wishlist|messages|scan-product|auth|oauth|integration)(\/|$)/.test(pathname);if(!privateRoute)return;let meta=document.querySelector<HTMLMetaElement>('meta[name="robots"]');const created=!meta;if(!meta){meta=document.createElement('meta');meta.name='robots';document.head.appendChild(meta);}const previous=meta.content;meta.content='noindex,nofollow';return()=>{if(created)meta?.remove();else if(meta)meta.content=previous;};},[pathname]);return null;}
-export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><RobotsPolicy/><CustomerBridge/><Header/>
+export default function App(){return <BrowserRouter><PageMetaProvider><ErrorBoundary><AuthProvider><AccountShopBoundary><ScrollReset/><CustomerBridge/><Header/>
  <Suspense fallback={<div className="page-loading"><span className="brand">DAH GLOW</span><p>Loading your next favorites…</p></div>}><SentryRoutes>
   <Route path="/" element={<Shop/>}/><Route path="/trends" element={<Trends/>}/><Route path="/cart" element={<Cart/>}/><Route path="/me" element={<Me/>}/>
   <Route path="/settings" element={<Settings/>}/><Route path="/settings/:type" element={<Preferences/>}/><Route path="/login" element={<Login/>}/>
@@ -74,4 +73,4 @@ export default function App(){return <BrowserRouter><ErrorBoundary><AuthProvider
   <Route path="/private-control/:segment" element={<PrivateControl/>}/><Route path="/private-control/:segment/:section" element={<PrivateControl/>}/>
   <Route path="*" element={<NotFound/>}/>
  </SentryRoutes></Suspense><DesktopFooter/><BottomTabs/><TidioWidget/><Analytics/><SpeedInsights/><Toaster position="top-center" richColors/>
- </AccountShopBoundary></AuthProvider></ErrorBoundary></BrowserRouter>;}
+ </AccountShopBoundary></AuthProvider></ErrorBoundary></PageMetaProvider></BrowserRouter>;}

@@ -17,21 +17,35 @@ export default function InspirationDetail() {
   usePageMeta(
     item ? `${item.title} | Style Inspiration | Dah Glow` : 'Inspiration not found | Dah Glow',
     item?.description || 'Explore beauty, skincare, hair, personal style, and self-care inspiration from Dah Glow.',
+    { image: item?.image, noindex: !item },
   );
 
   useEffect(() => {
     if (!item) return;
     const script = document.createElement('script');
     script.type = 'application/ld+json';
+    const url = `https://us.dahglow.com/inspiration/${item.slug}`;
     script.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: item.title,
-      description: item.description,
-      image: item.image,
-      articleSection: item.category,
-      publisher: { '@type': 'Organization', name: 'Dah Glow', url: 'https://us.dahglow.com/' },
-      mainEntityOfPage: `https://us.dahglow.com/inspiration/${item.slug}`,
+      '@graph': [
+        {
+          '@type': 'Article',
+          headline: item.title,
+          description: item.description,
+          image: item.image,
+          articleSection: item.category,
+          publisher: { '@type': 'Organization', name: 'Dah Glow', url: 'https://us.dahglow.com/' },
+          mainEntityOfPage: url,
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://us.dahglow.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Style Inspiration', item: 'https://us.dahglow.com/inspiration' },
+            { '@type': 'ListItem', position: 3, name: item.title, item: url },
+          ],
+        },
+      ],
     });
     document.head.appendChild(script);
     return () => script.remove();

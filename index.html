@@ -3,25 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff9f5" />
+    <meta name="robots" content="index,follow" />
     <script>
-      if (location.pathname.startsWith('/private-control/')) {
-        const robots = document.createElement('meta');
-        robots.id = 'dah-glow-private-indexing';
-        robots.name = 'robots';
-        robots.content = 'noindex, nofollow, noarchive, nosnippet';
-        document.head.appendChild(robots);
+      if (/^\/(private-control|account|settings|wallet|login|affiliate|us\/user|checkout|cart|me|wishlist|messages|scan-product|auth|oauth|integration|support|r|search|shopify\/callback)(\/|$)/.test(location.pathname)) {
+        document.querySelector('meta[name="robots"]').content = 'noindex,nofollow';
       }
     </script>
-    <meta name="theme-color" content="#fff9f5" />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <title>Dah Glow Official Store | Beauty, Skincare &amp; Selfcare</title>
     <meta
       name="description"
       content="Discover beauty, skincare, lip gloss and self-care essentials at Dah Glow. Explore your beauty favorites and glow with confidence."
-    />
-    <meta
-  name="keywords"
-  content="Dah Glow, Dah Glow beauty, Dah Glow official store, beauty, beauty products, beauty essentials, online beauty store, beauty shopping, beauty marketplace, skincare, skincare products, skincare essentials, skincare routine, face care, facial care, skin care products, makeup, makeup products, makeup essentials, makeup collection, lip gloss, clear lip gloss, glossy lips, lip care, lip products, lip balm, lip oil, beauty accessories, cosmetic products, cosmetics online, affordable beauty products, premium beauty products, women's beauty, women's skincare, feminine beauty, self-care, self-care products, self-care essentials, self-care routine, beauty routine, daily skincare, glowing skin, skin glow, natural beauty, beauty inspiration, makeup inspiration, beauty trends, beauty favorites, beauty collection, new beauty arrivals, beauty deals, beauty offers, beauty gifts, digital gift cards, beauty gift cards, beauty shopping online, online cosmetics store, personal care, personal care products, bath and body, body care, hair care, beauty lifestyle, confidence and beauty, Shop Dah Glow, beauty products for women, skincare online, makeup online, lip gloss online, beauty and selfcare"
     />
     <link rel="canonical" href="https://us.dahglow.com/" />
     <meta property="og:type" content="website" />
@@ -32,24 +24,10 @@
       property="og:description"
       content="Discover beauty, skincare, lip gloss and self-care essentials at Dah Glow. Explore your beauty favorites and glow with confidence."
     />
-    <meta
-  property="og:image"
-  content="https://us.dahglow.com/path-to-dah-glow-image.png"
-/>
+    <meta property="og:image" content="https://us.dahglow.com/logo.jpeg" />
 <meta name="google-site-verification" content="sa0vgmQSzW2jzO2BoVYCpf6QPuM9Mp15G1zWAtLJrjE" />
    <meta name="p:domain_verify" content="98d8e9c1d5024d674a0d86896ee077d2"/>
-  <meta
-  property="og:image:width"
-  content="1254"
-  />
-    <meta
-  property="og:image:height"
-  content="1254"
-  />
-    <meta
-  property="og:image:alt"
-  content="Dah Glow Beauty, Selfcare, Confidence logo"
-  />
+    <meta property="og:image:alt" content="Dah Glow beauty, self-care, and confidence" />
     
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dah Glow Official Store | Beauty, Skincare &amp; Selfcare" />
@@ -79,7 +57,6 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "z884mr0n1w");
 </script>
-     <script src="https://cdn.userway.org/widget.js" data-account="WSvHLbYYfB"></script>
 
     <script type="application/ld+json">
       {
